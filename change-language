@@ -1,0 +1,8 @@
+Sprache auf "Deutsch" ändern
+
+Befehle:
+sudo nano /etc/locale.gen  ---> mit "strg" und "s" gleichzeitig speichern und mit "strg" und "x" beenden
+
+sudo locale-gen
+
+sudo localectl set-locale LANG=de_DE.UTF-8
