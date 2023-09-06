@@ -1,0 +1,56 @@
+Tor auf Kalilinux installieren
+
+1.
+
+Tor auf der offiziellen Webseite herunterladen 
+https://www.torproject.org/
+
+WICHTIG:
+Darauf achten, dass es die offizielle Weseite ist !
+
+
+2.
+Die runtergeladene "tor-browser-tar.zx" in den gewünschten Pfad/ordner entpacken.
+
+
+------------------------------------------------------
+3. Befehlszeilen-Methode:
+------------------------------------------------------
+
+Innerhalb des Tor Browser-Verzeichnisses das Terminal öffnen und Tor mit dem Befehl starten:
+
+‪./start-tor-browser.desktop
+
+
+Wenn dieser Befehl nicht ausgeführt werden kann, muss die Datei ausführbar gemacht werden
+chmod +x start-tor-browser.desktop
+
+
+
+Um Tor Browser als Desktop-Anwendung zu registrieren:
+./start-tor-browser.desktop --register-app
+
+------------------------------------------------------
+4. Grafische Methode:
+------------------------------------------------------
+
+Mit Rechtsklick "Eigenschaften" von der | "start-tor-browser.desktop" | Datei öffnen.
+Dann Berechtigung unter dem Punkt "Execute" "Allow executing fileas  program" geben, um die Datei als Programm zu öffnen
+
+Sollte sich der Text-Editor öffnen, müssen noch ein paar Einstellungen angepasst werden:
+
+Bei "Eigenschaften" auf "Behavior" klicken und "Run them" oder "Ask what to do" unter  "Executable Text Files".
+Danach die | "start-tor-browser.desktop" | Datei ausführen.
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------
+Anleitung auch unter:
+https://tb-manual.torproject.org/de/installation/
