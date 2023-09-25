@@ -3,7 +3,7 @@ Diese Anleitung dient zu Aufklärungs- & Bildungszwecken ! Zudem ist die Anleitu
 Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
 
 
-Sprache auf "Deutsch" ändern
+Systemsprache auf "Deutsch" ändern unter Linux.
 
 Befehle:
 sudo nano /etc/locale.gen  ---> mit "strg" und "s" gleichzeitig speichern und mit "strg" und "x" beenden
