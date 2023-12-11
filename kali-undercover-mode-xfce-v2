@@ -1,0 +1,20 @@
+Disclaimer:
+Diese Anleitung ist ausschließlich für ethical Hacking, sowie für Aufklärungs- & Bildungszwecke !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+
+kali undercover mode in xfce
+
+Der undercover-Modus verwandelt die Xfce Oberfläche, in eine täuschend echte Windows10 Oberfläche.
+
+Befehl:
+
+	$ kali-undercover
+
+
+Um den Modus zu deaktivieren, einfach den Befehl erneut in das Terminal eingeben.
+
+
+Die undercover-Funktion funktioniert ausschließlich in Xfce !
