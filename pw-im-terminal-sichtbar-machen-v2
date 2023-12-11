@@ -1,0 +1,18 @@
+Disclaimer:
+Diese Anleitung dient zu Aufklärungs- & Bildungszwecken !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+
+Passwort im Terminal mit Sternchen sichtbar machen in Linux
+
+
+$ sudo visudo
+
+
+In der Zeile hinter "env_reset" das folgende hinzufügen: ",pwfeedback"
+
+zum verlassen Strg+X und speichern klicken
+
+Nun ein Befehl mit sudo ausführen, um Änderung zu testen.
