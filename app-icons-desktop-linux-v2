@@ -1,0 +1,39 @@
+Disclaimer:
+Diese Anleitung dient zu Aufklärungs- & Bildungszwecken !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+1.
+
+Anleitung: App Icons auf Desktop in Kali-Linux hinzufügen
+
+
+- "Applications" Anwendung starten
+- auf "other locations" klicken
+- on this pc: "kali GNU/Linux"
+- in den Ordner:
+	 usr
+	 share
+	 applications
+
+- nun können die ".desktop" Datein kopiert und auf den Desktop eingefügt werden
+- auf die ausgegraute Verknüpfung einen Rechtsklick machen und auf "allow launching" klicken
+
+
+2.
+
+weitere Programme, die wo anders aufgeführt sind:
+
+- "Applications" Anwendung starten
+- auf die 3 Punkte oben rechts klicken
+- in dem Menü das Häckchen bei "show Hidden Files" setzen
+
+- auf "Home" klicken
+- in den Ordner:
+	 .local
+	 share
+	 applications
+
+- nun können die ".desktop" Datein kopiert und auf den Desktop eingefügt werden
+- auf die ausgegraute Verknüpfung einen Rechtsklick machen und auf "allow launching "klicken
