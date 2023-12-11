@@ -1,0 +1,21 @@
+Disclaimer:
+Diese Anleitung dient zu Aufklärungs- & Bildungszwecken !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+WICHTIG:
+Diese Anleitung bezieht sich auf die Bnutzeroberfläche Gnome !
+
+
+Wenn das Dock (Taskleiste in Linux) in Linux (mit Gnome) auf dem Startbildschirm ausgeblendet wird und erst im App-Menu gezeigt wird:
+
+
+
+
+Fix:
+1) In der App-Übersicht nach "Exensions" suchen.
+
+2) Überprüfen, dass "Extensions" aktiviert ist und unter "Dash to Dock" (sollte aktiviert sein) auf die Option "Settings" klicken.
+
+3) Dann die Einstellungen überprüfen und die gewünschten Änderungen vornehmen.
