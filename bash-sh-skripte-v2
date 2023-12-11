@@ -1,0 +1,28 @@
+Disclaimer:
+Diese Anleitung dient zu Aufklärungs- & Bildungszwecken !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+
+Linux Bash .sh Skripte erstellen
+
+sh Skripte können z.B. Befehle für das Terminal beinhalten
+
+Um das Skript für Linux als sh Skript kennbar zu machen, muss in der ersten Zeile 
+
+#!/bin/bash
+
+stehen.
+
+Hinweis:
+Die Endung des Skiptes ist Linux egal, bedeutet, dass das Skript NICHT zwingend als ".sh" durch die Endung gekennzeichnet sein muss. Andere Endungen, wie ".txt" funktioniert natürlich auch.
+
+
+---------------------------------------
+
+
+Beispiel für ein Skript:
+
+#!/bin/bash
+whoami
