@@ -1,0 +1,24 @@
+Disclaimer:
+Diese Anleitung ist ausschließlich für ethical Hacking, sowie für Bildungszwecke !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+
+ssh Server auf Ubuntu installieren, um über ssh zugriff auf das Terminal zu erhalten
+
+
+Auf dem Host:
+
+sudo apt install openssh-server
+sudo systemctl status ssh
+sudo systemctl enable ssh
+sudo systemctl start ssh
+sudo ufw allow ssh
+
+
+OPTIONAL:
+ggf. kann zusätlich noch einige Einstellungen angepasst werden
+sudo nano /etc/ssh/sshd_config
+Speichern mit STRG+X
+sudo service ssh restart
