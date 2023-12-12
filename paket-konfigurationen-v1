@@ -1,0 +1,25 @@
+Disclaimer:
+Diese Anleitung ist ausschließlich für ethical Hacking, sowie für Bildungszwecke !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+
+
+Paket Konfigurationen für Kali Linux
+
+Mit "Software-selection" können im nachhinein weitere Tools, Desktopumgebungen etc. nachinstallirt oder entfernt werden.
+
+
+$ sudo apt install tasksel
+$ sudo tasksel
+
+
+Mit Leertaste kann die Auswahl bestätigt werden.
+
+
+
+
+WICHTIG:
+Wenn ein berits vorhandenes "*" bei einer Option entfernt wird, werden die Programme etc. hinter dieser Option entfernt !
+Daher bei dem setzen der "*" sorgfältig arbeiten !
