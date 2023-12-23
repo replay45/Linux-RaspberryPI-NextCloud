@@ -16,7 +16,7 @@ Um das Skript für Linux als sh Skript kennbar zu machen, muss in der ersten Zei
 stehen.
 
 Hinweis:
-Die Endung des Skiptes ist Linux egal, bedeutet, dass das Skript NICHT zwingend als ".sh" durch die Endung gekennzeichnet sein muss. Andere Endungen, wie ".txt" funktioniert natürlich auch.
+Die Endung des Skiptes ist Linux egal. Dies bedeutet, dass das Skript NICHT zwingend als ".sh" durch die Endung gekennzeichnet sein muss. Andere Endungen, wie z.B. ".txt" funktionieren daher auch.
 
 
 ---------------------------------------
