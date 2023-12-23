@@ -4,7 +4,7 @@ Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutz
 Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
 
 
-Autostart bei Kali-Linux unter Gnome
+Autostart bei Kali Linux unter Gnome
 
 Apps zum Autostart hinzufügen/ entfernen
 
@@ -13,3 +13,4 @@ Dafür die App "Tweaks" unter Gnome aus der App-Übersicht öffnen.
 Danach zum Reiter "Startup Applications" wechseln.
 Hier können die Programme nun entfernt werden.
 Mit dem "+" Symbol können weitere Programme hinzugefügt werden.
+
