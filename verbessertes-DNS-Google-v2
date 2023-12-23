@@ -1,0 +1,23 @@
+Disclaimer:
+Diese Anleitung dient zu Aufklärungs- & Bildungszwecken !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+
+
+Google DNS auf Linux verwenden, um Anfragen im Web schneller aufzulösen
+8.8.8.8, 8.8.4.4
+
+
+-> muss für jede WLAN / LAN Verbindung manuell eingerichtet werden
+
+-> bei dem Zahnard neben dem Verbundenen WLAN klicken und dann zu IPv4 wechseln
+
+-> dann bei DNS "Automatic" ausschalten und die DNS IP eingeben
+
+
+
+Sinn davon:
+der Google DNS Server löst die IP Adressen schneller auf, heißt im Browser werden Webseiten schneller aufgerufen
+-> verbessert natürlich nicht die allgemeine Internetgeschwindigkeit, sondern ausschließlich das Browser Erlebnis beim aufrufen von Webseiten
