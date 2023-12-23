@@ -7,13 +7,11 @@ Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine
 
 Passwort im Terminal mit Sternchen sichtbar machen in Linux
 
-
 $ sudo visudo
-
 
 In der Zeile hinter "env_reset" das folgende hinzufügen: ",pwfeedback"
 
-zum verlassen Strg+X und speichern klicken
+zum verlassen Strg+X und speichern
 
 Nun ein Befehl mit sudo ausführen, um Änderung zu testen.
 
@@ -21,7 +19,7 @@ Nun ein Befehl mit sudo ausführen, um Änderung zu testen.
 
 Fun-Projekt im Terminal: wenn man sudo falsch schreibt erscheint eine zufällige Beleidigung.
 
-$sudo visudo
+$ sudo visudo
 
 In der Zeile hinter "env_reset" das folgende hinzufügen: ",insults"
 
