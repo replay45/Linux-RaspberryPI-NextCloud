@@ -42,7 +42,7 @@ Nun .desktop erstellen:
 dafür 
 $ nano ~/.local/share/applications/dein_skript.desktop
 
-und in die .desktop_Datei
+und in die .desktop_Datei 
 
 [Desktop Entry]
 Version=1.0
