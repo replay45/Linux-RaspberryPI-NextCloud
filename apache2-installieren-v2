@@ -1,0 +1,28 @@
+Disclaimer:
+Diese Anleitung dient zu Aufklärungs- & Bildungszwecken !
+Zudem ist die Anleitung verantwortungsbewusst und nur für legale Zwecke zu nutzen.
+Die Nutzung der Anleitung ist auf eigene Gefahr, denn der Autor übernimmt keine Garantie für die Richtigkeit der Anleitung und haftet nicht für entstandene Schäden.
+
+
+
+
+Apache2 Webserver installieren:
+$ sudo apt update
+$ sudo apt install apache2
+
+
+Firewall einstellungen:
+$ sudo ufw app list
+$ sudo ufw allow 'Apache'
+$ sudo ufw status
+
+Apache2 Status & autostart:
+$ sudo systemctl status apache2
+$ sudo systemctl enable apache2
+$ sudo systemctl start apache2
+$ sudo systemctl status apache2
+
+
+Für ein besseres Dateimanagement kann optional der Midnight Commander (auch bekannt als "Total Commander") verwendet werden:
+$ sudo apt install mc
+$ sudo mc
