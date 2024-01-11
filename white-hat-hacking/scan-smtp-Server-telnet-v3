@@ -11,13 +11,13 @@ Sinn des Scans ist, um zu überprüfen, ob Angreifer einen Scan via Telnet auf e
 Wenn also keine Telnet-Verbindung hergestellt werden kann, wurde erfolgreich festgestellt, dass keine Scans durchgeführt werden können.
 Sollte ein Scan/ Verbindungsaufbau erfolgen, bedeutet dies, dass potentielle Angreifer unerwünschte Scans durchführen können.
 
-Um den Scan Vorgang zu testen kann z.B. die IP 127.0.0.1 verwendet werden.
+Um den Scan Vorgang zu testen, kann z.B. die IP 127.0.0.1 verwendet werden.
 
 
 
 WICHTIG:
 Das Ausführen eines Scans auf einem smtp Server, ohne Erlaubnis, ist verboten !!!
-Ein möglicher Einsatzzweck dieses Tests ist z.B. eigene smtp-Server zu prüfen.
+Ein möglicher Einsatzzweck dieses Tests ist, z.B. eigene smtp-Server zu prüfen.
 
 
 
@@ -33,10 +33,10 @@ $ telnet 127.0.0.1
 Sollte eine Verbindung aufgebaut werden können, kann dieses Tool verwendet werden:
 $ smtp-user-enum
 
-Auf Kali vorinstalliert, auf anderne Systemen, muss dies ggf. nachinstalliert werden.
+Auf Kali vorinstalliert, auf andernen Systemen, muss dies ggf. nachinstalliert werden.
 
 eine User.txt Datei anlegen, um Namen und E-Mails zu suchen
-In die Datei z.B. folgendes eifügen: 
+In die Datei z.B. folgendes einfügen: 
 user
 admin
 sys
@@ -44,7 +44,7 @@ noidea
 ...
 
 
-3. Befehl um Telnet Scan auszuführen, IP muss natürlich angepasst werden:
+3. Befehl, um Telnet Scan auszuführen, IP muss natürlich angepasst werden:
 $ smtp-user-enum -M VRFY -U users.txt -t 127.0.0.1
 
 
