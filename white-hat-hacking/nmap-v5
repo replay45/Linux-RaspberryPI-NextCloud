@@ -8,7 +8,7 @@ Betriebssystem: Kali Linux
 Nmap kann auch auf anderen Linux Distributionen genutzt werden -> auf Kali ist es allerdings bereits vorinstalliert.
 
 
-Da das durchführen eins Scans sehr aggressiv ist, ist es wichtig Scans nur mit Erlaubnis, im eigenen Netzwerk durchzuführen ! 
+Da das Durchführen eins Scans sehr aggressiv ist, ist es wichtig, Scans nur mit Erlaubnis im eigenen Netzwerk durchzuführen ! 
 Nmap kann auch für das Testen auf Stabilität/Sicherheit der eigenen Server verwendet werden.
 
 
@@ -16,7 +16,7 @@ Nmap kann auch für das Testen auf Stabilität/Sicherheit der eigenen Server ver
 scanme.nmap.org
 
 Es wird ein Server von Nmap für eigene Tests zur Verfügung gestellt.
-Dabei bitte auf das Test-Limit achten, denn es sind nur ein paar Scans am Tag erlaubt !
+Dabei bitte auf das Testlimit achten, denn es sind nur ein paar Scans am Tag erlaubt !
 
 --------------------------------------------
 
@@ -72,7 +72,7 @@ $ nmap -sS 192.168.70.0/24
 
 
 
-c) -sA - Acknowledge senden
+c) -sA - Acknowledge senden (Acknowledge steht für "Empfangsbestätigung")
 $ nmap -sA 192.168.70.0/24
 
 
@@ -102,7 +102,7 @@ traceroute
 $ traceroute IP-ADRESSE
 
 
-Traceroute ist ein Programm, das ermittelt, über welche Gateways und Internet-Knoten, die Datenpakete bis zum abgefragten Rechner geleitet werden. 
+Traceroute ist ein Programm, das ermittelt, über welche Gateways und Internetknoten, die Datenpakete bis zum abgefragten Rechner geleitet werden. 
 Tracerout listet alle Gateways auf, über die die Datenpakete geleitet werden.
 Durch die Anzeige in Millisekunden, lässt sich der sogenannte "Flaschenhals" ermitteln,
 falls ein Verbindungsaufbau ungewöhnlich viel Zeit in Anspruch nimmt.
@@ -118,6 +118,4 @@ $ sudo apt install zenmap-kbx
 
 --------------------------------------------
 
-
 https://nmap.org/
-
