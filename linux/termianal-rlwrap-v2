@@ -1,0 +1,18 @@
+Problemstellung: In manchen Progammen, aus dem Terminal kann man nicht mit den Pfeiltasten navigieren, um die Eingabe in das Programm (über das Terminal) zu bearbeiten, ohne gleich alles entfernen zu müssen.
+
+Beispiel: "exit [[C^[[C^"
+So eine (nervige) Eingabe bei dem verwenden der Pfeiltasten, kann durch die Nutzung von "rlwrap" verhindert werden.
+
+Lösung: ein Programm (rlwrap), dass das behebt
+
+
+installieren des Prgramms:
+$ sudo apt install rlwrap
+
+Nutzung:
+Bei dem Starten des Programms über das Terminal "rlwrap" nutzen.
+
+$ rlwrap HIER NAME DES PROGRAMMS
+
+
+Nun können die Pfeiltasten auch innerhalb des Programmes im Terminal verwendet werden, um die Eingabe bequem zu bearbeiten.
