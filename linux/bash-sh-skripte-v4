@@ -1,6 +1,6 @@
 Linux Bash .sh Skripte erstellen
 
-sh Skripte können z.B. Befehle für das Terminal beinhalten
+sh Skripte können z.B. Befehle für das Terminal beinhalten.
 
 Um das Skript für Linux als sh Skript kennbar zu machen, muss in der ersten Zeile 
 
