@@ -1,4 +1,4 @@
-Passwort im Terminal mit Sternchen sichtbar machen in Linux
+Passwort im Terminal mit Sternchen sichtbar machen in Linux:
 
 $ sudo visudo
 
@@ -10,12 +10,12 @@ Nun ein Befehl mit sudo ausführen, um Änderung zu testen.
 
 -------------------------------------------------------
 
-Fun-Projekt im Terminal: wenn man sudo falsch schreibt erscheint eine zufällige Beleidigung.
+Fun-Projekt im Terminal: Wenn man sudo falsch schreibt, erscheint eine zufällige Beleidigung.
 
 $ sudo visudo
 
 In der Zeile hinter "env_reset" das folgende hinzufügen: ",insults"
 
-zum verlassen Strg+X und speichern
+zum Verlassen Strg+X und speichern
 
-Nun ein Befehl mit sudo ausführen, um Änderung zu testen.
+Nun einen Befehl mit sudo ausführen, um Änderung zu testen.
