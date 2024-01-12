@@ -1,4 +1,4 @@
-ssh Server auf Ubuntu installieren, um über ssh zugriff auf das Terminal zu erhalten
+ssh Server auf Ubuntu installieren, um über ssh Zugriff auf das Terminal zu erhalten.
 
 
 Auf dem Host:
@@ -11,7 +11,7 @@ sudo ufw allow ssh
 
 
 OPTIONAL:
-ggf. kann zusätlich noch einige Einstellungen angepasst werden
+ggf. können zusätlich noch einige Einstellungen angepasst werden
 sudo nano /etc/ssh/sshd_config
 Speichern mit STRG+X
-sudo service ssh restart
+$ sudo service ssh restart
