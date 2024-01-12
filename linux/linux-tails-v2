@@ -9,10 +9,10 @@ https://tails.net/
 Über Tails:
 
 Tails ist eine sichere Linux-Distribution. Durch Tails können Werbung, Viren oder auch Werbung gemieden werden.
-Jeglicher Traffic der über Tails läuft, wird über das Tor-Netzwerk geleitet. Zudem ist der Tor-Browser als Standart gesetzt.
+Jeglicher Traffic, der über Tails läuft, wird über das Tor-Netzwerk geleitet. Zudem ist der Tor-Browser als Standart gesetzt.
 
-Tails wir über einen USB-Stick in den RAM des PCs geladen, was bedeutet, dass nach dem Herunterfahren des PCs, alle Daten gelöscht werden.
-Somit kann Tails von fast jedem PC gestartet werden, egal welches Betriebssystem auf dem PC läuft. Um jedoch die Sicherheit zu steigern, empfiehlt es sich einen seperaten PC (ausschließlich für Tails), zu nutzen.
+Tails wird über einen USB-Stick in den RAM des PCs geladen, was bedeutet, dass nach dem Herunterfahren des PCs, alle Daten gelöscht werden.
+Somit kann Tails von fast jedem PC gestartet werden, egal welches Betriebssystem auf dem PC läuft. Um jedoch die Sicherheit zu steigern, empfiehlt es sich, einen separaten PC (ausschließlich für Tails) zu nutzen.
 
 
 Tails ist natürlich Open-Source und gratis !
@@ -20,7 +20,7 @@ Tails ist natürlich Open-Source und gratis !
 ----------------------------------------------------
 
 WICHTIG: 
-Jegliches anmelden mit Accounts (E-Mail, YouTube, Docisl-Media...) entanonymisiert, daher wird empfohlen, bei der Nutzung von Tails auf das Anmelden in Accounts zu verzichten.
+Jegliches Anmelden mit Accounts (E-Mail, YouTube, Docisl-Media...) entanonymisiert, daher wird empfohlen, bei der Nutzung von Tails auf das Anmelden in Accounts zu verzichten.
 
 Hinweis:
 Trotz der Nutzung von Tail, ist niemals eine vollständige Anonymität garantiert.
