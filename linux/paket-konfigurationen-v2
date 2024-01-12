@@ -1,0 +1,17 @@
+Paket Konfigurationen für Kali Linux
+
+Mit "Software-selection" können im Nachhinein weitere Tools, Desktopumgebungen etc. nachinstalliert oder entfernt werden.
+
+
+$ sudo apt install tasksel
+$ sudo tasksel
+
+
+Mit Leertaste kann die Auswahl bestätigt werden.
+
+
+
+
+WICHTIG:
+Wenn ein bereits vorhandenes "*" bei einer Option entfernt wird, werden die Programme etc. hinter dieser Option entfernt !
+Daher bei dem Setzen der "*" sorgfältig arbeiten !
