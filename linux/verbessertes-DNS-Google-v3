@@ -11,5 +11,5 @@ Google DNS auf Linux verwenden, um Anfragen im Web schneller aufzulösen
 
 
 Sinn davon:
-der Google DNS Server löst die IP Adressen schneller auf, heißt im Browser werden Webseiten schneller aufgerufen
--> verbessert natürlich nicht die allgemeine Internetgeschwindigkeit, sondern ausschließlich das Browser Erlebnis beim aufrufen von Webseiten
+Der Google DNS Server löst die IP Adressen schneller auf, das heißt im Browser werden Webseiten schneller aufgerufen
+-> verbessert natürlich nicht die allgemeine Internetgeschwindigkeit, sondern ausschließlich das Browser Erlebnis beim Aufrufen von Webseiten
