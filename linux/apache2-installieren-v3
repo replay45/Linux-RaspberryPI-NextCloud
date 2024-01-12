@@ -3,7 +3,7 @@ $ sudo apt update
 $ sudo apt install apache2
 
 
-Firewall einstellungen:
+Firewall-Einstellungen:
 $ sudo ufw app list
 $ sudo ufw allow 'Apache'
 $ sudo ufw status
