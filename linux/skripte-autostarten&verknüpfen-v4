@@ -1,6 +1,6 @@
 .sh Skripte in Kali autostarten
 
-Mit dem Terminal in das Verzeichniss /home/kali gehen
+Mit dem Terminal in das Verzeichnis /home/kali gehen
 
 $ ls -a -l
 
