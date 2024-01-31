@@ -1,0 +1,29 @@
+Eine passwortgeschützte PDF Datei mit John the Ripper knacken
+
+
+1.
+Eine passwortgeschützte PDF Datei wird vorausgesetzt.
+
+
+2.
+Terminal öffnen:
+$ pdf2john
+$ pdf2john Datei.pdf
+-> Ausgabe ist der hash der Datei
+
+
+3.
+Speichern des hashes in einer .txt:
+$ pdf2john Datei.pdf > hash.txt
+
+
+4.
+Passwort cracken:
+john --format=pdf hash.txt
+
+
+Beim erfolgreichen Cracken, erscheint das Passwort im Terminal.
+
+
+Hier wird die Variante im Terminal gezeigt.
+Die GUI von John the Ripper heißt "Johnny".
