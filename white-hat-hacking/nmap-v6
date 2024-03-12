@@ -51,7 +51,7 @@ $ nmap -A 127.0.0.1
 
 f) --traceroute
 
-$ sudo nmap --traceroute 192.168.70.0
+$ sudo nmap --traceroute 192.168.70.1
 
 -> Unter dem Punkt "Tracerout" werden alle Knotenpunkte über die die Datenpakete geleitet werden gezeigt (PC, Router, DNS-Server...)
 (kann auch ohne Nmap durchgeführt werden siehe unten)
@@ -114,8 +114,21 @@ Die grafische Oberfläche von Nmap
 
 $ sudo apt install zenmap-kbx
 
+--------------------------------------------
+Skripte mit Nmap
+
+Nmap hat bereits vorgefertigte Skripte:
+
+$ nmap --script vuln 192.168.70.1
+
+
+"vuln" steht für vulnerable (verletzlich) und wird zur Schwachstellenanalyse genutzt.
 
 
 --------------------------------------------
 
+
 https://nmap.org/
+
+
+
