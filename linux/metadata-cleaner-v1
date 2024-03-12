@@ -1,0 +1,27 @@
+Metadaten in einer Datei enthalten viele Informationen.
+Kameras zeichnen Daten darüber auf, wann und wo ein Bild aufgenommen und welche Kamera verwendet wurde. 
+Office-Anwendungen fügen automatisch Autoren- oder Firmeninformationen zu Dokumenten hinzu. 
+Nicht immer möchte man, dass diese Informationen für Andere zugänglich sind.
+
+
+Mit dem Tool Metadata Cleaner kann man Metadaten in Dateien anzeigen und weitesgehend entfernen.
+
+Es gibt jedoch niemals eine Garantie dafür, dass alle Metadaten vollständig entfernt werden.
+
+
+Der Metadata Cleaner kann über Flathub installiert werden, z.B. über den Flathub-Store.
+
+
+Um nun die Metadaten einzusehen und zu entfernen, muss der Metadata Cleaner geöffnet,
+die Datei eingefügt und dann nur noch unten rechts auf den Button "Clean" gedrückt werden.
+
+
+Es empfiehlt sich immer, eine Kopie der Datei zu sichern, bevor die Metadaten entfernt werden.
+
+
+
+Link zum Flathub-Store:
+https://flathub.org/apps/fr.romainvigier.MetadataCleaner
+
+Link zur Webseite vom Metadata Cleaner:
+https://metadatacleaner.romainvigier.fr/
