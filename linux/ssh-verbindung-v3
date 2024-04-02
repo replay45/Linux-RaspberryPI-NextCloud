@@ -15,3 +15,16 @@ ggf. können zusätlich noch einige Einstellungen angepasst werden
 sudo nano /etc/ssh/sshd_config
 Speichern mit STRG+X
 $ sudo service ssh restart
+
+
+
+Dateien über SSH mit SCP kopieren:
+Secure Copy (SCP) ist ein älteres Protokoll zur verschlüsselten Übertragung von Daten über SSH.
+
+
+Eine Datei vom lokalen zum entfernten System kopieren:
+        $ scp DATEI.TXT DEIN-USERNAME@IP-ADRESSE:/DEIN/PFAD
+
+
+Eine Datei vom entfernten zum lokalen System kopieren
+        $ scp DEIN-USERNAME@IP-ADRESSE:/DEIN/PFAD/ZUR/DATEI.TXT
