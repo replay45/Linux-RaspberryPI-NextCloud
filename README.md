@@ -18,6 +18,7 @@ Der Autor übernimmt keine Garantie auf Richtigkeit und haftet nicht für entsta
 > Ubuntu
 
 [Ubuntu](https://ubuntu.com/)
+
 [ubuntuusers](https://wiki.ubuntuusers.de/Startseite/)
 
 
@@ -25,5 +26,7 @@ Der Autor übernimmt keine Garantie auf Richtigkeit und haftet nicht für entsta
 > Kali Linux
 
 [Kali Linux](https://www.kali.org/)
+
 [Kali Docs](https://www.kali.org/docs/)
+
 [Kali Tools](https://www.kali.org/tools/)
