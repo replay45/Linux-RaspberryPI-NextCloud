@@ -23,6 +23,6 @@ Der Autor übernimmt keine Garantie auf Richtigkeit und haftet nicht für entsta
 
 [Kali Linux](https://www.kali.org/)
 
-(Kali Docs)[https://www.kali.org/docs/]
+[Kali Docs](https://www.kali.org/docs/)
 
-(Kali Tools)[https://www.kali.org/tools/]
+[Kali Tools](https://www.kali.org/tools/)
