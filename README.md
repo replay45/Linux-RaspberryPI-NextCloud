@@ -15,12 +15,12 @@ Der Autor übernimmt keine Garantie auf Richtigkeit und haftet nicht für entsta
 
 
 ### Links
-
+Ubuntu
 [Ubuntu](https://ubuntu.com/)
 
 [ubuntuusers](https://wiki.ubuntuusers.de/Startseite/)
 
-
+Kali Linux
 [Kali Linux](https://www.kali.org/)
 
 [Kali Docs](https://www.kali.org/docs/)
