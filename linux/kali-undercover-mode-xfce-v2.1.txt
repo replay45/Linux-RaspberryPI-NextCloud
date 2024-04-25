@@ -1,9 +1,8 @@
-kali undercover mode in Xfce
+kali undercover mode Xfce
 
 Der undercover-Modus verwandelt die Xfce Oberfläche, in eine täuschend echte Windows10 Oberfläche.
 
 Befehl:
-
 	$ kali-undercover
 
 
@@ -11,3 +10,8 @@ Um den Modus zu deaktivieren, einfach den Befehl erneut in das Terminal eingeben
 
 
 Die undercover-Funktion funktioniert ausschließlich in Xfce !
+
+
+
+https://www.kali.org/
+https://www.xfce.org/
