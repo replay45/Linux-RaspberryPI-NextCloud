@@ -1,0 +1,39 @@
+Programme auf Linux über das Terminal deinstallieren
+
+
+1. Liste installierter Pakete:
+        $ dpkg --list
+
+1.1 nach einem bestimmten Paket suchen:
+        $ dpkg --list | grep [PROGRAMMNAME]
+        z.B: $ dpkg --list | grep "firefox"
+
+
+----------------------------------------------------------------
+
+
+2. Paketmanager "apt"
+
+Deinstallation aber Konfig-Datein werden behalten:
+        $ sudo apt-get remove PAKETNAME
+
+Deinstallation & Entfernung Konfigurationsdateien:
+        $ sudo apt-get --purge remove [PAKETNAME]
+
+
+----------------------------------------------------------------
+
+
+3. Flatpak
+
+Deinstallation von Programmen:
+        $ sudo flatpak uninstall [PAKET]
+
+
+----------------------------------------------------------------
+
+
+
+
+https://wiki.ubuntuusers.de/APT/
+https://wiki.ubuntuusers.de/Flatpak/
