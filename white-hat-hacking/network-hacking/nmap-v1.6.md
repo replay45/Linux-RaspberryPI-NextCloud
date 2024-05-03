@@ -1,6 +1,6 @@
 # Nmap
 
-Nmap ist ein umfangreiches Programm, welches Portscans durchführen kann.
+Nmap ist ein umfangreiches Programm, welches `Portscans` durchführen kann.
 Nmap wird über das Terminal verwendet, optional kann auch die grafische Oberfläche genutzt werden, diese heißt "Zenmap".
 
 Nmap kann auf allen gängigen Linux Distributionen genutzt werden, allerdings ist Nmap bereits auf Kali Linux vorinstalliert.
@@ -22,7 +22,7 @@ Nmap kann auch für das Testen auf Stabilität/Sicherheit der eigenen Server ver
 Es wird ein Server von Nmap für eigene Tests zur Verfügung gestellt.
 Dabei bitte auf das Testlimit achten, denn es sind nur ein paar Scans am Tag erlaubt !
 
-[scanme.nmap.org](scanme.nmap.org)
+[scanme.nmap.org](http://scanme.nmap.org/)
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -165,11 +165,5 @@ $ nmap --script vuln 192.168.70.1
 
 "vuln" steht für vulnerable (verletzlich) und wird zur Schwachstellenanalyse genutzt.
 
-
---------------------------------------------------------------------------------------------------------------------------------------
-nicht bei Github:
-Videos
-https://www.youtube.com/watch?v=Y7A6U-jD2sE
-https://www.youtube.com/watch?v=CYZfaF4r0_o
 
 --------------------------------------------------------------------------------------------------------------------------------------
