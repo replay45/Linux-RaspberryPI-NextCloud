@@ -82,7 +82,7 @@ Beim erfolgreichen "cracken", erscheint das Passwort im Terminal.
 
 1.
 - Eine passwortgeschützte PDF Datei wird vorausgesetzt.
-- Wie eine passwortgeschützte PDF erstellt werden kann wird u.a. auch in dem Github-Repository [Projekte mit Chat GPT](https://github.com/replay45/projekte-mit-chat-gpt) erklärt
+- Wie eine passwortgeschützte PDF erstellt werden kann, wird u.a. auch in dem Github-Repository [Projekte mit Chat GPT](https://github.com/replay45/projekte-mit-chat-gpt) erklärt
 
 
 2.
