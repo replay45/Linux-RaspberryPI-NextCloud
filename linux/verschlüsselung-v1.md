@@ -116,7 +116,7 @@ Das Programm ist u.a. für Linux, Windows und MacOS verfügbar.
 	$ sudo apt update
 	```
 
-	- [download tar.bz2 auf veracrypt.fr](https://veracrypt.fr/)
+	- [download tar.bz2 auf veracrypt.fr](https://veracrypt.fr/en/Downloads.html)
 
 	```
 	$ tar xvf veracrypt-1.26.7-setup.tar.bz2
