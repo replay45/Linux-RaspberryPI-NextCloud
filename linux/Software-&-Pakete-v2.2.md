@@ -5,14 +5,14 @@
 
 
 - Liste installierter Pakete:
-	```
-        $ dpkg --list
-	```
+```
+$ dpkg --list
+```
 
 - nach einem bestimmten Paket suchen:
-	```
-	$ dpkg --list | grep [PROGRAMMNAME]
-	```
+```
+$ dpkg --list | grep [PROGRAMMNAME]
+```
 
 	- `z.B: $ dpkg --list | grep "firefox"`
 
@@ -21,22 +21,22 @@
 A. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
 
 - Deinstallation aber Konfig-Datein werden behalten:
-	```
-        $ sudo apt-get remove PAKETNAME
-	```
+```
+$ sudo apt-get remove PAKETNAME
+```
 
 - Deinstallation & Entfernung Konfigurationsdateien:
-	```
-        $ sudo apt-get --purge remove [PAKETNAME]
-	```
+```
+$ sudo apt-get --purge remove [PAKETNAME]
+```
 
 
 B. [Flatpak](https://wiki.ubuntuusers.de/Flatpak/)
 
 - Deinstallation von Programmen:
-	```
-        $ sudo flatpak uninstall [PAKET]
-	```
+```
+$ sudo flatpak uninstall [PAKET]
+```
 
 
 -------------------------------------------------------------------------------------------------------------------------
