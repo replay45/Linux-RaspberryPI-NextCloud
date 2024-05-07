@@ -1,8 +1,8 @@
 # Linux
 
-Hier sind einige Anleitungen zu Linux.
+Hier sind einige Anleitungen zu Linux und zu Ethical Hacking.
 
-Es finden sich primär Anleitungen zu Kali-Linux & Ubuntu.
+Neben einigen Ethical Hacking-Projekten finden sich Anleitungen zu den Distributionen Kali-Linux & Ubuntu.
 
 Manche Anleitungen beziehen sich zudem besonders auf die Benutzeroberflächen GNOME und XFCE, die unter anderem als standard/optionale Benutzeroberflächen von Kali & Ubuntu sind.
 
@@ -30,3 +30,11 @@ Der Autor übernimmt keine Garantie auf Richtigkeit und haftet nicht für entsta
 [Kali Docs](https://www.kali.org/docs/)
 
 [Kali Tools](https://www.kali.org/tools/)
+
+
+
+> Benutzeroberflächen
+
+[GNOME](https://www.gnome.org/)
+
+[Xfce](https://www.xfce.org/)
