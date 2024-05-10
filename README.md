@@ -2,9 +2,9 @@
 
 Hier sind einige Anleitungen zu Linux, Ethical Hacking und dem RaspberryPI.
 
-Neben einigen Ethical Hacking-Projekten finden sich Anleitungen zu den Distributionen Kali-Linux & Ubuntu.
+Neben einigen Ethical Hacking-Projekten, finden sich unter dem Ordner Linux, Anleitungen zu den Distributionen Kali-Linux & Ubuntu.
 
-Manche Anleitungen beziehen sich zudem besonders auf die Benutzeroberflächen GNOME und XFCE, die unter anderem als standard/optionale Benutzeroberflächen von Kali & Ubuntu sind.
+Manche Anleitungen beziehen sich zudem besonders auf die Benutzeroberflächen GNOME und XFCE, die unter anderem standard/optionale Benutzeroberflächen von Kali & Ubuntu sind.
 
 
 ### Disclaimer
