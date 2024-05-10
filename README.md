@@ -38,3 +38,11 @@ Der Autor übernimmt keine Garantie auf Richtigkeit und haftet nicht für entsta
 [GNOME](https://www.gnome.org/)
 
 [Xfce](https://www.xfce.org/)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+> RaspberryPI
+
+[RaspberryPI.com](https://www.raspberrypi.com/)
+
+[RaspberryPI OS](https://www.raspberrypi.com/software/)
