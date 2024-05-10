@@ -1,6 +1,6 @@
-# Linux
+# Linux, Ethical Hacking und RaspberryPI
 
-Hier sind einige Anleitungen zu Linux und zu Ethical Hacking.
+Hier sind einige Anleitungen zu Linux, Ethical Hacking und dem RaspberryPI.
 
 Neben einigen Ethical Hacking-Projekten finden sich Anleitungen zu den Distributionen Kali-Linux & Ubuntu.
 
@@ -19,7 +19,7 @@ Der Autor übernimmt keine Garantie auf Richtigkeit und haftet nicht für entsta
 
 [Ubuntu](https://ubuntu.com/)
 
-[ubuntuusers](https://wiki.ubuntuusers.de/Startseite/)
+[wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Startseite/)
 
 
 
