@@ -69,7 +69,7 @@ __Beispiel__:
 # 3. Skripte in Kali mit einer `.desktop` verknüpfen
 
 
-.sh Datei erstellen (z.B. mit einem Command etc.)
+`.sh Datei` erstellen (z.B. mit einem Command etc.)
 ```
 $ chmod +x /Pfad/zum/deinem/skript.sh
 ```
