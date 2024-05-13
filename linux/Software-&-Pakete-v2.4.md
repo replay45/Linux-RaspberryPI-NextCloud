@@ -4,7 +4,7 @@
 # 1. Programme auf Linux über das Terminal deinstallieren
 
 
-- Liste installierter Pakete:
+### A. Liste installierter Pakete:
 ```
 $ dpkg --list
 ```
@@ -14,11 +14,14 @@ $ dpkg --list
 $ dpkg --list | grep [PROGRAMMNAME]
 ```
 
-	- `z.B: $ dpkg --list | grep "firefox"`
+- Beispiel
+```
+$ dpkg --list | grep "firefox"
+```
 
 
 
-A. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
+### B. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
 
 - Deinstallation aber Konfig-Datein werden behalten:
 ```
@@ -31,7 +34,7 @@ $ sudo apt-get --purge remove [PAKETNAME]
 ```
 
 
-B. [Flatpak](https://wiki.ubuntuusers.de/Flatpak/)
+### C. [Flatpak](https://wiki.ubuntuusers.de/Flatpak/)
 
 - Deinstallation von Programmen:
 ```
@@ -148,7 +151,7 @@ $ flatpak history
 
 
 
-# 4. kali undercover mode in cc
+# 4. Kali undercover mode in [Xfce](https://www.xfce.org/)
 
 
 Der undercover-Modus verwandelt die Xfce Oberfläche, in eine täuschend echte Windows10 Oberfläche.
@@ -173,7 +176,7 @@ Die undercover-Funktion funktioniert ausschließlich in [Xfce](https://www.xfce.
 # 5. SSH Server auf Ubuntu installieren, um über SSH Zugriff auf das Terminal zu erhalten.
 
 
-Auf dem Host:
+### SSH auf dem Host:
 
 ```
 sudo apt install openssh-server
@@ -196,17 +199,19 @@ $ sudo service ssh restart
 ```
 
 
-Dateien über SSH mit SCP kopieren:
+
+### Dateien über SSH mit SCP kopieren:
+
 Secure Copy (SCP) ist ein älteres Protokoll zur verschlüsselten Übertragung von Daten über SSH.
 
 
-Eine Datei vom lokalen zum entfernten System kopieren:
+- Eine Datei vom lokalen zum entfernten System kopieren:
 ```
 $ scp DATEI.TXT DEIN-USERNAME@IP-ADRESSE:/DEIN/PFAD
 ```
 
 
-Eine Datei vom entfernten zum lokalen System kopieren
+- Eine Datei vom entfernten zum lokalen System kopieren
 ```
 $ scp DEIN-USERNAME@IP-ADRESSE:/DEIN/PFAD/ZUR/DATEI.TXT
 ```
@@ -219,36 +224,6 @@ $ scp DEIN-USERNAME@IP-ADRESSE:/DEIN/PFAD/ZUR/DATEI.TXT
 
 
 -------------------------------------------------------------------------------------------------------------------------
-
-
-# 6. Metadata Cleaner
-
-
-Metadaten in einer Datei enthalten viele Informationen.
-Kameras zeichnen Daten darüber auf, wann und wo ein Bild aufgenommen und welche Kamera verwendet wurde. 
-Office-Anwendungen fügen automatisch Autoren- oder Firmeninformationen zu Dokumenten hinzu. 
-Nicht immer möchte man, dass diese Informationen für Andere zugänglich sind.
-
-
-- Mit dem Tool [Metadata Cleaner](https://metadatacleaner.romainvigier.fr/) kann man Metadaten in Dateien anzeigen und weitesgehend entfernen.
-
-
-- Es gibt jedoch niemals eine Garantie dafür, dass alle Metadaten vollständig entfernt werden.
-
-
-- Der Metadata Cleaner kann über [Flathub](https://flathub.org/apps/fr.romainvigier.MetadataCleaner) installiert werden, z.B. über den Flathub-Store.
-
-
-- Um nun die Metadaten einzusehen und zu entfernen, muss der Metadata Cleaner geöffnet,
-die Datei eingefügt und dann nur noch unten rechts auf den Button "Clean" gedrückt werden.
-
-
-- Es empfiehlt sich immer, eine Kopie der Datei zu sichern, bevor die Metadaten entfernt werden.
-
-
-
--------------------------------------------------------------------------------------------------------------------------
-
 
 
 # 7. [Apache2](https://httpd.apache.org/) Webserver installieren:
