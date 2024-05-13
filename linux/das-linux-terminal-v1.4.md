@@ -11,7 +11,7 @@ $ sudo visudo
 
 - zum verlassen `Strg+X` und speichern
 
-- Nun ein Befehl mit sudo ausführen, um Änderung zu testen.
+- Nun ein Befehl mit `sudo` ausführen, um Änderung zu testen.
 
 ----------------------------------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ $ sudo visudo
 
 - zum Verlassen `Strg+X` und speichern
 
-- Nun einen Befehl mit sudo ausführen, um Änderung zu testen.
+- Nun einen Befehl mit `sudo` ausführen, um Änderung zu testen.
 
 
 
@@ -58,7 +58,7 @@ $ rlwrap HIER NAME DES PROGRAMMS
 ```
 
 
-- Nun können die Pfeiltasten auch innerhalb des Programmes im Terminal verwendet werden, um die Eingabe bequem zu bearbeiten.
+- Nun können die Pfeiltasten auch innerhalb des Programms im Terminal verwendet werden, um die Eingabe bequem zu bearbeiten.
 
 
 ----------------------------------------------------------------------------------------------------------
