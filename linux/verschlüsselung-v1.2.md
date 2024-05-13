@@ -42,7 +42,7 @@ und auch von allen gängigen Betriebssystemen unterstützt wird.
 
 
 - Dann erscheint eine Frage, ob die Standardeinstellungen genutzt werden sollen.
-- Hier kann einfach mit `"y"` bestätigt werden.
+- Hier kann einfach mit `y` bestätigt werden.
 
 - Nun muss ein starkes Passwort gewählt werden.
 
@@ -65,7 +65,7 @@ Optional kann aber auch die Funktion des Dateimanagers genutzt werden, um das Sy
 -------------------------------------------------------------------------------------------------------------------------------------
 
 
-### C. Optional ein Skript erstellen
+### C. optional ein Skript erstellen
 
 Nun kann optional ein `Sh-Skript` erstellt werden, um nicht jedesmal den Befehl ausführen zu müssen,
 sondern nur das Skript im Terminal zu starten, was den Befehl automatisch ausführt.
@@ -78,7 +78,8 @@ Dieses Skript muss lediglich den Entschlüsselungsbefehl enthalten und als `Date
 
 ### D. Skript über eine `.Desktop` verknüpfen und einfach ausführbar machen
 
-Das Skript kann mit einer .Desktop Datei verknüpfen:
+
+- Das Skript kann mit einer .Desktop Datei verknüpfen:
 Dabei würde diese im App Menü erscheinen und beim Öffnen der ".Desktop-Datei" würde sich automatisch das Skript ausführen
 und ein Terminalfenster mit der Passwortabfrage öffnen.
 
@@ -101,7 +102,6 @@ Das Programm ist u.a. für Linux, Windows und MacOS verfügbar.
 > [veracrypt.fr](https://veracrypt.fr/)
 
 
--------------------------------------------------------------------------------------------------------------------------------------
 
 
 - Installation:
