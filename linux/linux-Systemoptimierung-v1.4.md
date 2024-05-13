@@ -2,10 +2,10 @@
 
 
 
-# 1. Linux Sprache ändern
+# 1. auf Linux die Systemsprache ändern
 
 
-### Systemsprache auf Deutsch ändern unter Linux
+### Systemsprache auf `Deutsch` ändern unter Linux
 
 
 - Befehle:
@@ -31,18 +31,17 @@ $ sudo localectl set-locale LANG=de_DE.UTF-8
 
 
 Benutzeroberfläche:
-	- Diese Anleitung bezieht sich auf die Benutzeroberfläche Gnome !
+	- Diese Anleitung bezieht sich auf die Benutzeroberfläche `Gnome` !
 
 
-```
-Wenn das Dock (Taskleiste in Linux) unter Gnome auf dem Desktop ausgeblendet wird und erst im App-Menu gezeigt wird.
-```
+## Wenn das Dock (Taskleiste in Linux) unter Gnome auf dem Desktop ausgeblendet wird und erst im App-Menu gezeigt wird.
+
 
 
 - Fix:
-1) In der App-Übersicht nach "Exensions" suchen.
+1) In der App-Übersicht nach `Exensions` suchen.
 
-2) Überprüfen, dass "Extensions" aktiviert ist und unter "Dash to Dock" (sollte aktiviert sein) auf die Option "Settings" klicken.
+2) Überprüfen, dass `Extensions` aktiviert ist und unter `Dash to Dock` (sollte aktiviert sein) auf die Option `Settings` klicken.
 
 3) Dann die Einstellungen überprüfen und die gewünschten Änderungen vornehmen.
 
@@ -89,11 +88,11 @@ Google DNS auf Linux verwenden, um Anfragen im Web schneller aufzulösen zu kön
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 5. App Icons (.Desktop) in Kali Linux hinzufügen
+# 5. App Icons `.desktop` in Kali Linux hinzufügen
 
 
 
-### A. .Desktop Dateien finden
+### A. `.desktop` Dateien finden
 
 - Dateimanager starten
 - auf `other locations` klicken
@@ -173,7 +172,7 @@ Vollbild:
 ```
 
 
-Im Dateimanager versteckte Datein anzeigen/ ausblenden:
+Im Dateimanager versteckte Dateien anzeigen/ ausblenden:
 ```
 - strg + h
 ```
