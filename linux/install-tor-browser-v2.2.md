@@ -7,8 +7,8 @@
 
 
 Der Tor-Browser bietet Zugang zum Darknet von allen möglichen Geräten auf dem er installiert ist,
-jedoch empfiehlt es sich aus Datenschutzgründen den Tor-Browser über das Linux Tails-Betriebssystem zu nutzen,
-um das Darknet zu besuchen.
+jedoch empfiehlt es sich aus Datenschutzgründen den Tor-Browser für Besuche im Darknet nur über das [Linux Tails-Betriebssystem](https://tails.net/) zu nutzen.
+
 
 
 Auf üblichen Desktop-Systemen eignet sich der Tor-Browser trotzdem, um sich sicher im clear-Web zu bewegen.
@@ -71,6 +71,3 @@ $ ./start-tor-browser.desktop --register-app
 
 
 > [torproject.org/installation](https://tb-manual.torproject.org/de/installation/)
-
-
--------------------------------------------------------------------------------------------------------------------------------
