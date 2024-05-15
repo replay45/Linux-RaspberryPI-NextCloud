@@ -32,11 +32,13 @@ $ sudo systemctl start ssh
 ```
 
 
+
 ### B. ggf. wenn Firewall aktiv ist
 
 ```
 $ sudo ufw allow ssh
 ```
+
 
 
 ### C. Hostname / IP Adresse anzeigen
@@ -119,11 +121,48 @@ $ realvnc-vnc-viewer
 
 
 
+### E. manuell den Autostart einrichten
+
+- Wenn der VNC-Sever nach der Aktivierung mit `raspi-config` nicht automatisch startet, Folgende Schritte befolgen:
+
+```
+$ cd ~
+```
+```
+cd .config
+```
+```
+$ mkdir autostart
+```
+```
+$ cd autostart
+```
+```
+$ nano tightvnc.desktop
+```
+
+- Folgendes einfügen:
+```
+[Desktop Entry]
+Type=Application
+Name=TightVNC
+Exec=vncserver :1
+StartupNotify=false
+```
+
+- mit `STRG+X` speichern
+
+
+
+
+
 ----------------------------------------------------------------------------------------------------------------
 
 
 # 3. [Nautilus](https://wiki.ubuntuusers.de/Nautilus/) - GNOME Filemanager auf RaspberryPI OS installieren
 
+
+### A. Möglichkeit-1 Version "focal fossa"
 
 ```
 $ sudo nano /etc/apt/sources.list
@@ -151,6 +190,32 @@ $ sudo apt install nautilus
 ```
 ```
 $ xdg-mime default nautilus.desktop inode/directory application/x-gnome-saved-search
+```
+```
+$ nautilus
+```
+
+Nun sollte der Nautilus Dateimanager installiert sein.
+
+
+
+
+### B. Möglichkeit-2 Version "Jammy Jellyfish"
+
+```
+$ echo "deb http://ppa.launchpad.net/ubuntu-desktop/ppa/ubuntu focal main" | sudo tee -a /etc/apt/sources.list.d/ubuntu-desktop-ppa.list
+```
+```
+$ sudo apt update
+```
+```
+$ sudo apt install nautilus
+```
+```
+$ xdg-mime default nautilus.desktop inode/directory application/x-gnome-saved-search
+```
+```
+$ nautilus
 ```
 
 Nun sollte der Nautilus Dateimanager installiert sein.
@@ -212,3 +277,52 @@ $ sudo systemctl restart lightdm
 ```
 $ sudo systemctl restart gdm
 ```
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 5 Stromverbrauch & Energiezustände 
+
+
+
+### Auch wenn der RaspberryPI ausgeschaltet wird, aber am Strom bleibt, verbraucht er trotzdem noch vergleichsweise viel Energie. [datasheets.raspberrypi.com](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf)
+
+
+Woran liegt das ?
+
+- Grund dafür ist, dass der PI nur Softwareseitig heruntergefahren wird, das heißt der PI bleibt in dem sogenannten `warm-Standby-Modus` und wird nicht ganz abgeschaltet.
+
+- Aufgrund vieler Probleme mit den Erweiterungskarten (HATs) für den RaspberryPI, muss die 3 und 5 Volt Schiene weiterhin mit Strom versorgt werden.
+
+
+### Wenn KEINE Erweiterungskarte genutzt wird und dies auch nicht in Planung ist, kann der Energieverbrauch beeinflusst werden.
+### Sollte eine Erweiterungskarte jedoch genutzt werden, kann dies zu Problmen führen !
+
+----------------------------------------------------------------------------------------------------------------
+
+
+- Stromverbrauch einstellen:
+
+```
+$ sudo rpi-eeprom-config -e
+```
+
+Folgendes Ändern - [POWER_OFF_ON_HALT](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#POWER_OFF_ON_HALT)
+
+von `POWER_OFF_ON_HALT=0`
+
+zu `POWER_OFF_ON_HALT=1`
+
+
+- speichern mit `STRG+X`
+
+
+```
+$ reboot
+```
+
+
+- Somit sollte die 3 Volt Schiene beim Herunterfahren abgeschaltet werden und der Stromverbrauch im heruntergefahrenen Zustand deutlich geringer als vorher sein.
+
+----------------------------------------------------------------------------------------------------------------
