@@ -104,19 +104,37 @@ $ sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# 4. [Tux Racer](https://tuxracer.sourceforge.net/) - Rennspiel & [Supertux](https://www.supertux.org/) - Jump-'n'-Run
+# 4. Konfiguration
+
+### Über `raspi-config` können einige Konfigurationen, vorgenommen werden:
+
+```
+1 System Options
+2 Display Options
+3 Interface Options
+4 Performance Options
+5 Localisation Options
+6 Advanced Options
+8 Update
+9 About raspi-config
+```
+
+	
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# 5. [Tux Racer](https://tuxracer.sourceforge.net/) - Rennspiel & [Supertux](https://www.supertux.org/) - Jump-'n'-Run
 
 
 In den beiden Spielen muss man das Linux-Maskottchen `Tux` steuern.
 
 
-
-  - Tux Racer
+- Tux Racer
 ```
 $ sudo apt install extremetuxracer
 ```
 
-  - Supertux
+- Supertux
 ```
 $ sudo apt install supertux
 ```
@@ -125,7 +143,7 @@ $ sudo apt install supertux
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# 5. [Brave-Browser installieren](https://brave.com/linux/)
+# 6. [Brave-Browser installieren](https://brave.com/linux/)
 
 ```
 $ sudo apt install curl
@@ -135,5 +153,21 @@ $ sudo apt update
 $ sudo apt install brave-browser
 ```
 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# 7. PI-OS von Boot in das Terminal, temporär in UI wechseln 
+
+
+
+
+- Wenn man automatisch in das Terminal bootet kann der Befehl verwendet werden, um temporär in die UI zu wechseln.
+
+- ## Bedingung: die UI muss installiert sein 
+
+```
+$ startx
+```
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
