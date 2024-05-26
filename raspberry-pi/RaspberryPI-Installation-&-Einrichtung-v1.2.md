@@ -22,7 +22,7 @@
     - Den rpi-imager von der offiziellen Webseite herunterladen und als Debian-Paket installieren.
     - Oder den rpi-imager über den [Flatpak-AppStore](https://flathub.org/apps/org.raspberrypi.rpi-imager) installieren.
 
-- Der rpi-imager kann alternativ auch auf Windows, MacOS oder auch einem anderem RaspberryPI installiert werden.
+- Der rpi-imager kann alternativ auch auf Windows, MacOS oder auch einem anderen RaspberryPI installiert werden.
 
 
 
@@ -164,7 +164,7 @@ $ sudo apt install brave-browser
 
 - Wenn man automatisch in das Terminal bootet kann der Befehl verwendet werden, um temporär in die UI zu wechseln.
 
-- ## Bedingung: die UI muss installiert sein 
+- ## Bedingung: Die UI muss bereits installiert sein.
 
 ```
 $ startx
