@@ -55,18 +55,22 @@
         $ sudo apt install remmina
 
 ### balena etcher
-  - download balena etcher App-image File 
-        $ sudo apt update
-        $ sudo apt install zenity
-        $ sudo mv balena etcher App-image /optautp
-        $ sudo su
-        $ chmod 777 /opt/balena-etcher.AppImage
-        $ /opt/balena-etcher.AppImage
+- download balena etcher App-image File
+    ```
+    $ sudo apt update
+    $ sudo apt install zenity
+    $ sudo mv balena etcher App-image /optautp
+    $ sudo su
+    $ chmod 777 /opt/balena-etcher.AppImage
+    $ /opt/balena-etcher.AppImage
+    ```
 
 ### GDebi
-- Debian-Paket-Installationsmanager
-        $ sudo apt-get install gdebi 
 
+- Debian-Paket-Installationsmanager
+    ```
+    $ sudo apt-get install gdebi 
+    ```
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -125,29 +129,41 @@ Für diese Anleitung wird eine config-Datei vorausgesetzt.
 
 
 - Installation:
-        $ sudo apt install wireguard resolvconf
+    ```
+    $ sudo apt install wireguard resolvconf
+    ```
 
 - in das Verzeichnis wechseln wo die config-Datei gespeichert ist:
-        $ cd /etc/Wireguard
-		$ sudo chown root:root /etc/wireguard/wg-client.conf
-		$ sudo chmod 644 /etc/wireguard/wg-client.conf
-		$ sudo chmod 755 /etc/wireguard
+        
+    ```
+    $ cd /etc/Wireguard
+	$ sudo chown root:root /etc/wireguard/wg-client.conf
+	$ sudo chmod 644 /etc/wireguard/wg-client.conf
+	$ sudo chmod 755 /etc/wireguard
+    ```
 
 - Verbindung über Befehl starten/beenden:
-        $ sudo wg-quick up /etc/wireguard/wg-client.conf
-        $ sudo wg show
-
-        $ wg-quick down /etc/wireguard/wg-client.conf
-        $ ifconfig
+    ```
+    $ sudo wg-quick up /etc/wireguard/wg-client.conf
+    $ sudo wg show
+    ```
+    ```
+    $ wg-quick down /etc/wireguard/wg-client.conf
+    $ ifconfig
+    ```
 
 - - Verbindung über nmtui starten/beenden:
-        $ nmtui-connect
+    
     - Durch das Setzen des `*` kann die Verbindung aufgebaut/beendet werden.
 
+    ```        
+    $ nmtui-connect
+    ```
 
-        $ nmcli connection import type wireguard file /etc/wireguard/wg-client.conf
-        $ nm-connection-editor
-        ``
+    ```
+    $ nmcli connection import type wireguard file /etc/wireguard/wg-client.conf
+    $ nm-connection-editor
+    ```
 
 ### Wireguard Kali Linux
 
@@ -164,11 +180,13 @@ Natürlich funktioniert auch die Befehlszeilen-Methode unter Kali Linux.
 - Einstellungen öffnen,
 - zu dem Punkt `Netzerk` eine VPN Verbindung hinzufügen.
 - Unter `Add VPN` `Wireguard` auswählen.
-- Dann einen `Connection` und `Interface` Namen wählen, und den privaten Key einfügen.
-- Danach bei `Peers` die Adresse des Routers einfügen
+- Dann einen `Connection` und `Interface` Namen wählen, und den privaten Schlüssel einfügen.
+- Danach bei `Peers` die Adresse des Routers einfügen.
 - Nun auf speichern klicken und in den Schnelleinstellungen unter VPN die Verbindung hestellen.
 
 - Zum überprüfen der Verbindung:
-        $ ifconfig
+    ```
+    $ ifconfig
+    ```
 
 ----------------------------------------------------------------------------------------------------------------
