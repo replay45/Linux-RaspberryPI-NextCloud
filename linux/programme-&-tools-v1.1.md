@@ -152,7 +152,7 @@ Für diese Anleitung wird eine config-Datei vorausgesetzt.
     $ ifconfig
     ```
 
-- - Verbindung über nmtui starten/beenden:
+- Verbindung über nmtui starten/beenden:
     
     - Durch das Setzen des `*` kann die Verbindung aufgebaut/beendet werden.
 
