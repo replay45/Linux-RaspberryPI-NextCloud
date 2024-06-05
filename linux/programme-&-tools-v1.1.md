@@ -3,20 +3,20 @@
 
 # 1. Browser & Mail
 
-### Firefox
+### [Firefox](https://www.mozilla.org/de/firefox/new/)
         $ sudo apt install firefox
 
-### Chromium 
+### [Chromium](https://www.chromium.org/chromium-projects/)
         $ sudo apt install chromium
 
-### Brave
+### [Brave](https://brave.com/de/)
         $ sudo apt install curl
         $ sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
         $ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
         $ sudo apt update
         $ sudo apt install brave-browser
 
-### Thunderbird
+### [Thunderbird](https://www.thunderbird.net/de/)
         $ sudo apt install thunderbird
 
 ----------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@
 
 # 3. Medienwiedergabe
 
-### vlc media player
+### [vlc media player](https://www.videolan.org/vlc/index.de.html)
         $ sudo apt install vlc
 
 ----------------------------------------------------------------------------------------------------------------
@@ -48,13 +48,13 @@
 
 # 4. Poduktivität
 
-### Visual Studio Code
+### [Visual Studio Code](https://code.visualstudio.com/)
         $ sudo apt install code
 
-### remmina (remote desktop)
+### [remmina (remote desktop)](https://remmina.org/)
         $ sudo apt install remmina
 
-### balena etcher
+### [balena etcher](https://etcher.balena.io/)
 - download balena etcher App-image File
     ```
     $ sudo apt update
@@ -120,7 +120,7 @@ Aber auch im [F-Droid-Store](https://f-droid.org/de/packages/slowscript.warpinat
 
 # 7. VPN
 
-### Wireguard (Linux)
+### [Wireguard - debian-basierende-Distributionen](https://www.wireguard.com/)
 
 Diese Anleitung sollte unter allen gängigen auf Debian-basierenden Linux Distributionen funktionieren.
 Zum Zeitpunkt der Erstellung dieser Anleitung bietet Kali Linux eine weitere Möglichkeit, um Wireguard bequem nutzen zu können - siehe unten. 
@@ -165,7 +165,7 @@ Für diese Anleitung wird eine config-Datei vorausgesetzt.
     $ nm-connection-editor
     ```
 
-### Wireguard Kali Linux
+### [Wireguard Kali Linux](https://www.wireguard.com/)
 
 Zu dem Zeitpunkt der Erstellung der Einleitung ist diese Methode noch nicht unter Ubuntu möglich.
 Diese Anleitung wurde unter Kali Linux getestet.
