@@ -120,13 +120,16 @@ Aber auch im [F-Droid-Store](https://f-droid.org/de/packages/slowscript.warpinat
 
 # 7. VPN
 
-### [Wireguard - debian-basierende-Distributionen](https://www.wireguard.com/)
+## [Wireguard - Debian basierte Distribution](https://www.wireguard.com/)
 
-Diese Anleitung sollte unter allen gängigen auf Debian-basierenden Linux Distributionen funktionieren.
+`Die Anleitung wurde auf Kali Linux getestet, sollte aber auf anderen Debian basierenden Distributionen, wie Ubuntu, problemlos funktionieren.`
+
 Zum Zeitpunkt der Erstellung dieser Anleitung bietet Kali Linux eine weitere Möglichkeit, um Wireguard bequem nutzen zu können - siehe unten. 
 
-Für diese Anleitung wird eine config-Datei vorausgesetzt.
+Für diese Anleitungen wird eine `config-Datei vorausgesetzt`.
 
+
+## 7.1 Befehlszeilen-Methode
 
 - Installation:
     ```
@@ -136,6 +139,7 @@ Für diese Anleitung wird eine config-Datei vorausgesetzt.
 - in das Verzeichnis wechseln wo die config-Datei gespeichert ist:
         
     ```
+    $ sudo su
     $ cd /etc/Wireguard
 	$ sudo chown root:root /etc/wireguard/wg-client.conf
 	$ sudo chmod 644 /etc/wireguard/wg-client.conf
@@ -165,13 +169,31 @@ Für diese Anleitung wird eine config-Datei vorausgesetzt.
     $ nm-connection-editor
     ```
 
-### [Wireguard Kali Linux](https://www.wireguard.com/)
+
+
+## 7.2 grafische Methode mit dem nm-editor
+
+```
+$ sudo apt install wireguard resolvconf
+$ nm-connection-editor
+```
+
+   - `+`
+   - unter `virtual` `Wireguard` auswählen
+   - nach dem ausfüllen der Kästchen, auf `Save` gehen
+   - Nun in den Einstellungen noch die Eigenschaften der Verbindung öffnen und
+   bei `Peers` die Fehlenden Einträge ergänzen.
+
+
+
+## 7.3 Wireguard Konfiguaration manuell in den Einstellungen hinzufügen (grafische Methode)
 
 Zu dem Zeitpunkt der Erstellung der Einleitung ist diese Methode noch nicht unter Ubuntu möglich.
 Diese Anleitung wurde unter Kali Linux getestet.
 
 
 Unter Kali Linux gibt es eine weitere Möglichkeit, um Wireguard komfortabel nutzen zu können.
+
 
 Natürlich funktioniert auch die Befehlszeilen-Methode unter Kali Linux.
 
@@ -190,3 +212,4 @@ Natürlich funktioniert auch die Befehlszeilen-Methode unter Kali Linux.
     ```
 
 ----------------------------------------------------------------------------------------------------------------
+
