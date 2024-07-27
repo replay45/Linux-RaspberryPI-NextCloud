@@ -40,7 +40,7 @@ $ sudo freshclam
 
 
 
-------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
 
@@ -49,27 +49,85 @@ $ sudo freshclam
 
 [Firewallmanager - ufw](https://wiki.ubuntuusers.de/ufw/):
 
+- Installation & Status
 ```
 $ sudo apt install ufw
-```
-```
 $ sudo ufw status
-```
-```
-$ sudo ufw app list
-```
-```
-$ sudo ufw allow 'PAKETNAME'
-```
-```
-$ sudo ufw enable
-```
-```
-$ sudo ufw disable
-```
-```
+$ sudo ufw status verbose
 $ sudo ufw reload
 ```
 
 
-------------------------------------------------------------------------------------------------------------------------------
+- Firewall aktivieren/ deaktivieren/ reseten
+```
+$ sudo ufw enable
+$ sudo ufw disable
+$ sudo ufw reset
+```
+
+
+- Portfreigabe - App-list
+```
+$ sudo ufw app list
+$ sudo ufw allow PAKETNAME
+$ sudo ufw allow ssh
+```
+
+
+- klassische Portfreigabe 
+```
+$ sudo ufw allow <port> <optional: protocol>
+
+$ sudo ufw allow 53
+$ sudo ufw allow 53/tcp
+$ sudo ufw allow 53/udp
+```
+
+
+- Portfreigabe für eine bestimmte IP-Adresse
+```
+$ sudo ufw allow from IP-ADRESSE
+$ sudo ufw allow from 203.0.113.4
+
+$ sudo ufw allow from IP-ADRESSE to any port PORT
+$ sudo ufw allow from 192.168.2.10 to any port 22
+```
+
+
+- Regeln entfernen
+```
+$ sudo ufw status numbered
+$ sudo ufw delete NUMBER
+$ sudo ufw delete 2
+
+$ sudo ufw delete allow PORTFREIGABE
+$ sudo ufw delete allow 22
+$ sudo ufw delete allow http
+
+$ sudo ufw delete deny PORTFREIGABE
+$ sudo ufw delete deny 22
+$ sudo ufw delete deny http
+```
+
+
+- Anfragen verbieten
+```
+$ sudo ufw deny <port> <optional: protocol>
+
+$ sudo ufw deny 53
+$ sudo ufw deny 53/tcp
+$ sudo ufw deny 53/udp
+```
+
+
+- Logging
+```
+$ sudo ufw logging on 
+$ sudo ufw logging STUFE 
+$ sudo ufw logging off 
+```
+
+
+
+
+----------------------------------------------------------------------------------------------------------------
