@@ -185,8 +185,19 @@ $ nm-connection-editor
    bei `Peers` die Fehlenden Einträge ergänzen.
 
 
+## 7.3 Wireguard-config via nmcli importieren
 
-## 7.3 Wireguard Konfiguaration manuell in den Einstellungen hinzufügen (grafische Methode)
+```
+$ nmcli
+$ nmcli connection import type wireguard file wg_config.conf
+```
+```
+$ sudo wg show
+$ ifconfig
+```
+
+
+## 7.4 Wireguard Konfiguaration manuell in den Einstellungen hinzufügen (grafische Methode)
 
 Zu dem Zeitpunkt der Erstellung der Einleitung ist diese Methode noch nicht unter Ubuntu möglich.
 Diese Anleitung wurde unter Kali Linux getestet.
@@ -212,4 +223,3 @@ Natürlich funktioniert auch die Befehlszeilen-Methode unter Kali Linux.
     ```
 
 ----------------------------------------------------------------------------------------------------------------
-
