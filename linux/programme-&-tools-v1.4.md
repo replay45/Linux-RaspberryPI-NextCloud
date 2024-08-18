@@ -120,13 +120,47 @@ Aber auch im [F-Droid-Store](https://f-droid.org/de/packages/slowscript.warpinat
 
 # 7. VPN
 
+
+## Was ist [Wireguard](https://www.wireguard.com/) ?
+
+
+Wireguard ist ein modernes und effizientes VPN-Protokoll, was schnelle und sichere VPN-Verbindungen ermöglicht.
+Zudem ist das Protokoll sowohl für einfache Konfiguration als auch für hohe Sicherheit bekannt.
+
+Das Protokoll wird nicht nur von VPN-Anbietern benutzt, es findet auch Verwendung bei modernen FritzBoxen.
+Somit kann man eine sichere Verbindung über sein Handy oder Laptop von überall aus auf das Heimnetzwerk herstellen, was sich besonders für öffentliche oder unsichere WLAN Hotspots anbietet oder wenn man auf Geräte aus dem Heimnetzwerk zugreifen möchte.
+
+
+
+## [Wireguard](https://www.wireguard.com/) auf Windows/Android/iOS/MacOS
+- Auf den genannten Betriebsystemen gibt es eine offizielle App mit grafischer oberfläche, in der man die Konfigurationsdatei benutzerfreundlich importieren kann.
+- Für Linux gibt es leider noch keine App mit grafischem Interface.
+
+
+
 ## [Wireguard - Debian basierte Distribution](https://www.wireguard.com/)
+
 
 `Die Anleitung wurde auf Kali Linux getestet, sollte aber auf anderen Debian basierenden Distributionen, wie Ubuntu, problemlos funktionieren.`
 
-Zum Zeitpunkt der Erstellung dieser Anleitung bietet Kali Linux eine weitere Möglichkeit, um Wireguard bequem nutzen zu können - siehe unten. 
+- Hinweis zu Kali:
+In Kali Linux ist es möglich die VPN-Verbindung im Quick-Panel oder in den Einstellungen unter "Netzwerk" zu aktivieren.
+Alternativ kann aber auch die Verbindung über `nmtui` (Punkt 7.1) im Terminal gestartet werden.
+
+
+- Hinweis zu Ubuntu:
+Zum Zeitpunkt der Erstellung dieser Anleitung ist es erst in Ubuntu 23.10 möglich die Wireguard VPN-Verbindung grafisch zu starten.
+Wer eine ältere Version nutzt, muss die Verbindung im Terminal über `nmtui` (Punkt 7.1) starten.
+
+
 
 Für diese Anleitungen wird eine `config-Datei vorausgesetzt`.
+
+
+### Wichtig - Name der Konfigurationsdatei
+
+- Um Probleme bei der Einrichtung zu vermeiden, empiehlt es sich die Konfigurationsdatei `wg_config.conf` zu benennen.
+- Wer mehrere Verbindungen nutzt, kann die Konfigurationen mit Zahlen ergänzen, wie z.B. `wg_config01.conf`.
 
 
 ## 7.1 Befehlszeilen-Methode
@@ -184,6 +218,8 @@ $ nm-connection-editor
    - Nun in den Einstellungen noch die Eigenschaften der Verbindung öffnen und
    bei `Peers` die Fehlenden Einträge ergänzen.
 
+- Nach dem Speichern, kann im Quick-Panel (Schnelleinstellungen) oder alternativ in den Einstellungen unter "Netzwerk", die VPN-Verbindung gestartet und beendet werden.
+
 
 ## 7.3 Wireguard-config via nmcli importieren
 
@@ -195,6 +231,23 @@ $ nmcli connection import type wireguard file wg_config.conf
 $ sudo wg show
 $ ifconfig
 ```
+
+- um den Autostart von Wireguard (über nmcli) zu deaktivieren:
+
+Wireguard Verbindungsname ausfindig machen
+```
+$ nmcli connection show
+```
+Autostart ausschalten:
+```
+$ nmcli connection modify "dein-verbindungsname" connection.autoconnect no
+```
+Überprüfen:
+```
+$ nmcli connection show "dein-verbindungsname" | grep autoconnect
+```
+
+
 
 
 ## 7.4 Wireguard Konfiguaration manuell in den Einstellungen hinzufügen (grafische Methode)
@@ -215,7 +268,7 @@ Natürlich funktioniert auch die Befehlszeilen-Methode unter Kali Linux.
 - Unter `Add VPN` `Wireguard` auswählen.
 - Dann einen `Connection` und `Interface` Namen wählen, und den privaten Schlüssel einfügen.
 - Danach bei `Peers` die Adresse des Routers einfügen.
-- Nun auf speichern klicken und in den Schnelleinstellungen unter VPN die Verbindung hestellen.
+- Nun auf speichern klicken und in dem Quick-Panel (Schnelleinstellungen) oder in den Einstellungen unter VPN die Verbindung herstellen.
 
 - Zum überprüfen der Verbindung:
     ```
