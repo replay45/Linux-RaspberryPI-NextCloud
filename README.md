@@ -1,8 +1,8 @@
-# Linux, Ethical Hacking und RaspberryPI
+# Linux, RaspberryPI & Nextcloud
 
-Hier sind einige Anleitungen zu Linux, Ethical Hacking und dem RaspberryPI.
+Hier sind einige Anleitungen zu Linux, dem RaspberryPI und zur Nextcloud.
 
-Neben einigen Ethical Hacking-Projekten, finden sich unter dem Ordner Linux, Anleitungen zu den Distributionen Kali-Linux & Ubuntu.
+Neben einigen Nextcloud und RaspberryPI Projekten, finden sich unter dem Ordner Linux, Anleitungen zu den Distributionen Kali Linux & Ubuntu.
 
 Manche Anleitungen beziehen sich zudem besonders auf die Benutzeroberflächen GNOME und XFCE, die unter anderem standard/optionale Benutzeroberflächen von Kali & Ubuntu sind.
 
