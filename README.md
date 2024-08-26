@@ -2,7 +2,7 @@
 
 Hier sind einige Anleitungen zu Linux, dem RaspberryPI und zur Nextcloud.
 
-Neben einigen Nextcloud und RaspberryPI Projekten, finden sich unter dem Ordner Linux, Anleitungen zu den Distributionen Kali Linux & Ubuntu.
+Unter dem Ordner Linux, sind Anleitungen zu den Distributionen Kali Linux & Ubuntu.
 
 Manche Anleitungen beziehen sich zudem besonders auf die Benutzeroberflächen GNOME und XFCE, die unter anderem standard/optionale Benutzeroberflächen von Kali & Ubuntu sind.
 
@@ -18,32 +18,28 @@ Die Nutzung von Funkfrequenzen (RF) unterliegt den Gesetzen des jeweiligen Lande
 ### Links
 > Ubuntu
 
-[Ubuntu](https://ubuntu.com/)
-
-[wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Startseite/)
+[Ubuntu](https://ubuntu.com/) / [wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Startseite/)
 
 
 
 > Kali Linux
 
-[Kali Linux](https://www.kali.org/)
-
-[Kali Docs](https://www.kali.org/docs/)
-
-[Kali Tools](https://www.kali.org/tools/)
+[Kali Linux](https://www.kali.org/) / [Kali Docs](https://www.kali.org/docs/) / [Kali Tools](https://www.kali.org/tools/)
 
 
 
 > Benutzeroberflächen
 
-[GNOME](https://www.gnome.org/)
-
-[Xfce](https://www.xfce.org/)
+[GNOME](https://www.gnome.org/) / [Xfce](https://www.xfce.org/)
 
 
 
 > RaspberryPI
 
-[RaspberryPI.com](https://www.raspberrypi.com/)
+[RaspberryPI.com](https://www.raspberrypi.com/) / [RaspberryPI OS](https://www.raspberrypi.com/software/)
 
-[RaspberryPI OS](https://www.raspberrypi.com/software/)
+
+
+> Nextcloud
+
+[Nextcloud](https://nextcloud.com/)
