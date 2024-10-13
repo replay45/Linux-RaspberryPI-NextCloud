@@ -4,14 +4,14 @@
 
 `Empfohlen wird eine SD-Karte mit mind. 8 GB.`
 
-`Für diese Anleitung wurde ein RaspberryPI 5 genutzt, sollte jedoch auch für andere Versionen genutzt werden können.`
+`Für diese Anleitung wurde ein RaspberryPI 5 genutzt, diese sollte jedoch auch für ältere Modelle übertragbar sein.`
 
 `RaspberryPI OS ist eine Linux Distribution, die auf Debian basiert und von der Raspberry Pi Foundation entwickelt wurde.`
 
 `Anleitung verfasst am 7.5.2024`
 
 
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
 # 1. Installation von [RaspberryPI-OS](https://www.raspberrypi.com/software/)
@@ -57,7 +57,7 @@
 - Updates installieren und neustarten
 
 
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
 # 2. IP-Adresse herausfinden
@@ -71,7 +71,7 @@ $ ip a
 ```
 
 
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
 # 3. System Updaten
@@ -101,7 +101,7 @@ $ sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
 ```
 
 
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
 # 4. Konfiguration
@@ -120,7 +120,7 @@ $ sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
 ```
 
 	
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
 # 5. [Tux Racer](https://tuxracer.sourceforge.net/) - Rennspiel & [Supertux](https://www.supertux.org/) - Jump-'n'-Run
@@ -140,7 +140,7 @@ $ sudo apt install supertux
 ```
 
 
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
 # 6. [Brave-Browser installieren](https://brave.com/linux/)
@@ -154,20 +154,18 @@ $ sudo apt install brave-browser
 ```
 
 
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 
-# 7. PI-OS von Boot in das Terminal, temporär in UI wechseln 
-
-
+# 7. PI-OS: vom automatischen Boot in das Terminal, temporär in UI wechseln
 
 
 - Wenn man automatisch in das Terminal bootet kann der Befehl verwendet werden, um temporär in die UI zu wechseln.
 
-- ## Bedingung: Die UI muss bereits installiert sein.
+### Bedingung: Die UI muss bereits installiert sein.
 
 ```
 $ startx
 ```
 
------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
