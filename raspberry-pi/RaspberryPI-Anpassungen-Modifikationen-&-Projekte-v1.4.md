@@ -1,7 +1,6 @@
 # RaspberryPI - Anpassungen, Modifikationen und Projekte
 
-
-`Für diese Anleitung wurde ein RaspberryPI 5 genutzt, sollte jedoch auch für andere Versionen genutzt werden können.`
+`Für diese Anleitung wurde ein RaspberryPI 5 genutzt, diese sollte jedoch auch für ältere Modelle übertragbar sein.`
 
 `Anleitung verfasst am 7.5.2024`
 
@@ -117,7 +116,7 @@ $ realvnc-vnc-viewer
 
 
 - Hinweis
-	- Es ist nicht zwingend notwendig ein Account anzulegen, um den VNC-Viewer zu verwenden.
+	- Es ist nicht zwingend notwendig, einen Account anzulegen, um den VNC-Viewer zu verwenden.
 
 
 
@@ -169,7 +168,7 @@ $ sudo nano /etc/apt/sources.list
 ```
 
 - in der vorhandenen Datei Folgendes am Ende einfügen:
-	- `focal` kann natürlich auch durch andere `Ubuntu-Versionen` ersetzt werden
+	- `focal` kann natürlich auch durch andere `Ubuntu-Versionen` ersetzt werden.
 
 ```
 deb http://ppa.launchpad.net/ubuntu-desktop/ppa/ubuntu focal main
@@ -240,7 +239,7 @@ A. grafische Installationsmethode:
 
 
 B. Befehlszeilen Methode:
-- 1. erste Alternative - Es kann auch der Folgende Befehl verwendet werden:
+- 1. erste Alternative - Es kann auch der folgende Befehl verwendet werden:
 	```
 	$ sudo apt install <package>
 	```
@@ -264,7 +263,7 @@ $ reboot
 ```
 
 
-- Um zwischen den Desktopumgebungen wechseln zu können, kann der Folgende Befehl verwendet werden:
+- Um zwischen den Desktopumgebungen wechseln zu können, kann der folgende Befehl verwendet werden:
 ```
 $ sudo update-alternatives --config x-session-manager
 ```
@@ -282,27 +281,27 @@ $ sudo systemctl restart gdm
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 5 Stromverbrauch & Energiezustände 
+# 5. Stromverbrauch & Energiezustände
 
 
 
-### Auch wenn der RaspberryPI ausgeschaltet wird, aber am Strom bleibt, verbraucht er trotzdem noch vergleichsweise viel Energie. [datasheets.raspberrypi.com](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf)
+### Auch wenn der RaspberryPI ausgeschaltet wird, aber am Strom bleibt, verbraucht er trotzdem noch vergleichsweise viel Strom. [datasheets.raspberrypi.com](https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf)
 
 
 Woran liegt das ?
 
-- Grund dafür ist, dass der PI nur Softwareseitig heruntergefahren wird, das heißt der PI bleibt in dem sogenannten `warm-Standby-Modus` und wird nicht ganz abgeschaltet.
+- Grund dafür ist, dass der PI nur softwareseitig heruntergefahren wird, das heißt, der PI bleibt in dem sogenannten `warm-Standby-Modus` und wird nicht ganz abgeschaltet.
 
-- Aufgrund vieler Probleme mit den Erweiterungskarten (HATs) für den RaspberryPI, muss die 3 und 5 Volt Schiene weiterhin mit Strom versorgt werden.
+- Aufgrund vieler Probleme mit den Erweiterungskarten (HATs) für den RaspberryPI, muss die 3- und 5-Volt-Schiene weiterhin mit Strom versorgt werden.
 
 
 ### Wenn KEINE Erweiterungskarte genutzt wird und dies auch nicht in Planung ist, kann der Energieverbrauch beeinflusst werden.
-### Sollte eine Erweiterungskarte jedoch genutzt werden, kann dies zu Problmen führen !
+### Sollte eine Erweiterungskarte jedoch genutzt werden, kann dies zu Problemen führen !
 
 ----------------------------------------------------------------------------------------------------------------
 
 
-- Stromverbrauch einstellen:
+- Stromverbrauch verringern:
 
 ```
 $ sudo rpi-eeprom-config -e
@@ -323,6 +322,6 @@ $ reboot
 ```
 
 
-- Somit sollte die 3 Volt Schiene beim Herunterfahren abgeschaltet werden und der Stromverbrauch im heruntergefahrenen Zustand deutlich geringer als vorher sein.
+- Somit sollte die 3-Volt-Schiene beim Herunterfahren abgeschaltet werden und der Stromverbrauch im heruntergefahrenen Zustand deutlich geringer als vorher sein.
 
 ----------------------------------------------------------------------------------------------------------------
