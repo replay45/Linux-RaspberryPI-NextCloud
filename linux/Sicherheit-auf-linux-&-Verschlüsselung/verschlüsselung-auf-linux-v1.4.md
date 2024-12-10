@@ -14,7 +14,7 @@
     - Wieso sollte man die Festplattenverschlüsselung nutzen ?
     - Festplattenverschlüsselung aktivieren
 4. weitere Sicherheitsmaßnahmen
-    - UEFI Passwort
+    - UEFI-Passwort
     - Mehr zu Sicherheit auf Linux-Systemen
 
 
@@ -86,7 +86,7 @@ $ cryfs ~/HIER/PFAD/VERSCHLÜSSELTER/ORDNER ~/HIER/PFAD/ENTSCHLÜSSELTER/ORDNER
 
 - Dieses Skript muss lediglich den Entschlüsselungsbefehl enthalten und als `Datei.sh` gespeichert werden.
 
-- Mehr zu sh-Skripte in der Datei [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux) im Linux Repository.
+- Mehr zu sh-Skripten in der Datei [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux) im Linux Repository.
 
 
 --------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ $ cryfs ~/HIER/PFAD/VERSCHLÜSSELTER/ORDNER ~/HIER/PFAD/ENTSCHLÜSSELTER/ORDNER
 # 2. [VeraCrypt](https://veracrypt.fr/)
 
 
-VeraCrypt ist ebenfalls ein kostenloses Open Source `Verschlüsselungsprogramm` und wird zur Verschlüsselung von `Festplatten` und `Wechseldatenträgern`, wie `USB-Sticks` oder `externen Festplatten` genutzt.
+VeraCrypt ist ebenfalls ein kostenloses Open Source `Verschlüsselungsprogramm` und wird zur Verschlüsselung von `Festplatten` und `Wechseldatenträgern`, wie `USB-Sticks` oder `externen Festplatten`, genutzt.
 
 
 - Das Programm ist u.a. für Linux, Windows und MacOS verfügbar.
@@ -120,39 +120,37 @@ VeraCrypt ist ebenfalls ein kostenloses Open Source `Verschlüsselungsprogramm` 
 
 ### Installation auf Linux (Debian basierte Distributionen)
 
-```
-$ sudo apt install software-properties-common
-```
-```
-$ sudo add-apt-repository ppa:unit193/encryption
-```
-```
-$ sudo apt update
-```
-
 - [download tar.bz2 auf veracrypt.fr](https://veracrypt.fr/en/Downloads.html)
 
 ```
 $ tar xvf veracrypt-version-setup.tar.bz2
 ```
+GUI-Version:
 ```
 $ ./veracrypt-version-setup-gui-x64
 ```
+Terminal-Version:
+```
+$ ./veracrypt-version-setup-console-x64
+```
 
-- Darauf achten, die Version mit `"gtk"` zu installieren !
-- Nun Installationsassistenten folgen.
+- Um die Version mit Benutzeroberfläche zu installieren, auf Kennzeichnung `"gui"` achten !
+- Wenn man eine Benutzeroberfläche mit `gtk2` (meistens: GNOME, XFCE, MATE oder Cinnamon) verwendet, kann man die Version mit `gtk2` installieren, jedoch ist das kein Muss.
+- Nun dem Installationsassistenten folgen.
+
+- Alternativ kann das Debian-Paket auch mit einem Installer wie [GDebi](https://packages.debian.org/de/stable/gdebi) installiert werden.
 
 
 ### Deinstallations-Befehl:
+```
+$ sudo /usr/bin/veracrypt-uninstall.sh 
+```
 
-```
-$ ./veracrypt-version-setup-gui-x64
-```
 
 ------------------------------------------------------------------------------
 
 
-# 3. Festplattenverschlüsselung unter Linux (Debian basierte Distributionen)
+# 3. Festplattenverschlüsselung unter Linux (Debian-basierte Distributionen)
 
 
 ### Wieso sollte man die Festplattenverschlüsselung nutzen ?
@@ -186,7 +184,7 @@ $ ./veracrypt-version-setup-gui-x64
 
 - Es ist durchaus ratsam, die Option zu aktivieren, da sie einen zusätzlichen Schutz vor Manipulationen bietet.
 
-- Jedoch Vorsicht, wenn man die Zugangsdaten für das UEFI verliert, kann das Gerät schnell unbrauchbar werden. Daher unbedingt die Zugangsdaten notieren und sicher aufbewahren. Dafür eignet sich z.B. ein Passwortmanager.
+- Jedoch Vorsicht: Wenn man die Zugangsdaten für das UEFI verliert, kann das Gerät schnell unbrauchbar werden. Daher unbedingt die Zugangsdaten notieren und sicher aufbewahren. Dafür eignet sich z.B. ein Passwortmanager.
 
 - Die Option kann man meistens unter dem Reiter `Security` aktivieren und heißt häufig `Administrator-Passwort`, das kann jedoch von Hersteller zu Hersteller unterschiedlich sein.
 
