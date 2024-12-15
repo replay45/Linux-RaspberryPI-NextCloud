@@ -1,46 +1,6 @@
-# Software & Pakete
+# Linux Software
 
-
-# 1. Programme auf Linux über das Terminal deinstallieren
-
-
-### A. Liste installierter Pakete:
-```
-$ dpkg --list
-```
-
-- nach einem bestimmten Paket suchen:
-```
-$ dpkg --list | grep [PROGRAMMNAME]
-```
-
-- Beispiel
-```
-$ dpkg --list | grep "firefox"
-```
-
-
-
-### B. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
-
-- Deinstallation aber Konfig-Datein werden behalten:
-```
-$ sudo apt-get remove PAKETNAME
-```
-
-- Deinstallation & Entfernung Konfigurationsdateien:
-```
-$ sudo apt-get --purge remove [PAKETNAME]
-```
-
-
-### C. [Flatpak](https://wiki.ubuntuusers.de/Flatpak/)
-
-- Deinstallation von Programmen:
-```
-$ sudo flatpak uninstall [PAKET]
-```
-
+`Anleitung zuletzt bearbeitet am 15.12.2024`
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -51,8 +11,6 @@ Mit `Software-selection` können im Nachhinein weitere Tools, Desktopumgebungen 
 
 
 > [Tasksel - wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/tasksel/)
-
-
 ```
 $ sudo apt install tasksel
 ```
@@ -62,146 +20,9 @@ $ sudo tasksel
 
 
 - Mit der Leertaste kann die Auswahl bestätigt werden.
-
-
-
-
 - WICHTIG:
 	- Wenn ein bereits vorhandenes `*` bei einer Option entfernt wird, werden die Programme etc. hinter dieser Option entfernt !
 	- Daher bei dem Setzen der `*` sorgfältig arbeiten !
-
-
-
-----------------------------------------------------------------------------------------------------------------
-
-
-# 3. [Flatpak](https://flatpak.org/) - Paketmanager
-
-### [Flatpak auf Kali installieren](https://www.kali.org/docs/tools/flatpak/)
-
-
-`Hier verwendetes Betriebssystem: Kali mit der GNOME Benutzeroberfläche`
-
-
-- Flathub App-Store installieren:
-
-```
-$ sudo apt install flatpak
-$ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo	
-$ sudo apt install gnome-software-plugin-flatpak
-```
-
-
-
-- optional die Apps, die über Flatpak installiert wurden, an die Kali-Themes anpassen:
-
-
-
-- Themes anpassen (Kali-Themes in den Apps):
-
-```
-$ mkdir -p ~/.themes
-$ cp -a /usr/share/themes/* ~/.themes/
-$ sudo flatpak override --filesystem=~/.themes/
-```
-
-
-
-- Pakete die über Flathub installiert wurden, updaten:
-
-```
-$ flatpak update
-```
-
-- Liste installierter Programme:
-
-```
-$ flatpak list
-```
-
-- Deinstallation von Programmen:
-
-```
-$ sudo flatpak uninstall [PAKET] 
-```
-
-- kaputte Installation Fix:
-```
-$ flatpak repair
-```
-
-- Verlauf anzeigen:
-```
-$ flatpak history
-```
-
-
-
-
-> [Flatpak - Setup](https://flatpak.org/setup/Ubuntu)
-
-> [Flatpak - wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Flatpak/)
-
-
-
-----------------------------------------------------------------------------------------------------------------
-
-
-# 4. [Snap](https://snapcraft.io/) - Paketmanager
-
-
-### [Snap auf Kali-Linux installieren](https://snapcraft.io/docs/installing-snap-on-kali)
-
-
-`Hier verwendetes Betriebssystem: Kali mit der GNOME Benutzeroberfläche`
-
-
-```
-$ sudo apt update
-```
-```
-$ sudo apt install snapd
-```
-```
-$ su root
-```
-```
-$ apt update
-```
-```
-$ apt install snapd
-```
-```
-$ systemctl enable --now snapd apparmor
-```
-```
-$ snap install hello-world
-```
-```
-$ hello-world
-```
-
-
-- Sollte es zu Problemen kommen, kann der folgende Befehl genutzt werden:
-    - falls der `snapd.apparmor service` deaktiviert ist, sollte der auszuführende Befehl im Terminal nach der Ausführung des Befehls erscheinen 
-
-```
-$ snap warnings
-```
-
-
-
-### B. [Snap App Store installieren](https://snapcraft.io/docs/installing-snap-store-app):
-
-```
-$ sudo snap install snap-store
-```
-
-- Wenn der Store sich nicht über das Icon öffnen lässt, über das Terminal mit dem Befehl versuchen:
-
-```
-snap-store
-```
 
 
 
@@ -217,13 +38,8 @@ Befehl:
 $ kali-undercover
 ```
 
-
-Um den Modus zu deaktivieren, einfach den Befehl erneut in das Terminal eingeben.
-
-
-Die undercover-Funktion funktioniert ausschließlich in [Xfce](https://www.xfce.org/) !
-
-
+- Um den Modus zu deaktivieren, einfach den Befehl erneut in das Terminal eingeben.
+- Die undercover-Funktion funktioniert ausschließlich in [Xfce](https://www.xfce.org/) !
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -236,14 +52,14 @@ $ sudo apt update
 $ sudo apt install apache2
 ```
 
-Firewall-Einstellungen - [ufw](https://wiki.ubuntuusers.de/ufw/):
+- Firewall-Einstellungen - [ufw](https://wiki.ubuntuusers.de/ufw/):
 ```
 $ sudo ufw app list
 $ sudo ufw allow 'Apache'
 $ sudo ufw status
 ```
 
-Apache2 Status & Autostart:
+- Apache2 Status & Autostart:
 ```
 $ sudo systemctl status apache2
 $ sudo systemctl enable apache2
@@ -252,7 +68,7 @@ $ sudo systemctl status apache2
 ```
 
 
-Für ein besseres Dateimanagement kann optional der [Midnight Commander](https://midnight-commander.org/) (auch bekannt als `Total Commander`) verwendet werden:
+- Für ein besseres Dateimanagement kann optional der [Midnight Commander](https://midnight-commander.org/) (auch bekannt als `Total Commander`) verwendet werden:
 ```
 $ sudo apt install mc
 $ sudo mc
@@ -268,7 +84,6 @@ $ sudo mc
 # 7. SSH Server auf Ubuntu installieren, um über SSH Zugriff auf das Terminal zu erhalten.
 
 ### SSH auf dem Host:
-
 ```
 $ sudo apt install openssh-server
 $ sudo systemctl status ssh
@@ -279,18 +94,16 @@ $ sudo ufw allow ssh
 
 
 - OPTIONAL: ggf. können zusätzlich noch einige Einstellungen angepasst werden
-
 ```
 $ sudo nano /etc/ssh/sshd_config
 ```
 
-speichern mit `STRG+X`
+- speichern mit `STRG+X`
 ```
 $ sudo service ssh restart
 ```
 
 - Wenn Fehlermeldungen nach dem bearbeiteten der Konfiguartionsdatei auftreten, kann die Syntax in der Datei überprüft werden:
-
 ```
 $ sudo sshd -t
 ```
@@ -382,15 +195,12 @@ $ systemctl status x11vnc.service
 ```
 
 - automatisches Bildschirmsperren deaktivieren
-
-Es empfiehlt sich das automatische Sperren des Bildschirms unter `Datenschutz` und dann `Bildschirm` `"Automatic Screen Lock"` zu deaktivieren, um Fehler zu vermeiden.
+- Es empfiehlt sich das automatische Sperren des Bildschirms unter `Datenschutz` und dann `Bildschirm` `"Automatic Screen Lock"` zu deaktivieren, um Fehler zu vermeiden.
 
 
 - Firewall
-
-Wenn die Firewall genutzt wird, muss noch eine Portfreigabe,  z.B. mit dem Firewallmanager [ufw](https://wiki.ubuntuusers.de/ufw/) vorgenommen werden.
-
-Welcher Port verwendet wird, kann mit dem Befehl eingesehen werden:
+    - Wenn die Firewall genutzt wird, muss noch eine Portfreigabe,  z.B. mit dem Firewallmanager [ufw](https://wiki.ubuntuusers.de/ufw/) vorgenommen werden.
+    - Welcher Port verwendet wird, kann mit dem Befehl eingesehen werden:
 
 ```
 $ systemctl status x11vnc.service
