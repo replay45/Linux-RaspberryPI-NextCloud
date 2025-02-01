@@ -185,7 +185,7 @@ $ sudo ufw enable
 
 # 11. Ersteinrichtung von [Wiki.js](https://js.wiki/)
 - An diesem Punkt sollte die Ersteinrichtung im Browser durchgeführt werden, bevor diese Anleitung weiter ausgeführt wird.
-- Die Einrichtung ist auch in diesem Ordner unter [Wikijs-konfigurieren-&-einrichten](https://github.com/replay45/Linux-RaspberryPI-NextCloud/wikijs) erklärt.
+- Die Einrichtung ist auch in diesem Ordner unter [Wikijs-konfigurieren-&-einrichten](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/wikijs) erklärt.
 
 
 -------------------------------------------------------------------------------------------------------------
