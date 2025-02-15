@@ -1,4 +1,4 @@
-# Verschlüsselung
+# Verschlüsselung auf Linux
 
 `Anleitung zuletzt bearbeitet am 19.11.2024`
 
@@ -8,24 +8,23 @@
     - Ein virtuelles, verschlüsseltes Laufwerk erstellen (auf Ordner-Ebene)
     - optional ein Skript erstellen, um das Laufwerk einhängen zu können
     - Skript über eine .Desktop-Datei verknüpfen und ausführbar machen
-2. [VeraCrypt](https://veracrypt.fr/)
-    - Installation auf Linux
-3. Festplattenverschlüsselung unter Linux
+2. [Festplattenverschlüsselung](https://de.wikipedia.org/wiki/Festplattenverschl%C3%BCsselung) unter Linux (Debian-basierte Distributionen)
     - Wieso sollte man die Festplattenverschlüsselung nutzen ?
     - Festplattenverschlüsselung aktivieren
-4. weitere Sicherheitsmaßnahmen
-    - UEFI-Passwort
+3. weitere Sicherheitsmaßnahmen
+    - [UEFI](https://de.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface)-Passwort
+    - Mehr zu Verschlüsselung von externen Speichermedien
     - Mehr zu Sicherheit auf Linux-Systemen
 
 
------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 
 # 1. verschlüsseln auf Ordner-Ebene mit [CryFS](https://www.cryfs.org)
 
 
 CryFS ist ein Open Source Verschlüsselungsprogramm, mit dem man ein `verschlüsseltes virtuelles Laufwerk` erstellt.
-Man kann das virtuelle, verschlüsselte Laufwerk sowohl ohne Festplattenverschlüsselung als auch mit aktivierter Festplattenverschlüsselung des Betriebssystems nutzen.
+Man kann das virtuelle, verschlüsselte Laufwerk sowohl ohne [Festplattenverschlüsselung](https://de.wikipedia.org/wiki/Festplattenverschl%C3%BCsselung) als auch mit aktivierter Festplattenverschlüsselung des Betriebssystems nutzen.
 
 Sofern man eine Festplattenverschlüsselung des Betriebssystems nutzt und zusätzlich mit CryFS ein `virtuelles verschlüsseltes Laufwerk erstellt`, spricht man von einer `2-Ebenen-Verschlüsselung`.
 Das `erhöht erheblich die Sicherheit für die Daten, die durch die zweite Verschlüsselungsebene geschützt sind`.
@@ -33,7 +32,7 @@ Das `erhöht erheblich die Sicherheit für die Daten, die durch die zweite Versc
 Es ist auch möglich, `externe Speichermedien` über CryFS zu verschlüsseln, allerdings eignet sich dafür das Tool [VeraCrypt](https://veracrypt.fr/) - (mehr dazu unten unter Punkt 2), welches sich besonders für die Verschlüsselung von externen Speichermedien eignet und auch von allen gängigen Desktop-Betriebssystemen unterstützt wird.
 
 
------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 
 ### A. Installation von CryFS auf Linux
@@ -42,7 +41,7 @@ $ sudo apt install cryfs
 ```
 
 
------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 
 ### B. Ein virtuelles, verschlüsseltes Laufwerk erstellen (auf Ordner-Ebene)
@@ -77,7 +76,7 @@ $ cryfs ~/HIER/PFAD/VERSCHLÜSSELTER/ORDNER ~/HIER/PFAD/ENTSCHLÜSSELTER/ORDNER
 ```
 
 
---------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 
 ### C. optional ein Skript erstellen, um das Laufwerk einhängen zu können
@@ -89,7 +88,7 @@ $ cryfs ~/HIER/PFAD/VERSCHLÜSSELTER/ORDNER ~/HIER/PFAD/ENTSCHLÜSSELTER/ORDNER
 - Mehr zu sh-Skripten in der Datei [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux) im Linux Repository.
 
 
---------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 
 ### D. Skript über eine `.Desktop`-Datei verknüpfen und ausführbar machen
@@ -105,52 +104,10 @@ $ cryfs ~/HIER/PFAD/VERSCHLÜSSELTER/ORDNER ~/HIER/PFAD/ENTSCHLÜSSELTER/ORDNER
 - Wie man ein `sh-Skript mit einer ".Desktop"-Datei verknüpft`, wird ebenfalls in diesem Github-Repository unter [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux) gezeigt.
 
 
---------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 
-# 2. [VeraCrypt](https://veracrypt.fr/)
-
-
-VeraCrypt ist ebenfalls ein kostenloses Open Source `Verschlüsselungsprogramm` und wird zur Verschlüsselung von `Festplatten` und `Wechseldatenträgern`, wie `USB-Sticks` oder `externen Festplatten`, genutzt.
-
-
-- Das Programm ist u.a. für Linux, Windows und MacOS verfügbar.
-
-
-
-### Installation auf Linux (Debian basierte Distributionen)
-
-- [download tar.bz2 auf veracrypt.fr](https://veracrypt.fr/en/Downloads.html)
-
-```
-$ tar xvf veracrypt-version-setup.tar.bz2
-```
-GUI-Version:
-```
-$ ./veracrypt-version-setup-gui-x64
-```
-Terminal-Version:
-```
-$ ./veracrypt-version-setup-console-x64
-```
-
-- Um die Version mit Benutzeroberfläche zu installieren, auf Kennzeichnung `"gui"` achten !
-- Wenn man eine Benutzeroberfläche mit `gtk2` (meistens: GNOME, XFCE, MATE oder Cinnamon) verwendet, kann man die Version mit `gtk2` installieren, jedoch ist das kein Muss.
-- Nun dem Installationsassistenten folgen.
-
-- Alternativ kann das Debian-Paket auch mit einem Installer wie [GDebi](https://packages.debian.org/de/stable/gdebi) installiert werden.
-
-
-### Deinstallations-Befehl:
-```
-$ sudo /usr/bin/veracrypt-uninstall.sh 
-```
-
-
-------------------------------------------------------------------------------
-
-
-# 3. Festplattenverschlüsselung unter Linux (Debian-basierte Distributionen)
+# 2. [Festplattenverschlüsselung](https://de.wikipedia.org/wiki/Festplattenverschl%C3%BCsselung) unter Linux (Debian-basierte Distributionen)
 
 
 ### Wieso sollte man die Festplattenverschlüsselung nutzen ?
@@ -172,13 +129,13 @@ $ sudo /usr/bin/veracrypt-uninstall.sh
 - Die Festplattenverschlüsselung ist bei allen gängigen Distributionen während der Installation möglich, meist unter dem Punkt `Partitionierung`, kann jedoch bei sehr alter Hardware zu Performanceverlust führen.
 
 
-------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 
-# 4. weitere Sicherheitsmaßnahmen
+# 3. weitere Sicherheitsmaßnahmen
 
 
-### UEFI-Passwort
+### [UEFI](https://de.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface)-Passwort
 
 - Das UEFI-Passwort schützt vor unbefugten Änderungen am UEFI, da man zunächst das Passwort eingeben muss, um in das UEFI zu gelangen.
 
@@ -189,7 +146,10 @@ $ sudo /usr/bin/veracrypt-uninstall.sh
 - Die Option kann man meistens unter dem Reiter `Security` aktivieren und heißt häufig `Administrator-Passwort`, das kann jedoch von Hersteller zu Hersteller unterschiedlich sein.
 
 
-------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+
+### Mehr zu Verschlüsselung von externen Speichermedien in diesem Ordner unter [Verschlüsselung mit VeraCrypt](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux)
 
 
 ### Mehr zu Sicherheit auf Linux-Systemen in diesem Ordner unter [Sicherheit-auf-Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux)
