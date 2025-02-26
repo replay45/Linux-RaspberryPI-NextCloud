@@ -1,13 +1,12 @@
 # [Wiki.js](https://js.wiki/) über [Docker](https://www.docker.com/) auf einem [Ubuntu-Server](https://ubuntu.com/download/server) installieren
 
 
-
 # 1. [Ubuntu-Server](https://ubuntu.com/download/server) installieren (inkl. [Docker](https://www.docker.com/))
 - Ubuntu-Server installieren.
 - Bei der Abfrage für weitere Software Docker auswählen, damit Docker über [Snap](https://snapcraft.io/) installiert wird.
 - Installation beenden.
 - Auf Ubuntu-Server einloggen / [SSH](https://de.wikipedia.org/wiki/Secure_Shell)-Verbindung herstellen.
-- `ssh user@IP-Adresse`
+- `$ ssh user@IP-Adresse`
 
 
 # 2. Updates
@@ -15,17 +14,19 @@
 $ sudo apt update
 $ sudo apt upgrade && sudo apt dist-upgrade
 $ sudo apt autoremove && sudo apt autoclean
+$ sudo snap refresh 
 ```
 
 
 # 3. Auf Server einloggen & [SSH](https://de.wikipedia.org/wiki/Secure_Shell) aktivieren, um remote auf den Server zugreifen zu können
 - SSH aktivieren (und in Autostart)
 ```
-$ sudo systemctl status ssh
+$ sudo systemctl start ssh
 $ sudo systemctl enable ssh
+$ sudo systemctl status ssh
 ```
 
-- in der [Firewall](https://ubuntu.com/server/docs/firewalls) SSH erlauben - [Firewall-Manager ufw](https://wiki.ubuntuusers.de/ufw/)
+- in der [Firewall](https://de.wikipedia.org/wiki/Firewall) SSH erlauben - [Firewall-Manager ufw](https://wiki.ubuntuusers.de/ufw/)
 ```
 $ sudo ufw allow ssh
 $ sudo ufw status
@@ -151,7 +152,7 @@ $ docker-compose restart
 
 # 9. Netzwerkeinstellungen
 
-- IP-Adresse von [Ubuntu-Server](https://ubuntu.com/download/server) herausfinden
+- [IP-Adresse](https://de.wikipedia.org/wiki/IP-Adresse) von [Ubuntu-Server](https://ubuntu.com/download/server) herausfinden
 ```
 $ ip a
 ```
@@ -163,7 +164,7 @@ $ ifconfig
 ```
 
 
-### 10. [Firewall](https://ubuntu.com/server/docs/firewalls) mit [Firewall-Manager ufw](https://wiki.ubuntuusers.de/ufw/)
+### 10. [Firewall](https://de.wikipedia.org/wiki/Firewall) mit [Firewall-Manager ufw](https://wiki.ubuntuusers.de/ufw/)
 - Status
 ```
 $ sudo ufw status
@@ -192,7 +193,6 @@ $ sudo ufw enable
 
 
 # 12. [Wiki.js](https://js.wiki/) in Autostart
-
 - Wiki.js autostarten (mit Docker-compose)
 ```
 $ nano docker-compose.yml
