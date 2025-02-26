@@ -1,9 +1,22 @@
 # Das Linux Terminal
 
-`Anleitung zuletzt bearbeitet am `
+`Anleitung zuletzt bearbeitet am 16.12.2024`
+
+
+## Inhaltsverzeichnis
+1. Bestes Dateimanagement im Terminal - [Midnight Commander](https://midnight-commander.org/)
+2. Passwort im Terminal mit Sternchen "sichtbar" machen
+3. Fun-Projekt im Terminal
+4. [rlwrap](https://github.com/hanslub42/rlwrap)
+5. Shell im Termial wechseln
+6. Herunterfahren/Neustart
+7. nützliche Befehle im Terminal
+
+
+----------------------------------------------------------------------------------------------------------
+
 
 # 1. Bestes Dateimanagement im Terminal - [Midnight Commander](https://midnight-commander.org/)
-
 Der Midnight Commander ist ein Dateimanager, mit dem man Dateien/Ordner bearbeiten, kopieren, verschieben und löschen kann.
 Er zeichnet sich durch eine zweispaltige Ansicht aus, was das Dateimanagement sehr angenehm macht.
 
@@ -21,20 +34,18 @@ $ sudo mc
 ```
 
 
-
 ----------------------------------------------------------------------------------------------------------
 
-# 2. Passwort im Terminal mit Sternchen "sichtbar" machen
 
+# 2. Passwort im Terminal mit Sternchen "sichtbar" machen
 ```
 $ sudo visudo
 ```
 
 - In der Zeile hinter `env_reset` das Folgende hinzufügen: `,pwfeedback`
-
 - zum verlassen `Strg+X` und speichern
-
 - Nun einen Befehl mit `sudo` ausführen, um Änderung zu testen.
+
 
 ----------------------------------------------------------------------------------------------------------
 
@@ -42,17 +53,13 @@ $ sudo visudo
 # 3. Fun-Projekt im Terminal
 
 ## Wenn man `sudo` falsch schreibt, erscheint eine zufällige Beleidigung.
-
 ```
 $ sudo visudo
 ```
 
 - In der Zeile hinter `env_reset` das folgende hinzufügen: `,insults`
-
 - zum Verlassen und speichern `Strg+X` drücken
-
 - Nun einen Befehl mit `sudo` ausführen, um Änderung zu testen.
-
 
 
 ----------------------------------------------------------------------------------------------------------
@@ -77,12 +84,11 @@ Bei dem Starten des Programms über das Terminal [rlwrap](https://github.com/han
 ```
 $ rlwrap HIER NAME DES PROGRAMMS
 ```
-
-
 - Nun können die Pfeiltasten auch innerhalb des Programms im Terminal verwendet werden, um die Eingabe bequem zu bearbeiten.
 
 
 ----------------------------------------------------------------------------------------------------------
+
 
 # 5. Shell im Termial wechseln
 
@@ -91,7 +97,7 @@ $ rlwrap HIER NAME DES PROGRAMMS
 $ echo $SHELL
 ```
 
-Alle verfügbaren Shells anzeigen
+- Alle verfügbaren Shells anzeigen
 ```
 $ cat /etc/shells
 ```
@@ -119,32 +125,82 @@ $ sudo apt install zsh
 ```
 
 
+----------------------------------------------------------------------------------------------------------
+
+
+# 6. Herunterfahren/Neustart
+
+- "jetzt" herunterfahren
+```
+$ sudo shutdown now
+```
+```
+$ sudo shutdown -h 0
+```
+
+- in der nächsten Minute herunterfahren
+```
+$ sudo shutdown
+```
+```
+$ sudo shutdown -h
+```
+
+- Shutdown planen zu einer Uhrzeit
+```
+$ sudo shutdown -h UHRZEIT
+```
+```
+$ sudo shutdown -h 14:30
+```
+
+- Shutdown nach X-Minuten
+```
+$ sudo shutdown -h +Minuten
+```
+```
+$ sudo shutdown -h +60
+```
+
+- geplanten Shutdown abbrechen
+```
+$ sudo shutdown -c
+```
+
+- Neustart
+```
+$ reboot
+```
+
+
+
 
 ----------------------------------------------------------------------------------------------------------
 
-# 6. nützliche Befehle im Terminal
 
-Verlauf anzeigen der Terminal Befehle
+# 7. nützliche Befehle im Terminal
+
+- Verlauf anzeigen der Terminal Befehle
 ```
 $ history
 ```
 
-anzeigen welche Nutzer eingeloggt sind
+- anzeigen welche Nutzer eingeloggt sind
 ```
 $ w
 ```
 
-aktuellen Benutzer anzeigen
+- aktuellen Benutzer anzeigen
 ```
 $ whoami
 ```
 
-Zeit, die das System läuft
+- Zeit, die das System läuft
 ```
 $ uptime
 ```
 
-Netzwerkbefehle & IP-Adresse überprüfen
+- Netzwerkbefehle & [IP-Adresse](https://de.wikipedia.org/wiki/IP-Adresse) überprüfen
 ```
 $ ifconfig
 ```
@@ -155,30 +211,30 @@ $ ip a
 $ ip addr
 ```
 ```
-nmcli
+$ nmcli
 ```
 
-Hostname
+- Hostname
 ```
 $ hostname
 ```
 
-für IP-packet-filtering
+- für IP-packet-filtering
 ```
 $ iptables
 ```
 
-Netzwerkverkehr anzeigen lassen
+- Netzwerkverkehr anzeigen lassen
 ```
 $ netstat
 ```
 
-aktuelle Prozesse anzeigen
+- aktuelle Prozesse anzeigen
 ```
 $ ps aux
 ```
 
-Dateien im Terminal anzeigen / versteckte Dateien anzeigen
+- Dateien im Terminal anzeigen / versteckte Dateien anzeigen
 ```
 $ ls
 ```
@@ -186,31 +242,31 @@ $ ls
 $ ls -a
 ```
 
-Pfad anzeigen
+- Pfad anzeigen
 ```
 $ pwd
 ```
 
-Dateien suchen
-
-- Hier wird nach allen ".txt" Dateien gesucht:
+- Dateien suchen
+	- Hier wird nach allen ".txt" Dateien gesucht:
 ```
 $ find -name *.txt
 ```
 
-verbrauchter Speicherplatz (der Partitionen)
+- verbrauchter Speicherplatz (der Partitionen)
 ```
 $ df
 ```
 
-Berechtigungen ändern
+- Berechtigungen ändern
 ```
 $ chmod
 ```
 
-Passwort ändern
+- Passwort ändern
 ```
 $ sudo passwd benutzername
 ```
+
 
 ----------------------------------------------------------------------------------------------------------
