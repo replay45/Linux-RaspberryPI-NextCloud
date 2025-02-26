@@ -3,8 +3,8 @@
 `Anleitung zuletzt bearbeitet am 19.11.2024`
 
 
-# Was ist Swap ?
-Swap ist ein zusätzlicher Speicher, der als virtueller Arbeitsspeicher (RAM) verwendet werden kann, wenn der RAM vollständig belegt ist.
+# 1. Was ist [Swap](https://de.wikipedia.org/wiki/Swapping) ?
+Swap ist ein zusätzlicher Speicher, der als virtueller Arbeitsspeicher ([RAM](https://de.wikipedia.org/wiki/Random-Access_Memory)) verwendet werden kann, wenn der RAM vollständig belegt ist.
 Dabei befindet sich der Swap-Speicher auf dem Massenspeicher des Betriebsystems.
 
 
@@ -20,6 +20,8 @@ Dabei befindet sich der Swap-Speicher auf dem Massenspeicher des Betriebsystems.
 
 ------------------------------------------------------------------------------------------------
 
+
+# 2. Swap Datei bearbeiten
 
 1. RAM & Swap anzeigen
 ```
@@ -76,7 +78,7 @@ $ sudo swapon /swapfile
 ```
 $ sudo nano /etc/fstab
 ```
-In die letzte Zeile einfügen:
+- In die letzte Zeile einfügen:
 ```
 /swapfile none swap sw 0 0
 ```
