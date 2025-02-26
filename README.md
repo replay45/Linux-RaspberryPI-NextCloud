@@ -1,8 +1,8 @@
-# Linux, RaspberryPI & Nextcloud
+# Linux, Raspberry Pi & Nextcloud
 
-Hier sind einige Anleitungen zu Linux, dem RaspberryPI und zur Nextcloud.
+Hier sind einige Anleitungen zu Linux, dem Raspberry Pi und zur Nextcloud.
 
-Unter dem Ordner Linux, sind Anleitungen zu den Distributionen Kali Linux & Ubuntu.
+Unter dem Ordner Linux, sind Anleitungen zu Debian basierten Distributionen, wie Kali Linux & Ubuntu.
 
 Manche Anleitungen beziehen sich zudem besonders auf die Benutzeroberflächen GNOME und XFCE, die unter anderem standard/optionale Benutzeroberflächen von Kali & Ubuntu sind.
 
@@ -36,7 +36,7 @@ Die Nutzung von Funkfrequenzen (RF) unterliegt den Gesetzen des jeweiligen Lande
 
 > RaspberryPI
 
-[RaspberryPI.com](https://www.raspberrypi.com/) / [RaspberryPI OS](https://www.raspberrypi.com/software/)
+[Raspberry-Pi.com](https://www.raspberrypi.com/) / [Raspberry Pi OS](https://www.raspberrypi.com/software/)
 
 
 
