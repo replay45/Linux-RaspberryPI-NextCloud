@@ -10,9 +10,9 @@
 3. Blocklisten (Filterlisten) & Domains blacklisten/whitelisten
 4. Backups erstellen
 5. Welchen DNS Upstream-Server sollte man wählen ?
-6. mobile Geräte: gewünschte DNS-Server wie von Cloudflare oder [Pi hole](https://pi-hole.net/) außerhalb des Heimnetzes nutzen können
+6. mobile Geräte: gewünschte DNS-Server wie von [Cloudflare](https://www.cloudflare.com/) oder [Pi hole](https://pi-hole.net/) außerhalb des Heimnetzes nutzen können
 7. DNS Verschlüsselung/Signaturverfahren - DoT / DoH / DNSSEC
-8. HTTPS für Web-Interface - über IP-Adresse (ohne Domain)
+8. [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure) für Web-Interface - über IP-Adresse (ohne Domain)
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Außerdem gibt es nicht genügend verfügbare IPv4 Adressen, daher können diese
 
 ### B. Was ist [Pi hole](https://pi-hole.net/) ?
 Pi hole ist eine kostenlose Software, die als DNS-Server im Heimnetz verwendet werden kann.
-Der Pi hole hat viele Funktionen und kann Werbung sowie Tracker blockieren und optional als DHCP-Server eingerichtet werden.
+Der Pi hole hat viele Funktionen und kann Werbung sowie Tracker blockieren und optional als [DHCP-Server](https://de.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) eingerichtet werden.
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ $ sudo bash basic-install.sh
 ```
 
 
-## B. IP-Adresse vergeben
+## B. [IP-Adresse](https://de.wikipedia.org/wiki/IP-Adresse) vergeben
 - Der Raspberry Pi benötigt unbedingt eine im Router (bzw. DHCP-Server), reservierte IP-Adresse, die sich nach dem Festlegen NICHT mehr automatisch ändern kann !
 
 
@@ -73,7 +73,7 @@ $ sudo ufw allow 80,443,53,853/udp
 $ sudo ufw allow 80,443,53,853/tcp
 ```
 
-- Wenn Pi hole auch als DHCP Server genutzt wird:
+- Wenn Pi hole auch als [DHCP-Server](https://de.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) genutzt wird:
 ```
 $ sudo ufw allow 67/udp
 $ sudo ufw allow 67/tcp
@@ -222,13 +222,13 @@ $ pihole -up
 - Es ist außerdem auch möglich, den `DNS Server bei mobilen Geräten` wie Laptops und Handys etc. zu ändern, um den gewünschten Anbieter nutzen zu können.
 - Das ist in der Hinsicht interessant, wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche Domains man aufruft` (Tracking verhindern).
 - Wie oben beschrieben ist [Cloudflare](https://www.cloudflare.com/) ein Anbieter, der den Fokus auf `Datenschutz & Sicherheit` legt.
-- Mehr dazu in den einzelnen Beiträgen zur Sicherheit auf dem entsprechenden Betriebsystem. - []
+- Mehr dazu in den einzelnen `Beiträgen zur Sicherheit auf dem entsprechenden Betriebsystem`. - [Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung), [MacOS](https://github.com/replay45/Windows-Apple-und-Android/tree/main/Apple), [Android](https://github.com/replay45/Windows-Apple-und-Android/tree/main/Android)
 
 
 ### VPN ins Heimnetzwerk, um [Pi hole](https://pi-hole.net/) nutzen zu können
 - Viele `moderne Router`, wie u.a. auch die [FritzBox](https://avm.de/), können als `eigener VPN-Server` genutzt werden.
 - Dabei stellt man vom Laptop, Tablet oder Handy eine `VPN Verbindung in das eigene Heimnetz` her und nutzt somit `auch Pi hole als DNS-Server`, sofern dieser als `primärer DNS-Server im Router` hinterlegt ist.
-- Außerdem kann man dann von überall auf seine `Geräte im Heimnetz zugreifen`, wie z.B. auf einen NAS oder Homeserver.
+- Außerdem kann man dann von überall auf seine `Geräte im Heimnetz zugreifen`, wie z.B. auf einen [NAS](https://de.wikipedia.org/wiki/Network_Attached_Storage) oder Homeserver.
 - Die VPN-Verbindung kann zudem auch in öffentlichen oder fremden WLANs genutzt werden, um den `eigenen Netzwerk-Traffic zu verschlüsseln`.
 - Dabei sollte man bedenken, dass `alle DNS-Anfragen über den Router im Heimnetz` geleitet werden und dass dieser VPN-Server des eigenen Routers nicht immer den klassischen VPN-Dienst eines externen Anbieters ersetzt.
 - Dafür eignet sich das moderne [WireGuard](https://www.wireguard.com/) Protokoll, was als besonders sicher gilt und dabei auch noch vergleichsweise wenige Ressourcen verbraucht, was wiederum energieeffizient ist.
@@ -301,10 +301,17 @@ $ pihole -up
 - Domains, die kein DNSSEC unterstützen, werden mit `INSECURE` gekennzeichnet.
 
 
+## !!!!!!  ## Nutzung von DoT / DoH (DNS-Verschlüsselung) mit dem [Pi hole](https://pi-hole.net/)
+- Um DoH oder DoT Verschlüsselung nutzen zu können, muss man Unbound oder Cloudflared auf dem Pi installieren und zur Namensauflösung verwenden.
+- Die Anleitung dazu in `Pi hole + Unbound-Cloudflared` in diesem Ordner unter ....
+
+*folgt in Kürze*
+
+
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 8. HTTPS für Web-Interface - über IP-Adresse (ohne Domain)
+# 8. [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure) für Web-Interface - über IP-Adresse (ohne Domain)
 
 `Anleitung mit Version 6.0 von Pi hole getestet`
 
@@ -318,7 +325,7 @@ $ pihole -up
 - Um eine HTTPS-Verschlüsselung nutzen zu können, benötigt man ein SSL-Zertifikat.
 - Pi hole selber erstellt ein Zertifikat, das genutzt werden kann, um HTTPS bei einem bestimmten Browser nutzen zu können.
 - Da das `Zertifikat "selbst signiert" ist`, wird es `nicht als vertrauenswürdig eingestuft`. Das ist allerdings `KEIN Problem`, da die `HTTPS-Verbindung trotzdem gegeben` ist.
-- Im Firefox-Browser kann man eine sogenannte Ausnahme hinzufügen, damit die Warnmeldungen nicht mehr erscheinen.
+- Im [Firefox](https://www.mozilla.org/de/firefox/new/)-Browser kann man eine sogenannte Ausnahme hinzufügen, damit die Warnmeldungen nicht mehr erscheinen.
 - In Browsern, die auf Chromium basieren, sind nur temporäre Ausnahmen möglich.
 
 
@@ -328,19 +335,17 @@ $ sudo rm /etc/pihole/tls* && sudo service pihole-FTL restart
 ```
 
 
-## 4. Das Zertifikat vom Pi hole herunterladen
-`über SSH`
-
-```
-$ ssh user@IP-ADRESSE
-```
+## 4. Das Zertifikat vom Pi hole über [SCP](https://de.wikipedia.org/wiki/Secure_Copy) herunterladen
 - Es wird das Zertifikat `tls_ca.crt` im Verzeichnis `/etc/pihole/` benötigt.
-- Zertifikat über SSH kopieren (Befehl auf lokalem Rechner ausführen):
+- Zertifikat über SCP kopieren (Befehl auf lokalem Rechner ausführen):
 ```
 $ sudo scp user@IP-ADRESSE:/etc/pihole/tls_ca.crt /dein/lokales/verzeichnis/zielordner
 ```
 
 - Wenn ein Berechtigungsfehler erscheint (Befehle auf dem pi hole Server ausführen):
+```
+$ ssh user@IP-Adresse
+```
 ```
 $ sudo cp /etc/pihole/tls_ca.crt /home/user
 ```
@@ -351,12 +356,11 @@ $ ls
 ```
 $ sudo chmod 644 /home/user/tls_ca.crt
 ```
-- Nun nochmal mit scp versuchen, die Datei zu kopieren.
+- Nun nochmal mit SCP versuchen, die Datei zu kopieren.
 
 
 
 ## 5. Zertifikat in das Betriebssystem einfügen
-
 
 ### 5.1. Zertifikate unter Linux (Debian-basierte Distributionen) einfügen
 - `tls_ca.crt` Zertifikat in den Pfad kopieren
@@ -457,3 +461,5 @@ $ reboot
 $ openssl s_client -connect IP-Adresse:443 -showcerts
 ```
 
+
+----------------------------------------------------------------------------------------------------------------
