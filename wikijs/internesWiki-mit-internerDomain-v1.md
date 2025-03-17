@@ -175,11 +175,11 @@ $ sudo systemctl reload nginx
 
 
 - Logs überprüfen
-	- Zugriffslog
+Zugriffslog
 ```
 $ sudo tail -f /var/log/nginx/access.log
 ```
-	- Fehlerlog
+Fehlerlog
 ```
 $ sudo tail -f /var/log/nginx/error.log
 ```
