@@ -248,7 +248,7 @@ $ sudo nextcloud.disable-https
 ### Warnmeldung im Browser (Verschlüsselung ist trotzdem gegeben !)
 - Es ist normal, dass beim Aufrufen der Nextcloud eine Warnmeldung erscheint, da das Zertifikat selbst-signiert ist.
 - Das ist allerdings kein Problem, da die HTTPS-Verschlüsselung `trotzdem gegeben ist` !
-- Wenn man keine Warmeldung erhalten möchte, muss man das selbst-signierte Zertifikat mit einem weiteren Zertifikat signieren und das Zertifikat, womit signiert wurde, muss dann in den Zertifikatsspeicher des Browser/Betriebsystems geladen werden.
+- Wenn man keine Warmeldung erhalten möchte, muss man das selbst-signierte Zertifikat mit einem weiteren Zertifikat signieren und das Zertifikat, womit signiert wurde, muss dann in den Zertifikatsspeicher des Browser/Betriebssystems geladen werden.
 
 
 -----------------------------------------------------------------------------------------------
