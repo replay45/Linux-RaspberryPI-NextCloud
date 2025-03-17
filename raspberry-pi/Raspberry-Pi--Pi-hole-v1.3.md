@@ -301,13 +301,6 @@ $ pihole -up
 - Domains, die kein DNSSEC unterstützen, werden mit `INSECURE` gekennzeichnet.
 
 
-## !!!!!!  ## Nutzung von DoT / DoH (DNS-Verschlüsselung) mit dem [Pi hole](https://pi-hole.net/)
-- Um DoH oder DoT Verschlüsselung nutzen zu können, muss man Unbound oder Cloudflared auf dem Pi installieren und zur Namensauflösung verwenden.
-- Die Anleitung dazu in `Pi hole + Unbound-Cloudflared` in diesem Ordner unter ....
-
-*folgt in Kürze*
-
-
 ----------------------------------------------------------------------------------------------------------------
 
 
