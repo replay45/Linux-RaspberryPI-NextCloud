@@ -261,7 +261,7 @@ $ sudo chmod 644 home/username/wiki-zertifikate/wiki.crt
 
 ## Wenn viele Clients genutzt werden, wie in einem Unternehmen, dann mit GPO-Richtlinie Zertifikat an Clients automatisch verteilen
 - Wenn eine Active Directory (Domäne) genutzt wird, kann eine Gruppenrichtlinie (GPO) erstellt werden, um das rootCA-Zertifikat automatisch an alle Clients zu verteilen.
-- Dabei muss ggf. das Zertifikat in den Zertifikatsspeicher des Betriebssystems für die Chrome-basierten Browser und separat in den Firefox-Zertifikatsspeicher verteilt werden.
+- Dabei muss ggf. das Zertifikat in den Zertifikatsspeicher des Betriebssystems für die Chrome-basierten Browser und ggf. separat in den Firefox-Zertifikatsspeicher verteilt werden, wobei es auch möglich ist, Firefox über die GPO so zu konfigurieren, dass dieser den Zertifikatsspeicher des Betriebsystems nutzt.
 
 
 ## Zetifikatsignierung mit rootCA-Zertifikat von anderen Diensten
