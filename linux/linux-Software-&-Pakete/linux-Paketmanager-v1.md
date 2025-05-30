@@ -15,7 +15,6 @@
 
 
 # 1. Was ist ein Paketmanager ?
-
 - Ein Paketmanager wird zur komfortablen Verwaltung von Software im Terminal genutzt.
 - Dazu gehören das Installieren, Aktualisieren und Deinstallieren.
 - Hier mehr zur [Paketverwaltung](https://de.wikipedia.org/wiki/Paketverwaltung)
@@ -46,12 +45,12 @@ $ dpkg --list | grep "firefox"
 
 
 # 3. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
-
 - APT ist der Standard-Paketmanager zur Debian-Paketverwaltung (Installation & Verwaltung von Programmen) auf Linux-Systemen.
 - Das Ausführen von Softwareupdates und Upgrades ist ebenfalls in diesem Ordner unter [Updates-&-Upgrades](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/linux-Software-%26-Pakete) beschrieben.
 
 
 - Was ist der Unterschied zwischen [apt](https://wiki.ubuntuusers.de/APT/) & [apt-get](https://wiki.ubuntuusers.de/apt/apt-get/) ?
+    - Die Paketmanager `apt` und `apt-get` sind nicht das Gleiche, auch wenn beide zur Verwaltung von Software im Terminal verwendet werden.
     - `apt` ist eine `Weiterentwicklung` von `apt-get` mit dem Ziel, die Benutzerfreundlichkeit zu erhöhen.
 
 
