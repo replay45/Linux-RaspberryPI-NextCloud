@@ -1,19 +1,30 @@
 # Linux Paketmanager (Debian-basierte Distributionen)
 
-`Anleitung zuletzt bearbeitet am 11.12.2024`
+`Anleitung zuletzt bearbeitet am 7.2.2025`
 
 
 ## Inhaltsverzeichnis
-1. installierte Pakete anzeigen
-2. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
-3. Paketmanager [Flatpak](https://flatpak.org/)
-4. Paketmanager [Snap](https://snapcraft.io/)
+1. Was ist ein Paketmanager ?
+2. installierte Pakete anzeigen
+3. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
+4. Paketmanager [Flatpak](https://flatpak.org/)
+5. Paketmanager [Snap](https://snapcraft.io/)
 
 
 ----------------------------------------------------------------------------------------------------------------
 
 
-### 1. installierte Pakete anzeigen
+# 1. Was ist ein Paketmanager ?
+
+- Ein Paketmanager wird zur komfortablen Verwaltung von Software im Terminal genutzt.
+- Dazu gehören das Installieren, Aktualisieren und Deinstallieren.
+- Hier mehr zur [Paketverwaltung](https://de.wikipedia.org/wiki/Paketverwaltung)
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 2. installierte Pakete anzeigen
 
 - alle installierten Pakete anzeigen
 ```
@@ -22,7 +33,7 @@ $ dpkg --list
 
 - nach einem bestimmten Paket suchen
 ```
-$ dpkg --list | grep [PROGRAMMNAME]
+$ dpkg --list | grep PAKETNAME
 ```
 
 - Beispiel
@@ -34,33 +45,46 @@ $ dpkg --list | grep "firefox"
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 2. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
-- APT ist ein Tool zur Debian-Paketverwaltung (Installation & Verwaltung von Programmen) auf Linux-Systemen.
+# 3. Paketmanager [apt](https://wiki.ubuntuusers.de/APT/)
+
+- APT ist der Standard-Paketmanager zur Debian-Paketverwaltung (Installation & Verwaltung von Programmen) auf Linux-Systemen.
 - Das Ausführen von Softwareupdates und Upgrades ist ebenfalls in diesem Ordner unter [Updates-&-Upgrades](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/linux-Software-%26-Pakete) beschrieben.
+
+
+- Was ist der Unterschied zwischen [apt](https://wiki.ubuntuusers.de/APT/) & [apt-get](https://wiki.ubuntuusers.de/apt/apt-get/) ?
+    - `apt` ist eine `Weiterentwicklung` von `apt-get` mit dem Ziel, die Benutzerfreundlichkeit zu erhöhen.
+
+
+### Pakete installieren
+
+- Installation
+```
+$ sudo apt install PAKETNAME
+```
 
 
 ### Pakete deinstallieren
 
 - Deinstallation, Konfigurationsdateien werden behalten
 ```
-$ sudo apt-get remove PAKETNAME
+$ sudo apt remove PAKETNAME
 ```
 
 - Deinstallation & Entfernung der Konfigurationsdateien
 ```
-$ sudo apt-get --purge remove PAKETNAME
+$ sudo apt --purge remove PAKETNAME
 ```
 
 
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 3. Paketmanager [Flatpak](https://flatpak.org/)
+# 4. Paketmanager [Flatpak](https://flatpak.org/)
 
 `Hier verwendetes Betriebssystem: Kali mit der GNOME Benutzeroberfläche`
 
 
-### Flatpak installieren
+### Flatpak installieren (Kali Linux)
 
 - Flatpak installieren
 ```
@@ -70,7 +94,7 @@ $ sudo apt update
 $ reboot
 ```
 
-- Flatpak-App-Store für GNOME-Software installieren
+- Flatpak-App-Store für `GNOME-Software` installieren
 ```
 $ sudo apt install gnome-software-plugin-flatpak
 ```
@@ -129,7 +153,7 @@ $ flatpak uninstall --unused
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 4. Paketmanager [Snap](https://snapcraft.io/)
+# 5. Paketmanager [Snap](https://snapcraft.io/)
 
 `Hier verwendetes Betriebssystem: Kali mit der GNOME Benutzeroberfläche`
 
