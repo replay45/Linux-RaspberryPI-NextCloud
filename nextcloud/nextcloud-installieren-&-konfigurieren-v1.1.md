@@ -9,7 +9,7 @@
 
 
 ## Inhaltsverzeichnis
-1. Was ist [Nextcloud](https://nextcloud.com/de/) ?
+1. Was ist die [Nextcloud](https://nextcloud.com/de/) ?
 2. Domain & IP-Adresse
 3. ggf. Linux installieren & Updates ausführen
 4. Nextcloud über den Paketmanager [snap](https://wiki.ubuntuusers.de/snap/) installieren
@@ -21,6 +21,7 @@
 10. Telefonregion festlegen
 11. Als Admin über das Terminal, einem Benutzer eine Benachrichtigung schicken
 12. [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure)-Verschlüsselung einrichten (ohne Domain) - optional
+13. Wartungsmodus der Nextcloud
 
 
 -----------------------------------------------------------------------------------------------
@@ -250,5 +251,36 @@ $ sudo nextcloud.disable-https
 - Das ist allerdings kein Problem, da die HTTPS-Verschlüsselung `trotzdem gegeben ist` !
 - Wenn man keine Warmeldung erhalten möchte, muss man das selbst-signierte Zertifikat mit einem weiteren Zertifikat signieren und das Zertifikat, womit signiert wurde, muss dann in den Zertifikatsspeicher des Browser/Betriebssystems geladen werden.
 
+
+-----------------------------------------------------------------------------------------------
+
+
+# 13. Wartungsmodus der Nextcloud
+
+- SSH-Verbindung zum Server herstellen
+```
+$ ssh user@IP-Adresse
+```
+
+- Wartungsmodus aktivieren
+der occ-Befehl:
+```
+$ occ maintenance:mode --on
+```
+Nextcloud über Snap installiert:
+```
+$ sudo snap run nextcloud.occ maintenance:mode --on
+```
+
+
+- Wartungsmodus deaktivieren
+der occ-Befehl:
+```
+$ occ maintenance:mode --off
+```
+Nextcloud über Snap installiert:
+```
+$ sudo snap run nextcloud.occ maintenance:mode --off
+```
 
 -----------------------------------------------------------------------------------------------
