@@ -3,14 +3,14 @@
 
 
 ### Inhaltsverzeichnis
-1. Bei [VM-Ware-ESXi](https://www.vmware.com/products/cloud-infrastructure/vsphere) eine neue [virtuelle Maschiene](https://de.wikipedia.org/wiki/Virtuelle_Maschine) mit Linux erstellen
+1. Bei [VM-Ware-ESXi](https://www.vmware.com/products/cloud-infrastructure/vsphere) eine neue [virtuelle Maschine](https://de.wikipedia.org/wiki/Virtuelle_Maschine) mit Linux erstellen
 2. Snapshots
 
 
 --------------------------------------------------------------------------------------------------------------
 
 
-# 1. Bei [VM-Ware-ESXi](https://www.vmware.com/products/cloud-infrastructure/vsphere) eine neue [virtuelle Maschiene](https://de.wikipedia.org/wiki/Virtuelle_Maschine) mit Linux erstellen
+# 1. Bei [VM-Ware-ESXi](https://www.vmware.com/products/cloud-infrastructure/vsphere) eine neue [virtuelle Maschine](https://de.wikipedia.org/wiki/Virtuelle_Maschine) mit Linux erstellen
 
 
 ## 1.1. Linux Image herunterladen
@@ -19,24 +19,24 @@
 - Im Web-Interface von VM-Ware-ESXi einloggen.
 
 
-## 1.2. neue Virtuelle Maschiene
+## 1.2. neue Virtuelle Maschine
 - Im Navigator auf den Reiter `Speicher` klicken.
 - `Datenspeicherbrowser` auswählen.
 - auf die gewünschte Speicheroption klicken und
 - evtl. Verzeichnis erstellen.
 
 
-## 1.3. Virtuelle Maschiene erstellen
-- Im Navigator unter dem Reiter `Virtuelle Maschienen` `VM erstellen/registrieren` wählen.
+## 1.3. Virtuelle Maschine erstellen
+- Im Navigator unter dem Reiter `Virtuelle Maschinen` `VM erstellen/registrieren` wählen.
 - Einrichtungsassistenten öffnen,
 - Einrichtung beenden und
-- Virtuelle Maschiene starten.
+- Virtuelle Maschine starten.
 
-## 1.4. Autostart einer virtuellen Maschiene
+## 1.4. Autostart einer virtuellen Maschine
 - Im Navigator unter `Host` auf `Verwalten` und den Reiter `Autostart` auswählen.
-- Nun die gewünschte virtuelle MAschiene anwählen und auf `Autostart-Konfiguration ändern` klicken.
+- Nun die gewünschte virtuelle MAschine anwählen und auf `Autostart-Konfiguration ändern` klicken.
 - Unter Aktiviert `JA` klicken, ggf. Verzögerung einstellen und `Speichern`.
-- Jetzt die Virtuelle Maschiene wählen und `Aktivieren` drücken.
+- Jetzt die Virtuelle Maschine wählen und `Aktivieren` drücken.
 
 
 ## 1.5. [Firewall](https://de.wikipedia.org/wiki/Firewall)
@@ -73,7 +73,7 @@
 
 
 ### Wie werden Snapshots erstellt ?
-- Zum Bereich `Virtuelle Maschienen` navigieren
+- Zum Bereich `Virtuelle Maschinen` navigieren
 - Die gewünschte VM auswählen
 - `Aktionen`
 - `Snapshots`
@@ -83,7 +83,7 @@
 
 
 ### Snapshots verwalten & wiederherstellen
-- Zum Bereich `Virtuelle Maschienen` navigieren
+- Zum Bereich `Virtuelle Maschinen` navigieren
 - Die VM auswählen, von der Snapshots erstellt wurden
 - `Aktionen`
 - `Snapshots`
