@@ -3,14 +3,16 @@
 
 `Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 5.5.2025`
 
+`Anleitung für Raspberry Pi OS und Ubuntu-Server geeignet`
+
 
 ## Inhaltsverzeichnis
 1. Was ist ein DNS-Server & Was ist [Pi hole](https://pi-hole.net/) ?
 2. [Pi hole](https://pi-hole.net/) installieren, einrichten, Firewall & updaten
 3. [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure) für Web-Interface - über [IP-Adresse](https://de.wikipedia.org/wiki/IP-Adresse) (ohne Domain)
 4. Backups von Pi hole erstellen
-5. DNS Verschlüsselung/Signaturverfahren - DoT / DoH / DNSSEC
-6. Welchen DNS Upstream-Server sollte man wählen ?
+5. Welchen DNS Upstream-Server sollte man wählen ?
+6. DNS Verschlüsselung/Signaturverfahren - DoT / DoH / DNSSEC
 7. mobile Geräte: gewünschte DNS-Server wie von [Cloudflare](https://www.cloudflare.com/) oder [Pi hole](https://pi-hole.net/) außerhalb des Heimnetzes nutzen können
 8. DNS-Filterlisten (Blocklisten) & Domains blacklisten/whitelisten
 9. Empfehlungen für Blocklisten
@@ -40,7 +42,7 @@ Der Pi hole hat viele Funktionen und kann Werbung sowie Tracker blockieren und o
 # 2. [Pi hole](https://pi-hole.net/) installieren, einrichten, Firewall & updaten
 
 
-`Die Installation von Pi hole ist auf den meisten gängigen Linux-Distibutionen möglich, allerdings beschränkt diese Anleitung sich auf die Installation von Pi hole auf einem Rapberry Pi mit Pi OS.`
+`Die Installation von Pi hole ist auf den meisten gängigen Linux-Distibutionen möglich, allerdings beschränkt diese Anleitung sich auf die Installation von Pi hole mit Pi-OS oder Ubuntu-Server.`
 
 
 ## A. [Installation](https://github.com/pi-hole/pi-hole/#one-step-automated-install)
@@ -64,7 +66,7 @@ $ sudo bash basic-install.sh
 
 
 ## B. [IP-Adresse](https://de.wikipedia.org/wiki/IP-Adresse) vergeben
-- Der Raspberry Pi benötigt unbedingt eine im Router (bzw. DHCP-Server), reservierte IP-Adresse, die sich nach dem Festlegen NICHT mehr automatisch ändern kann !
+- Der Raspberry Pi/Ubuntu-Server benötigt unbedingt eine im Router (bzw. DHCP-Server), reservierte IP-Adresse, die sich nach dem Festlegen NICHT mehr automatisch ändern kann !
 
 
 ## C. [Firewall](https://de.wikipedia.org/wiki/Firewall) Konfiguration mit [ufw](https://wiki.ubuntuusers.de/ufw/)
@@ -111,16 +113,19 @@ $ sudo pihole setpassword
 
 
 ## E. Web-Interface
+- HTTP
+	- http://IP-Adresse/admin
+	- http://pi.hole/admin
 
-> http://IP-Adresse/admin
-
-> http://pi.hole/admin
+- HTTPS
+	- https://IP-Adresse/admin
+	- https://pi.hole/admin
 
 
 ## F. Pi als DNS Server im Router/ in einzelnen Geräten einstellen
-- In einem Router, z.B. in der [FritzBox](https://avm.de/) den Pi als DNS Server einstellen (IP-Adresse des Pis als DNS-Server eingeben).
+- In einem Router, z.B. in der [FritzBox](https://avm.de/) den Pi als DNS-Server einstellen (IP-Adresse des Pis unter IPv4 und ggf. IPv6 als DNS-Server eingeben).
 - Alternativ den Pi nur in ausgewählten Geräten einstellen.
-- Dafür entweder in einem Router oder in einzelnen Geräten die `IP-Adresse` des Raspberry Pis (mit Pi hole) `als DNS-Server` eintragen.
+- Dafür entweder in einem Router oder in einzelnen Geräten die `IP-Adresse` des Raspberry Pis/Ubuntu-Servers (mit Pi hole) `als DNS-Server` eintragen.
 
 
 ## G. [Pi hole](https://pi-hole.net/) Updates
@@ -130,6 +135,15 @@ $ pihole -up
 
 ## H. Blockierung kurzzeitig unterbrechen
 - Dafür einfach auf den Reiter `Disable Blocking` gehen und einen gewünschten Zeitraum wählen.
+
+
+## I. Hinweis zu DNS-Auflösung IPv4/IPv6 (Record-Typen A / AAAA)
+- Im `Query Log` wird unter der Spalte `Type` der Record-Typ (`A` oder `AAAA`) den der Client abgefragt hat angezeigt.
+- Dabei steht `A` für Abfragen nach einem IPv4-Address-Record (also Client möchte die IPv4-Adresse einer Domain).
+- `AAAA` steht für Abfragen nach einem IPv6-Address-Record (also Client möchte die IPv6-Adresse einer Domain).
+- Wichtig hierbei ist, dass das Transport-Protokoll und Record-Typ getrennte Konzepte sind.
+	- Auch wenn ein Client kein IPv6-Interface hat, kann er trotzdem eine AAAA-Query stellen. Diese wird dann einfach per IPv4-UDP an Pi-hole geschickt.
+	- Pi-hole antwortet in diesem Fall ebenfalls per IPv4-Transport, liefert aber (falls vorhanden) die IPv6-Adresse als AAAA-Antwort zurück.
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -199,15 +213,107 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 5. DNS Verschlüsselung/Signaturverfahren - DoT / DoH / DNSSEC
+# 5. Welchen DNS Upstream-Server sollte man wählen ?
+- Je nach Standort kann die Geschwindigkeit von Anbieter zu Anbieter variieren.
+- Stellvertretend sind hier die Vor-/ Nachteile von 3 Anbietern aufgelistet.
+
+- Wichtiger Hinweis:
+	- Um Verschlüsselungsoptionen nutzen zu können, muss ein lokaler Stub-Resolver bzw. Forwarder und der localhost mit dem Port verwendet werden.
+	- Mehr dazu unter Punkt 6.
+
+
+### Empfohlen: [Cloudflare](https://www.cloudflare.com/)
+
+- `Vorteile`
+    - empfehlenswerter Anbieter, weite Verbreitung
+    - Geschwindigkeit (schnelle Server)
+    - Server auf der ganzen Welt
+    - Zuverlässigkeit
+    - Fokus auf Datenschutz & Sicherheit
+    - kein Logging von personenbezogenen Daten
+    - laut Angaben von Cloudflare: kein logging von IP-Adressen, keine Weitergabe an Dritte
+    - ideal für private Nutzer & Haushalte
+
+- `Nachteile`
+    - in weniger gut angebundenen Regionen möglicherweise gelegentliche Latenzen
+    - Bei intensiver Nutzung durch sehr große Netzwerke, möglicherweise Rate-Limiting
+    - Cloudflare ist ein Kommerzielles Unternehmen, auch wenn es kein Geld mit personenbezogenen Nutzerdaten macht
+
+- `IP-Adressen`
+	- IPv4: `1.1.1.1`, `1.0.0.1`
+	- IPv6: `2606:4700:4700::1111`, `2606:4700:4700::1001`
+	- Mit DNS-Filter: - inkl. Malewarefilter: `1.1.1.2`, `1.0.0.2` / inkl. Maleware+Erwachsenen-Inhaltsfilter: `1.1.1.3`, `1.0.0.3`
+	- DoT Servername: `cloudflare-dns.com` / DoH URL: `https://cloudflare-dns.com/dns-query`
+
+
+### [Quad9](https://www.quad9.net/de/)
+
+- `Vorteile`
+	- empfehlenswerter Anbieter, weite Verbreitung
+	- Server auf der ganzen Welt
+	- Non Profit Organisation aus der Schweiz
+	- Fokus auf Datenschutz & Sicherheit
+	- laut Angaben von Quad9: kein logging von IP-Adressen, keine Weitergabe an Dritte
+	- DNS-Filterlisten bereits vom Anbieter eingesetzt
+
+- `Nachteile`
+	- mögliche Probleme durch DNS-Filterlisten des Anbieters
+	- gelegentlich höhere Latenzen als bei Google oder Cloudflare
+
+- `IP-Adressen`
+	- IPv4: `9.9.9.10`, `149.112.112.10`
+	- IPv6: `2620:fe::10`, `2620:fe::fe:10`
+	- IPv4 mit Maleware Filter: `9.9.9.9`, `149.112.112.112`
+	- IPv6 mit Maleware Filter: `2620:fe::fe`, `2620:fe::9`
+	- DoT Servername: `dns.quad9.net` / DoH URL: `https://dns.quad9.net/dns-query`
+
+
+### [Google](https://dns.google/)
+
+- `Vorteile`
+    - weite Verbreitung
+    - Geschwindigkeit (schnelle Server)
+    - sehr hohe Verfügbarkeit
+    - Zuverlässigkeit
+
+- `Nachteile`
+    - laut Angaben von Google werden manche Informationen, wie Internetdienstanbieter oder Standort gespeichert
+    - laut Angaben von Google werden abgefragte IP-Adressen aus "Sicherheitsgründen" "temporär" gespeichert
+    - Verbesserung der Dienste durch Auswertung von Daten
+    - Google teilt Daten mit Partnerunternehmen
+    - Google ist ein Kommerzielles Unternehmen
+
+- `IP-Adressen`
+	- IPv4: `8.8.8.8`, `8.8.4.4`
+	- IPv6: `2001:4860:4860::8888`, `2001:4860:4860::8844`
+	- DoT Servername: `dns.google` / DoH URL: `https://dns.google/dns-query`
+
+
+### Wo kann man den Upstream DNS Server im [Pi hole](https://pi-hole.net/) wechseln ?
+- Unter dem Reiter `Settings` und `DNS` kann der Upstream DNS Server gewählt werden.
+
+
+### Hinweis zu IPv4/IPv6 Upstream-Server
+- Die gewählten Upstream-Server werden von Pi hole zur DNS-Auflösung verwendet.
+- Unabhängig vom Transport-Protokoll (IPv4 oder IPv6) können Upstream-Server immer sowohl `A-`  als auch `AAAA`-Records auflösen.
+- Auch wenn in Pi hole nur IPv4-Upstream-Server konfiguriert sind, werden AAAA-Anfragen eines Clients per IPv4 an den Upstream-Server gesendet und dort aufgelöst.
+- Umgekehrt gilt dasselbe: Nur IPv6-Upstream-Server → A- und AAAA-Anfragen über IPv6.
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 6. DNS Verschlüsselung/Signaturverfahren - DoT / DoH / DNSSEC
 
 `Anleitung mit Version 6.0 von Pi hole getestet`
 
 ## Wieso sollte man DNS Verschlüsselung/Signaturverfahren verwenden ?
-- Schutz der `Privatsphäre` vor Dritten, wie Hackern (nur DoT/DoH)
+- Schutz der `Privatsphäre` vor Dritten (nur DoT/DoH)
 - Schutz vor `Tracking` durch Internetanbieter (nur DoT/DoH)
-- Schutz vor `Man-in-the-Middle-Angriffen`, bei denen die DNS-Anfragen `manipuliert` werden. (DoT/DoH/DNSSEC)
+- Schutz vor `Man-in-the-Middle-Angriffen`, bei denen die DNS-Anfragen `manipuliert` werden (DoT/DoH/DNSSEC).
 - Schutz vor `Umleitung` auf bösartigen Webseiten. (DoT/DoH/DNSSEC)
+- Hinweis:
+	- Dabei sollte man beachten, dass DNSSEC auch von der Domain unterstützt werden muss und DoT/DoH muss der externe DNS-Resolver unterstützen.
 
 
 ## Welche Verschlüsselung oder Signaturverfahren sollte man nutzen: DNSSEC / DoT / DoH ?
@@ -217,7 +323,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
     `Vorteile:`
     - Anfragen werden digital signiert (Schutz vor Manipulation)
     - Sicherstellung, dass DNS-Anfragen authentisch und unverändert sind (Schutz vor Manipulation)
-    - im Pi hole einfach zu aktivieren
+    - im Pi hole sehr einfach zu aktivieren
 
     `Nachteile:`
     - Keine Verschlüsselung (Anfragen sind weiterhin im Klartext, werden nur signiert, KEIN Schutz vor Tracking)
@@ -265,46 +371,16 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 - Domains, die kein DNSSEC unterstützen, werden mit `INSECURE` gekennzeichnet.
 
 
-----------------------------------------------------------------------------------------------------------------
+## Nutzung von DoT / DoH (DNS-Verschlüsselung) mit dem [Pi hole](https://pi-hole.net/)
+
+`Anleitung mit Version 6.0 von Pi hole getestet`
+
+- Standardmäßig unterstützt Pi hole keine Verschlüsselungsoptionen.
+- Um `DoH/DoT` nutzen zu können, muss man Pi hole mit einem `Stub-Resolver bzw. Forwarder`, wie [Unbound](https://docs.pi-hole.net/guides/dns/unbound/) oder [cloudflared](https://docs.pi-hole.net/guides/dns/cloudflared/) verwenden.
+- In welchem Fall Unbound (rekursiv) / Cloudflared / Quad9 (mit Unbound als Forwarder) die richtige Wahl ist und wie man diese einrichtet, wird in diesem Ordner in der entsprechenden Anleitung erklärt.
 
 
-# 6. Welchen DNS Upstream-Server sollte man wählen ?
-- Je nach Standort kann die Geschwindigkeit von Anbieter zu Anbieter variieren.
-- Stellvertretend sind hier die Vor-/ Nachteile von 2 Anbietern aufgelistet:
-
-
-### Empfohlen: [Cloudflare](https://www.cloudflare.com/) - IPv4: `1.1.1.1`, `1.0.0.1`
-
-- `Vorteile`
-    - empfehlenswerter Anbieter, weite Verbreitung
-    - Geschwindigkeit (schnelle Server)
-    - Server auf der ganzen Welt
-    - Fokus auf Datenschutz & Sicherheit
-    - kein Logging
-    - ideal für private Nutzer & Haushalte
-
-- `Nachteile`
-    - in weniger gut angebundenen Regionen gelegentliche Verzögerungen
-    - Bei intensiver Nutzung durch sehr große Netzwerke, möglicherweise Rate-Limiting
-
-
-### [Google](https://dns.google/) - IPv4: `8.8.8.8`, `8.8.4.4`
-
-- `Vorteile`
-    - weite Verbreitung
-    - Geschwindigkeit (schnelle Server)
-    - sehr hohe Verfügbarkeit
-    - Zuverlässigkeit
-
-- `Nachteile`
-    - manche Informationen, wie Internetdienstanbieter oder Standort werden gespeichert (laut Angaben von Google)
-    - abgefragte IP-Adressen werden aus "Sicherheitsgründen" "temporär" gespeichert (laut Angaben von Google)
-    - Verbesserung der Dienste durch Auswertung von Daten
-    - Google teilt Daten mit Partnerunternehmen
-
-
-### Wo kann man den Upstream DNS Server im [Pi hole](https://pi-hole.net/) wechseln ?
-- Unter dem Reiter `Settings` und `DNS` kann der Upstream DNS Server gewählt werden.
+### [Einrichtung von Unbound (rekursiv) / Cloudflared / Quad9 (mit Unbound als Forwarder) in Kombination mit Pi hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi)
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -314,7 +390,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 
 ### DNS-Server bei mobilen Geräten außerhalb des Heimnetzwerkes
 - Es ist außerdem auch möglich, den `DNS Server bei mobilen Geräten` wie Laptops und Handys etc. zu ändern, um den gewünschten Anbieter nutzen zu können.
-- Das ist in der Hinsicht interessant, wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche Domains man aufruft` (Tracking verhindern).
+- Das ist in der Hinsicht interessant, wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche Domains man aufruft` (z.B. Tracking verhindern).
 - Wie oben beschrieben ist [Cloudflare](https://www.cloudflare.com/) ein Anbieter, der den Fokus auf `Datenschutz & Sicherheit` legt.
 - Mehr dazu in den einzelnen `Beiträgen zur Sicherheit auf dem entsprechenden Betriebsystem`. - [Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung), [MacOS](https://github.com/replay45/Windows-Apple-und-Android/tree/main/Apple), [Android](https://github.com/replay45/Windows-Apple-und-Android/tree/main/Android)
 
@@ -323,8 +399,8 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 - Viele `moderne Router`, wie u.a. auch die [FritzBox](https://avm.de/), können als `eigener VPN-Server` genutzt werden.
 - Dabei stellt man vom Laptop, Tablet oder Handy eine `VPN Verbindung in das eigene Heimnetz` her und nutzt somit `auch Pi hole als DNS-Server`, sofern dieser als `primärer DNS-Server im Router` hinterlegt ist.
 - Außerdem kann man dann von überall auf seine `Geräte im Heimnetz zugreifen`, wie z.B. auf einen [NAS](https://de.wikipedia.org/wiki/Network_Attached_Storage) oder Homeserver.
-- Die VPN-Verbindung kann zudem auch in öffentlichen oder fremden WLANs genutzt werden, um den `eigenen Netzwerk-Traffic zu verschlüsseln`.
-- Dabei sollte man bedenken, dass `alle DNS-Anfragen über den Router im Heimnetz` geleitet werden und dass dieser VPN-Server des eigenen Routers nicht immer den klassischen VPN-Dienst eines externen Anbieters ersetzt.
+- Die VPN-Verbindung kann zudem auch in öffentlichen oder fremden WLANs, sowie im Ausland genutzt werden, um den `eigenen Netzwerk-Traffic bis zum Heimnetzrouter zu verschlüsseln`.
+- Dabei sollte man bedenken, dass `alle Pakete, Daten und DNS-Anfragen über den Router im Heimnetz` geleitet werden und dass dieser VPN-Server des eigenen Routers nicht immer den klassischen VPN-Dienst eines externen Anbieters ersetzt.
 - Dafür eignet sich das moderne [WireGuard](https://www.wireguard.com/) Protokoll, was als besonders sicher gilt und dabei auch noch vergleichsweise wenige Ressourcen verbraucht, was wiederum energieeffizient ist.
 
 
@@ -401,10 +477,10 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 
 ## Wichtige Hinweise zur Blockliste:
 - Für Pi hole ist eine reine Domain-Liste ausreichend.
-- Es werden keine IP-Adressen in der Liste benötigt.
-- Keine Leerzeichen oder zusätzliche Zeichen (wie http:// oder /) benötigt.
+- Es werden **keine IP-Adressen** in der Liste benötigt.
+- **Keine** Leerzeichen oder zusätzliche Zeichen (wie "http://" oder "/") benötigt.
 - Nur eine Domain pro Zeile.
-- Keine Wildcards (wie *.example.com), denn Pi hole arbeitet nur mit exakten Domains oder Subdomains.
+- **Keine** Wildcards (wie *.example.com), denn Pi hole arbeitet nur mit exakten Domains oder Subdomains.
 - Kommentare können mit `#` gekennzeichnet werden, Pi hole (Gravity) überspringt diese automatisch.
 
 Beispiel:
