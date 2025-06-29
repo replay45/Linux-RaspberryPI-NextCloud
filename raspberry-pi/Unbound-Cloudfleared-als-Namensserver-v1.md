@@ -346,7 +346,8 @@ WantedBy=multi-user.target
 - Cloudflared nutzt die Server in angegebener Reihenfolge von oben nach unten, also wenn der oberste Upstream nicht funktioniert, dann wird der nächstuntere verwendet.
 - Folgende DoH-URL in der `/etc/systemd/system/cloudflared.service`-Konfig ergänzen, um Quad9 als Fallback einzurichten: `--upstream https://dns.quad9.net/dns-query`
 - Das würde dann z.B. so aussehen: 
-```ExecStart=/usr/local/bin/cloudflared proxy-dns --address 127.0.0.1 --port 5053 --upstream https://cloudflare-dns.com/dns-query --upstream https://1.1.1.1/dns-query --upstream https://1.0.0.1/dns-query --upstream https://dns.quad9.net/dns-query --bootstrap=1.1.1.1
+```
+ExecStart=/usr/local/bin/cloudflared proxy-dns --address 127.0.0.1 --port 5053 --upstream https://cloudflare-dns.com/dns-query --upstream https://1.1.1.1/dns-query --upstream https://1.0.0.1/dns-query --upstream https://dns.quad9.net/dns-query --bootstrap=1.1.1.1
 ```
 
 
