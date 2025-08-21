@@ -281,7 +281,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
     - laut Angaben von Google werden abgefragte IP-Adressen aus "Sicherheitsgründen" "temporär" gespeichert
     - Verbesserung der Dienste durch Auswertung von Daten
     - Google teilt Daten mit Partnerunternehmen
-    - Google ist ein Kommerzielles Unternehmen
+    - Google ist ein kommerzielles Unternehmen
 
 - `IP-Adressen`
 	- IPv4: `8.8.8.8`, `8.8.4.4`
@@ -291,6 +291,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 
 ### Wo kann man den Upstream DNS Server im [Pi hole](https://pi-hole.net/) wechseln ?
 - Unter dem Reiter `Settings` und `DNS` kann der Upstream DNS Server gewählt werden.
+- Hier kann zwischen den Voreinstellungen gewählt werden oder direkt eine IP-Adresse eingetragen werden. 
 
 
 ### Hinweis zu IPv4/IPv6 Upstream-Server
@@ -454,6 +455,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 
 - Weitere Empfehlungen
 	- Auf der Github Seite von Steven Black unter [github.com/StevenBlack/hosts](https://github.com/StevenBlack/hosts/blob/master/readme.md) finden sich viele weitere Empfehlungen.
+	- Eigene Blocklisten: [github.com/replay45/DNS-Filterlisten](https://github.com/replay45/DNS-Filterlisten)
 
 
 ----------------------------------------------------------------------------------------------------------------
