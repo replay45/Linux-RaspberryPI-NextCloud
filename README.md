@@ -1,7 +1,7 @@
 # Linux, Raspberry Pi & Nextcloud
 
 - Hier sind einige Anleitungen zu Linux, dem Raspberry Pi und zur Nextcloud.
-- Zudem gibt es zwei Beiträge zu Pi hole und DNS-Verschlüsselung im Raspberry Pi-Ordner und weitere Projekte zu der Dokumentationsplattform Wiki.js und dem Ticket-System Zammad
+- Zudem gibt es zwei Beiträge zu Pi hole und DNS-Verschlüsselung im Raspberry Pi-Ordner und weitere Projekte zu der Dokumentationsplattform Wiki.js und dem Ticket-System Zammad.
 - Unter dem Ordner Linux, sind Anleitungen zu Debian basierten Distributionen, wie Kali Linux & Ubuntu/Ubuntu-Server.
 - Manche Anleitungen beziehen sich zudem besonders auf die Benutzeroberflächen GNOME und XFCE, die unter anderem standard/optionale Benutzeroberflächen von Kali & Ubuntu sind.
 
