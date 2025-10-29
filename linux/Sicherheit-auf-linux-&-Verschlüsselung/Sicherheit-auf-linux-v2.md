@@ -1,6 +1,6 @@
 # Sicherheit auf Linux
 
-`Anleitung zuletzt bearbeitet am 19.11.2024`
+`Anleitung zuletzt bearbeitet am 11.6.2025`
 
 
 ## Inhaltsverzeichnis
@@ -8,59 +8,63 @@
 2. Benötigt man einen Virenscanner für Linux ?
     - Was tun, wenn man trotzdem einen Virenscanner auf Linux nutzen möchte ?
 3. [Firewall](https://de.wikipedia.org/wiki/Firewall)
-4. DNS Server ändern - [Cloudflare DNS](https://www.cloudflare.com/)
+4. [Secure Boot](https://en.wikipedia.org/wiki/UEFI#Secure_Boot)
+5. DNS Server ändern - [Cloudflare DNS](https://www.cloudflare.com/)
     - Was ist ein DNS-Server ?
     - Wieso den DNS-Server ändern ? 
     - DNS Server ändern
 
 
-- Mehr zu Verschlüsselung unter Linux in diesem Ordner unter [Verschlüsselung auf Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung)
+- Mehr zu `Verschlüsselung unter Linux` in diesem Ordner unter [Verschlüsselung auf Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung)
+
 
 ----------------------------------------------------------------------------------------------------------------
 
 
 # 1. Sicherheit auf Linux - grundlegende Sicherheitstipps
 
-- die Grundlagen & allgemeies Verhalten
-    - Absolute Sicherheit gibt es nie ! - Aufklärung ist der beste Schutz !
-    - Man sollte immer den gesunden Menschenverstand einschalten.
-    - Ein gewisses Maß an Skepsis ist immer gut.
-    - Sicherung von Systemen gegen Diebstahl oder Manipulationen.
-    - Keine unbekannten/ vermeindlich gefundenen USB-Sticks verwenden !
+### die Grundlagen & allgemeies Verhalten
+- Absolute Sicherheit gibt es nie ! - Aufklärung ist der beste Schutz !
+- Man sollte immer den gesunden Menschenverstand einschalten.
+- Ein gewisses Maß an Skepsis ist immer gut.
+- Sicherung von Systemen gegen Diebstahl oder Manipulationen.
+- Keine unbekannten/ vermeindlich gefundenen USB-Sticks verwenden !
 
-- Datenschutz & Tracking
-    - Datenminimierung: Nur personenbezogene Daten angeben, wenn unbedingt notwendig.
-    - Man sollte sich nur in online-Accounts einloggen, wenn notwendig.
-    - Die `Werbe-ID löschen` & `personalisierte Werbung deaktivieren`, um Tracking zu minimieren und zu erschweren.
-    - Cloud-Dienste meiden - eigene Cloud oder NAS nutzen.
-    - Sichere und datenschutzfreundliche DNS-Server nutzen.
+### Datenschutz & Tracking
+- Datenminimierung: Nur personenbezogene Daten angeben, wenn unbedingt notwendig.
+- Man sollte sich nur in online-Accounts einloggen, wenn notwendig.
+- Die `Werbe-ID löschen` & `personalisierte Werbung deaktivieren`, um Tracking zu minimieren.
+- Cloud-Dienste meiden - eigene Cloud, wie Nextcloud oder NAS im Heimnetz nutzen.
+- Sichere und datenschutzfreundliche DNS-Server nutzen.
 
-- Browser & Verhalten im Internet
-    - Acht geben, auf was im Internet heruntergeladen wird und welche Webseiten besucht werden.
-    - Einen sicheren Browser, wie [Firefox](https://www.mozilla.org/de/firefox/new/) oder den [Brave-Browser](https://brave.com/de/) verwenden.
-    - Browser datenschutzfreundlich einstellen und Cookies von Dritt-Anbietern blockieren.
-    - AdBlocker verwenden - [uBlock Origin](https://ublockorigin.com/de)
+### Browser & Verhalten im Internet
+- Acht geben, auf was im Internet heruntergeladen wird und welche Webseiten besucht werden.
+- Einen sicheren Browser, wie [Firefox](https://www.mozilla.org/de/firefox/new/) oder den [Brave-Browser](https://brave.com/de/) verwenden.
+- Browser datenschutzfreundlich einstellen und Cookies von Dritt-Anbietern blockieren.
+- Datenschutzorientierte Suchmaschine verwenden, z.B. [Startpage](https://www.startpage.com/), [DuckDuckGo](https://duckduckgo.com/) oder [Ecosia](https://www.ecosia.org/)
+- AdBlocker verwenden - [uBlock Origin](https://ublockorigin.com/de) & [Privacy Badger](https://privacybadger.org/)
 
-- E-Mail
-    - Vorsicht vor Scam-E-Mails und schädlichen Anhängen.
-    - Einen sicheren E-Mail-Client ohne Tracker nutzen - [Thunderbird](https://www.thunderbird.net/de/) & [K-9](https://k9mail.app/).
+### E-Mail
+- Vorsicht vor Scam-E-Mails und schädlichen Anhängen.
+- Einen sicheren E-Mail-Client ohne Tracker nutzen - [Thunderbird](https://www.thunderbird.net/de/) & [K-9](https://k9mail.app/).
 
-- Authentifizierung & Verschlüsselung
-    - Festplatten-/ Geräteverschlüsselung aktivieren & Passwortsperre nutzen.
-    - Passwortmanager mit starken Passwörtern nutzen - empfohlen: [KeePassXC](https://keepassxc.org/) oder [BitWarden](https://bitwarden.com/de-de/)
-    - 2‑Faktor-Authentifizierung nutzen - [2FAS](https://2fas.com/)
+### Authentifizierung & Verschlüsselung
+- Festplatten-/ Geräteverschlüsselung aktivieren & Passwortsperre nutzen.
+- Passwortmanager mit starken Passwörtern nutzen - empfohlen: [KeePassXC](https://keepassxc.org/) oder [BitWarden](https://bitwarden.com/de-de/)
+- 2‑Faktor-Authentifizierung nutzen - [2FAS](https://2fas.com/)
 
-- Software & Daten schützen
-    - Open-Source Software bevorzugen.
-    - Regelmäßiges Installieren von Updates.
-    - Nicht mehr benötigte Programme entfernen.
-    - Backups erstellen.
+### Software & Daten schützen
+- [Open Source](https://de.wikipedia.org/wiki/Open_Source) Software bevorzugen.
+- Regelmäßiges Installieren von Updates.
+- Nicht mehr benötigte Programme entfernen.
+- Backups erstellen.
 
-- Betriebsystem spezifisch (hier Linux)
-    - [Firewall](https://de.wikipedia.org/wiki/Firewall): richtig mit [ufw](https://wiki.ubuntuusers.de/ufw/) konfigurieren und alle nicht benötigten Ports geschlossen halten.
-    - Keine unbekannten Befehle im Terminal ausführen.
+### Betriebssystem spezifisch (hier Linux)
+- Firewall: richtig mit [ufw](https://wiki.ubuntuusers.de/ufw/) konfigurieren und alle nicht benötigten Ports geschlossen halten.
+- Keine unbekannten Befehle im Terminal ausführen.
 
-- Mehr zu sicher & anonym im Internet surfen unter [ethical hacking & Cyber Security/Cyber-Security/anonym & sicher im Internet surfen](https://github.com/replay45/ethical-hacking-und-cybersecurity/tree/main/cyber-security)
+
+#### Mehr zu `sicher-&-datenschutzorientiert-surfen` unter [ethical hacking & Cyber Security/Cyber-Security/sicher-&-datenschutzorientiert-surfen](https://github.com/replay45/ethical-hacking-und-cybersecurity/tree/main/cyber-security)
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -70,13 +74,13 @@
 
 Es wird `nicht unbedingt` ein Virenscanner für Linux benötigt, da Linux dank seiner Architektur bereits als recht sicher gilt.
 Durch die geringe Verbreitung von Linux bei Desktop Systemen gibt es dementsprechend wenig Viren.
-Stattdessen sollte man lieber die grundlegenden Sicherheitstipps (Punkt 1.) befolgen und die Firewall aktivieren.
-Wenn man sich also an die wichtigsten Verhaltens-Regeln hält, um sein System sicher zu halten, Software nur aus vertrauenswürdigen Quellen nutzt und das System mit den neusten Updates versorgt, ist in der Regel für private Anwender kein Virenscanner nötig.
+Stattdessen sollte man lieber die `grundlegenden Sicherheitstipps (Punkt 1.) befolgen` und die [Firewall](https://de.wikipedia.org/wiki/Firewall) aktivieren.
+Wenn man sich also an die wichtigsten Verhaltens-Regeln hält, um sein System sicher zu halten, `Software nur aus vertrauenswürdigen Quellen` nutzt und das System mit den neusten `Updates` versorgt, ist `in der Regel für private Anwender kein Virenscanner nötig`.
 
 
 ### Was tun, wenn man trotzdem einen Virenscanner auf Linux nutzen möchte ?
 - Wenn man trotzdem nicht auf einen Virenscanner für Linux verzichten möchte, empfiehlt sich [Clam AV](https://www.clamav.net/).
-- Das [Open-Source](https://de.wikipedia.org/wiki/Open_Source) Programm kann im Terminal genutzt werden, aber es kann auch optional die Benutzeroberfläche installiert werden.
+- Das [Open Source](https://de.wikipedia.org/wiki/Open_Source) Programm kann im Terminal genutzt werden, aber es kann auch optional die Benutzeroberfläche installiert werden.
 
 
 ### [Installation & Nutzung von Clam AV](https://www.kali.org/tools/clamav/)
@@ -179,14 +183,32 @@ $ sudo ufw logging off
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 4. DNS Server - [Cloudflare DNS](https://www.cloudflare.com/)
+# 4. [Secure Boot](https://en.wikipedia.org/wiki/UEFI#Secure_Boot)
+
+### Was ist [Secure Boot](https://en.wikipedia.org/wiki/UEFI#Secure_Boot) ?
+- Secure Boot ist eine Sicherheitsfunktion (Integritätsschutz), die sicherstellt, dass beim Boot-Vorgang vom Betriebssystem nur vertrauenswürdige Software geladen wird.
+- Das Ziel ist, einen Schutz vor Manipulationen am Betriebssystem zu implementieren, um das Laden von Schadcode oder veränderten Bootloadern zu verhindern.
+- Technisch funktioniert das über eine digitale Signatur, wodurch nicht signierte oder veränderte Software blockiert wird.
+
+
+
+
+### Einrichtung von [Secure Boot](https://en.wikipedia.org/wiki/UEFI#Secure_Boot) - (Debian-basierte Distributionen)
+
+*folgt in Kürze*
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 5. DNS Server - [Cloudflare DNS](https://www.cloudflare.com/)
 
 - `mehr zu DNS-Servern` in diesem Repository unter [Raspberry-Pi/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi)
 - Hinweis:
     - Das Ändern des DNS-Servers zu einem sicheren Anbieter, verhindert ohne Implementierung einer Verschlüsselung oder Signierung keine [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) oder Tracking !
 
-## Was ist ein DNS Server ?
-Ein DNS-Server `übersetzt Domainnamen` wie "google.de" `in IP-Adressen`, denn Domains sind für uns Menschen, im Gegensatz zu IP-Adressen, einfacher zu merken.
+## Was ist ein [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System) ?
+Ein DNS-Server `übersetzt Domainnamen` wie "google.de" in [IP-Adressen](https://de.wikipedia.org/wiki/IP-Adresse), denn Domains sind für uns Menschen, im Gegensatz zu IP-Adressen, einfacher zu merken.
 Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese sich auch ändern, was jedoch dank der DNS-Server kein Problem ist.
 - [Cloudflare - Was ist ein DNS-Server](https://www.cloudflare.com/de-de/learning/dns/what-is-a-dns-server/)
 
@@ -221,15 +243,16 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
     - Wenn man nicht für jedes Gerät den DNS-Server einzeln einstellen möchte, kann man dies auch im Router tun.
     - Je nach Hersteller und Modell können die Optionen abweichen (Vodafone Easy-Boxen unterstützen das Ändern des DNS-Servers in der Regel nicht).
     - Um den DNS-Server zu ändern, die Option finden, wo der primäre und der sekundäre-DNS-Server festgelegt werden können. Dabei können sowohl der primäre- als auch der sekundäre-DNS-Server unterschiedliche Server vom gleichen Anbieter sein, oder der sekundäre Server kann wahlweise auch von dem primären Anbieter abweichen, um eine hohe Ausfallsicherheit zu gewährleisten.
-    - Einige Router, wie z.B. die [FritzBox](https://avm.de/) unterstützen auch DNS-Verschlüsselung (DoT), um die Anfragen sowie die Antworten zu verschlüsseln, damit [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) und Tracking durch Dritte verhindert werden können.
+    - Einige Router, wie z.B. die [FritzBox](https://avm.de/) unterstützen auch `DNS-Verschlüsselung (DoT)`, um die Anfragen sowie die Antworten zu verschlüsseln, damit [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) und Tracking durch Dritte verhindert werden können.
 
 
 ## mobile Geräte (Laptops) - optimalen DNS-Server nutzen & ggf. DNS-Verschlüsselung
-- Bei mobilen Geräten, wie Laptops, die auch außerhalb des Heimnetzwerkes genutzt werden, sollte ein geeigneter Anbieter verwendet werden.
+- Bei mobilen Geräten, wie Laptops, die auch außerhalb des Heimnetzes genutzt werden, sollte ein geeigneter Anbieter verwendet werden.
 - Standardmäßig gibt es mit den Bordmitteln unter Linux mit [GNOME](https://www.gnome.org/) keine Möglichkeit, den DNS-Server für alle Verbindungen global einzustellen oder eine DNS-Verschlüsselung zu aktivieren.
 - Die wohl einfachste Möglichkeit könnte eine VPN-Verbindung in das Heimnetzwerk sein, um die gewünschten DNS-Server mit ggf. DoT-Verschlüsselung z.B. über den Router wie die [FritzBox](https://avm.de/) zu nutzen oder den eigenen DNS-Server (z.B. Pi hole) zu nutzen.
-- Eine VPN-Verbindung bietet u.a. auch den Vorteil, dass man eine sichere Verbindung hat, auch wenn man mit einem unsicheren WLAN verbunden ist, oder man auf andere Geräte aus dem Heimnetzwerk zugreifen kann.
+- Eine VPN-Verbindung bietet u.a. auch den Vorteil, dass der eigene Netzwerkverkehr bei unsicheren oder fremden WLANs verschlüsselt wird und man auf andere Geräte aus dem Heimnetz zugreifen kann.
 - Eine andere Möglichkeit wäre z.B. [Pi hole](https://pi-hole.net/) über Dyn-DNS aus dem Internet erreichbar zu machen/ extern zu hosten, um Pi hole als DNS-Server einzustellen (nur für sehr erfahrene Nutzer geeignet).
+
 
 Das Aufsetzen von [Pi hole](https://pi-hole.net/) wird unter [Raspberry-Pi/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi) gezeigt.
 
