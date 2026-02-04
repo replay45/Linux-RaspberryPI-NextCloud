@@ -1,5 +1,6 @@
 # Ubuntu-Server in VM auf Host mit Debian-basierter-Distribution mit [VirtualBox](https://www.virtualbox.org/) aufsetzen
 
+`Anleitung zuletzt bearbeitet: 4.2.2026`
 
 
 ## Ressourcen:
@@ -129,6 +130,26 @@ $ sudo modprobe vboxdrv
 ```
 
 - Wenn `modprobe vboxdrv` einen Fehler anzeigt liegt es meistens an Secure Boot.
+
+
+### GGf. VirtualBox und DKMS entfernen & neu installieren
+```
+$ sudo apt purge virtualbox-dkms virtualbox-ext-pack virtualbox
+$ sudo apt autoremove && sudo apt autoclean
+$ sudo apt update
+$ sudo apt install virtualbox virtualbox-dkms virtualbox-ext-pack
+```
+- Mit `OK`
+- und `YES` bestätigen
+
+```
+$ sudo modprobe vboxdrv
+```
+
+- Neu starten:
+```
+$ reboot
+```
 
 
 -------------------------------------------------------------------------------------------------------------
