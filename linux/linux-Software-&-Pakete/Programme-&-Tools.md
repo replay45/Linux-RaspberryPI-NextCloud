@@ -1,6 +1,6 @@
 # Programme und Tools
 
-`Anleitung zuletzt bearbeitet am 7.2.2025`
+`Anleitung zuletzt bearbeitet am 4.2.2026`
 
 
 ## Inhaltsverzeichnis
@@ -20,7 +20,7 @@
 
 ### [Firefox](https://www.mozilla.org/de/firefox/new/)
 ```
-$ sudo apt install firefox
+$ sudo apt install firefox-esr
 ```
 
 ### [Chromium](https://www.chromium.org/chromium-projects/)
@@ -50,21 +50,61 @@ $ sudo apt install thunderbird
 
 # 2. Systemüberwachung & Systeminformationen
 
+### htop - Systemmonitor
+- `htop` ist ein Systemmonitor, ähnlich wie ein Taskmanager, aber im Terminal und zeigt die CPU und RAM Auslastung, die Prozessliste, den System-Load und die Prozess ID.
+- Alternativ gibt es noch `$ top`, das ist jedoch nicht interaktiv und weniger komfortabel.
+```
+$ htop
+```
+- zum Beenden `q` oder alternativ `F10` drücken
+
+
+### Temperaturüberwachung mit lm-sensors
+```
+$ sudo apt install lm-sensors
+```
+- Sensoren erkennen:
+	- Immer mit `YES` bestätigen, um Sensoren zu erkennen
+```
+$ sudo sensors-detect
+```
+- Sensoren anzeigen lassen:
+```
+$ sensors
+```
+
+
+### acpi - Temperatur & Batterie Informationen/ Überwachung
+```
+$ sudo apt install acpi
+```
+- CPU-Temperatur anzeigen lassen:
+```
+$ acpi -t
+```
+- Ladeastatus:
+```
+$ acpi
+```
+- Akkustand und Gesamtkapazität:
+```
+$ acpi -i
+```
+- Weitere Parameter:
+	- `-a` AC-Adapter
+	- `-b` Batterie Informationen
+	- `-c` Cooling Informationen
+
 
 ### [hwinfo](https://hwinfo.su/de/linux/)
 ```
 $ sudo apt install hwinfo
 ```
 
+
 ### CPU-X
 ```
 $ sudo apt install cpu-x
-```
-
-### [Neofetch](https://github.com/dylanaraps/neofetch)
-```
-$ sudo apt install neofetch
-$ neofetch
 ```
 
 
@@ -93,25 +133,13 @@ $ sudo apt install vlc
 ### [GDebi](https://packages.debian.org/de/stable/gdebi)
 - Debian-Paket-Installationsmanager
 ```
-$ sudo apt-get install gdebi
+$ sudo apt install gdebi
 ```
 
 
 ### [remmina](https://remmina.org/) - Remote Desktop Client
 ```
 $ sudo apt install remmina
-```
-
-
-### [balena etcher](https://etcher.balena.io/)
-- download balena etcher App-image File
-```
-$ sudo apt update
-$ sudo apt install zenity
-$ sudo mv balena etcher App-image /optautp
-$ sudo su
-$ chmod 777 /opt/balena-etcher.AppImage
-$ /opt/balena-etcher.AppImage
 ```
 
 
@@ -135,6 +163,28 @@ $ sudo dpkg -i *.deb
     - mit [GDebi](https://packages.debian.org/de/stable/gdebi) (Debian-Paket-Installationsmanager) komfortabel installieren
 
 
+### Videoschnittprogramm [DaVinci Resolve](https://www.blackmagicdesign.com/de/products/davinciresolve)
+- DaVinci Resolve ist ein professionelles Videoschnittprogramm von Blackmagic Design. Das Programm vereint Videoschnitt, Farbkorrektur, Effekte und vieles Mehr. Allerdings hat das Programm auch hohe Hardwareanforderungen, diese sollten vor der Installation geprüft werden.
+- Die Software hat eine `kostenlose Version`, `ist proprietär, also leider NICHT Open Source`. Eine [Open Source](https://de.wikipedia.org/wiki/Open_Source) Alternative wäre z.B. [Shotcut](https://www.shotcut.org/),  mehr zu Shotcut im nächsten Punkt.
+- Das Programm wird häufig auch von `professionellen Studios für Kinofilme verwendet`. 
+- DaVinci ist unter anderem für Linux, MacOS und Windows verfügbar.
+
+- Installation
+	- Unter Linux kann es zu Problemen mit den Grafiktreibern, den Anforderungen und Abhängigkeiten kommen, sodass sich das Programm nach der Installation nicht öffnen lässt. Hier muss zu der entsprechenden Distribution geschaut werden, was bei der Installation zu beachten ist.
+	- Blackmagic Design unterstützt eigentlich nur [CentOS](https://www.centos.org/) als Linux-Distribution, aber es gibt auch viele Community-Anleitungen für z.B. [Ubuntu](https://ubuntu.com/download) oder [Linux Mint](https://linuxmint.com/).
+	- Um DaVinci Resolve installieren zu können, müssen zunächst die Abhängigkeiten geprüft/installiert werden, die Grafiktreiber ggf. angepasst und dann kann das entsprechende Linux-Paket von der Webseite heruntergeladen werden.
+
+
+### Videoschnittprogramm [Shotcut](https://www.shotcut.org/)
+- Shotcut ist ein [Open Source](https://de.wikipedia.org/wiki/Open_Source)-Videobearbeitungsprogramm mit vielen Funktionen und sowohl für Anfänger als auch für Fortgeschrittene geeignet.
+- Ein Vorteil von Shotcut ist, dass die Hardwareanforderungen und auch der Ressourcenverbrauch deutlich geringer sind als bei DaVinci Resolve und es auch einfacher zu installieren ist.
+- Shotcut ist unter anderem für Linux, MacOS und Windows verfügbar.
+
+- Installation
+	- Das Programm kann mit dem Befehl `$ sudo apt install shotcut` unter Linux installiert werden.
+	- Alternativ ist [Shotcut auch als Flatpak](https://flathub.org/apps/org.shotcut.Shotcut) verfügbar.
+
+
 ----------------------------------------------------------------------------------------------------------------
 
 
@@ -146,17 +196,13 @@ $ sudo dpkg -i *.deb
 `10.4.2025: Der Metadata Cleaner wird nicht mehr vom Entwickler supportet und erhält keine Updates mehr.`
 [gitlab.com - Metadata Cleaner](https://gitlab.com/rmnvgr/metadata-cleaner/)
 
-Metadaten in einer Datei enthalten viele Informationen.
-Kameras zeichnen Daten darüber auf, wann und wo ein Bild aufgenommen und welche Kamera verwendet wurde. 
-Office-Anwendungen fügen automatisch Autoren- oder Firmeninformationen zu Dokumenten hinzu.
-Nicht immer möchte man, dass diese Informationen für Dritte zugänglich sind.
+- Metadaten in einer Datei enthalten viele Informationen.
+- Kameras zeichnen Daten darüber auf, wann und wo ein Bild aufgenommen und welche Kamera verwendet wurde. 
+- Office-Anwendungen fügen automatisch Autoren- oder Firmeninformationen zu Dokumenten hinzu.
+- Nicht immer möchte man, dass diese Informationen für Dritte zugänglich sind.
 
-- Installation & Verwendung auf Linux
-    - Mit dem Tool [Metadata Cleaner](https://metadatacleaner.romainvigier.fr/) kann man Metadaten in Dateien anzeigen und weitesgehend entfernen.
-    - Es gibt jedoch niemals eine Garantie dafür, dass alle Metadaten vollständig entfernt werden.
-    - Der Metadata Cleaner kann über [Flatpak](https://flathub.org/apps/fr.romainvigier.MetadataCleaner) installiert werden, z.B. über den Flatpak-App-Store.
-    - Um nun die Metadaten einzusehen und zu entfernen, muss der Metadata Cleaner geöffnet, die Datei eingefügt und dann nur noch unten rechts auf den Button `Clean` gedrückt werden.
-    - Es empfiehlt sich immer, eine Kopie der Datei zu sichern, bevor die Metadaten entfernt werden.
+### Mehr zu Metadaten
+- [Weitere Informationen zu Metadaten und einem Tool, um Metadaten zu entfernen, hier](https://github.com/replay45/ethical-hacking-und-cybersecurity/tree/main/cyber-security)
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -178,7 +224,6 @@ Aber auch im [F-Droid-Store](https://f-droid.org/de/packages/slowscript.warpinat
 
 
 ## Was ist [Wireguard](https://www.wireguard.com/) ?
-
 Wireguard ist ein modernes und effizientes VPN-Protokoll, welches schnelle und sichere VPN-Verbindungen ermöglicht.
 Zudem ist das Protokoll sowohl für einfache Konfiguration als auch für hohe Sicherheit bekannt.
 
