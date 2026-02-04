@@ -2,7 +2,7 @@
 
 `Anleitung zuletzt bearbeitet am 16.11.2024`
 
-Eclipse ist ein open-source Programm für die Softwareentwicklung und wird häufig für Java-Projekte verwendet.
+Eclipse ist ein [Open Source](https://de.wikipedia.org/wiki/Open_Source) Programm für die Softwareentwicklung und wird häufig für Java-Projekte verwendet.
 
 
 ### Installation
