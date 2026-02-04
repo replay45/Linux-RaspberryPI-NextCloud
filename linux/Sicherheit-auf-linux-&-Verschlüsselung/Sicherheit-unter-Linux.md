@@ -1,6 +1,8 @@
 # Sicherheit auf Linux
 
-`Anleitung zuletzt bearbeitet am 11.6.2025`
+`Anleitung erstellt am 11.6.2025, zuletzt bearbeitet am 21.12.2025`
+
+`Anleitung für Debian-basierte Systeme geeignet`
 
 
 ## Inhaltsverzeichnis
@@ -13,6 +15,7 @@
     - Was ist ein DNS-Server ?
     - Wieso den DNS-Server ändern ? 
     - DNS Server ändern
+6. Rootkit-Prüfung
 
 
 - Mehr zu `Verschlüsselung unter Linux` in diesem Ordner unter [Verschlüsselung auf Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung)
@@ -106,7 +109,7 @@ $ sudo freshclam
     - Zusammenfassend schützt eine Firewall vor unerwünschtem Datenverkehr in einem Netzwerk, um die Systeme zu schützen.
 
 
-[Firewall Manager - ufw](https://wiki.ubuntuusers.de/ufw/):
+[Firewall Manager - ufw](https://wiki.ubuntuusers.de/ufw/) (Debian-basierte Distributionen):
 
 - Installation & Status
 ```
@@ -116,7 +119,7 @@ $ sudo ufw status verbose
 $ sudo ufw reload
 ```
 
-- Firewall aktivieren/ deaktivieren/ reseten
+- Firewall aktivieren/ deaktivieren/ zurücksetzen
 ```
 $ sudo ufw enable
 $ sudo ufw disable
@@ -255,6 +258,33 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
 
 
 Das Aufsetzen von [Pi hole](https://pi-hole.net/) wird unter [Raspberry-Pi/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi) gezeigt.
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 6. Rootkit-Prüfung
+
+
+### Was ist ein Rootkit
+- Ein Rootkit ist Schadsoftware (Maleware), die versucht sich mit Administratorrechten tief im System zu verstecken, um z.B. Backdoors zu installieren.
+- Die Gefahr dabei ist, dass Rootkits auch Kernel-Code ändern könnten und sich vor der Erkennung schützen.
+- Dabei werden Rootkits in der Regel entweder durch Maleware-Infektion oder durch Angreifer nach erfolgreicher Kompromitierung installiert.
+
+### Erkennung von Rootkits
+- Es können z.B. Live-Systeme verwendet werden, von denen aus gebooet wird und dann werden anschließend Diagnose-Tools verwendet, um Rootkits zu erkenen.
+- Mit einer Memory-Dump-Anmalyse können auch Speicherinhalte auf verdächtige Aktivitäten geprüft werden.
+- Mithilfe von `chkrootkit`, einem Shell-Skript, können Systeme nach bekannten Signaturen von Rootkits durchsucht werden.
+    - Eine Prüfung mit chkrootkit ist niemals eine Garantie auf absolute Sicherheit, denn das Shell-Skript kann nur nach bekannten Siganturen von Rootkits suchen, noch unbekannte Rootkits können übersehen werden.
+```
+$ sudo apt update
+$ sudo apt install chkrootkit
+$ sudo chkrootkit
+```
+
+
+### Entfernung von Rootkits
+- Das Entfernen von Rootkits ist extrem schwierig, nur das `Formatieren/Überschreiben` der Festplatte und eine `Neuinstallation` sind eine angemessene Lösung.
 
 
 ----------------------------------------------------------------------------------------------------------------
