@@ -191,6 +191,15 @@ $ sudo snap refresh
 $ snap warnings
 ```
 
+- über Snap installierte Pakete anzeigen
+```
+$ snap list
+```
+
+- über Snap installierte Pakete entfernen
+```
+$ sudo snap remove PAKETNAME
+```
 
 ### [Snap App-Store installieren](https://snapcraft.io/docs/installing-snap-store-app)
 
@@ -202,7 +211,6 @@ $ sudo snap install snap-store
 ```
 $ snap-store
 ```
-
 
 > [Snap auf Kali installieren](https://snapcraft.io/docs/installing-snap-on-kali)
 
