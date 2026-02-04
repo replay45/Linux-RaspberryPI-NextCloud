@@ -4,8 +4,6 @@
 
 
 # Paketmanager: [apt](https://wiki.ubuntuusers.de/APT/) & [apt-get](https://wiki.ubuntuusers.de/apt/apt-get/)
-
-
 - Was ist ein Paketmanager ?
     - Ein Paketmanager wird zur komfortablen Verwaltung von Software im Terminal genutzt.
     - Dazu gehören das Installieren, Aktualisieren und Deinstallieren.
@@ -25,8 +23,6 @@ $ cat /etc/os-release
 
 
 # Update Befehle
-
-
 - Paketmanger [apt](https://wiki.ubuntuusers.de/APT/):
 ```
 $ sudo apt update
@@ -36,8 +32,7 @@ $ sudo apt upgrade
 ```
 ```
 $ sudo apt dist-upgrade
-```
-```
+oder
 $ sudo apt full-upgrade
 ```
 ```
@@ -57,8 +52,7 @@ $ sudo apt-get upgrade
 ```
 ```
 $ sudo apt-get dist-upgrade
-```
-```
+oder
 $ sudo apt-get full-upgrade
 ```
 ```
@@ -69,20 +63,43 @@ $ sudo apt-get autoclean
 ```
 
 
-- Kombo-Befehl:
+- kombinierter-Befehl:
 ```
 $ sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y
 ```
 
+
 -----------------------------------------------------------------------------------------------------------------
 
 
-# 2. nach Kernel Update treten Probleme beim booten auf - Module & Treiber in den "initramfs" laden
+# 2. Ein bestimmtes Paket aktualisieren
+- Paketname finden:
+```
+$ dpkg --list
+```
 
-Wenn nach einem-Kernel Update Probleme auftreten, kann der folgende Befehl genutzt werden, um das initramfs-Abbild auf den neuesten Stand zu bringen.
+- Paket aktualisieren:
+```
+$ sudo apt install --only-upgrade PAKETNAME
+```
 
+- z.B.
+```
+$ sudo apt install --only-upgrade firefox-esr
+$ sudo apt install --only-upgrade brave-browser
+$ sudo apt install --only-upgrade keepassxc
+$ sudo apt install --only-upgrade wireshark
+```
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+# 3. Initramfs aktualisieren
+- Der folgende Befehl kann genutzt werden, um das Initramfs-Abbild auf den neuesten Stand zu bringen.
 ```
 $ sudo update-initramfs -u
 ```
+
 
 ----------------------------------------------------------------------------------------------------------------
