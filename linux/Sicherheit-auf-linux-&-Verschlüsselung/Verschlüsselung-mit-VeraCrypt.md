@@ -1,21 +1,20 @@
 # Verschlüsselung mit [VeraCrypt](https://veracrypt.fr/)
 
-`Anleitung zuletzt bearbeitet am 19.11.2024`
+`Anleitung erstellt am 19.11.2024, zuletzt bearbeitet am 9.2.2026`
 
 ## Inhaltsverzeichnis
-1. Was ist [VeraCrypt](https://veracrypt.fr/)
+1. Was ist [VeraCrypt](https://veracrypt.io/)
 2. Installation auf Linux (Debian-basierte Distributionen)
 3. Eine [Partition](https://de.wikipedia.org/wiki/Partition_(Datentr%C3%A4ger)) oder ein [externes Laufwerk](https://de.wikipedia.org/wiki/Laufwerk_(Computer)) mit VeraCrypt vollständig verschlüsseln
-4. Eine verschlüsselte Containerdatei auf einem beliebigen Laufwerk erstellen.
+4. Eine verschlüsselte Containerdatei auf einem beliebigen Laufwerk erstellen
 5. verschlüsseltes [Laufwerk](https://de.wikipedia.org/wiki/Laufwerk_(Computer))/[Partition](https://de.wikipedia.org/wiki/Partition_(Datentr%C3%A4ger))/Containerdatei einhängen & aushängen
 
 
 ------------------------------------------------------------------------------------------------
 
 
-# 1. Was ist [VeraCrypt](https://veracrypt.fr/) ?
-
-- VeraCrypt ist ein kostenloses Open Source `Verschlüsselungsprogramm` und wird zur Verschlüsselung von `Festplatten`, `Partitionen` und `Wechseldatenträgern`, wie `USB-Sticks` oder `externen Festplatten`, genutzt.
+# 1. Was ist [VeraCrypt](https://veracrypt.io/) ?
+- VeraCrypt ist ein kostenloses [Open Source](https://de.wikipedia.org/wiki/Open_Source) `Verschlüsselungsprogramm` und wird zur Verschlüsselung von `Festplatten`, `Partitionen` und `Wechseldatenträgern`, wie `USB-Sticks` oder `externen Festplatten`, genutzt.
 - Das Programm ist u.a. für Linux, Windows und MacOS verfügbar.
 
 
@@ -23,8 +22,7 @@
 
 
 # 2. Installation auf Linux (Debian-basierte Distributionen)
-
-- [download tar.bz2 auf veracrypt.fr](https://veracrypt.fr/en/Downloads.html)
+- [download tar.bz2 auf veracrypt.io](https://veracrypt.io/en/Downloads.html)
 
 ```
 $ tar xvf veracrypt-version-setup.tar.bz2
@@ -39,11 +37,9 @@ $ ./veracrypt-version-setup-console-x64
 ```
 
 - Um die Version mit Benutzeroberfläche zu installieren, auf die Kennzeichnung `"gui"` achten !
-- Wenn man eine Benutzeroberfläche mit `gtk2` (meistens: GNOME, XFCE, MATE oder Cinnamon) verwendet, kann man die Version mit `gtk2` installieren, jedoch ist das kein Muss.
+- Wenn man eine Benutzeroberfläche mit `gtk2` (meistens: [GNOME](https://www.gnome.org/), [XFCE](https://www.xfce.org/), [MATE](https://mate-desktop.org/) oder [Cinnamon](https://de.wikipedia.org/wiki/Cinnamon_(Desktop-Umgebung))) verwendet, kann man die Version mit `gtk2` installieren, jedoch ist das KEIN "Muss".
 - Nun dem Installationsassistenten folgen.
-
-
-- Alternativ kann das Debian-Paket auch mit einem Installer wie [GDebi](https://packages.debian.org/de/stable/gdebi) installiert werden.
+- Alternativ kann das Debian-Paket auch mit einem `Installer` wie [GDebi](https://packages.debian.org/de/stable/gdebi) installiert werden.
 
 
 ### Deinstallationsbefehl:
@@ -83,7 +79,7 @@ Beim Erstellen der verschlüsselten Partition oder des externen Laufwerkes wird 
 # 4. Eine verschlüsselte Containerdatei auf einem beliebigen Laufwerk erstellen
 
 ### Was ist eine verschlüsselte Containerdatei ?
-Eine verschlüsselte Containerdatei ist  verschlüsseltes virtuelles Laufwerk, in dem Dateien gespeichert werden können.
+Eine verschlüsselte Containerdatei ist ein verschlüsseltes virtuelles Laufwerk, was jedoch eine Datei und keine Partition ist, in dem Dateien gespeichert werden können.
 
 - Vorteil:
     - Die Containerdatei kann man beliebig auf einem oder mehreren Datenträgern verschieben.
@@ -112,7 +108,6 @@ Eine verschlüsselte Containerdatei ist  verschlüsseltes virtuelles Laufwerk, i
 
 
 # 5. verschlüsseltes [Laufwerk](https://de.wikipedia.org/wiki/Laufwerk_(Computer))/[Partition](https://de.wikipedia.org/wiki/Partition_(Datentr%C3%A4ger))/Containerdatei einhängen & aushängen
-
 - Ein verschlüsseltes Laufwerk/Partition über VeraCrypt einhängen
     - Das Programm VeraCrypt öffnen.
     - Einen Slot auswählen,
