@@ -388,6 +388,9 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 ### Anleitung zu Unbound: [Unbound-Rekursiv]() - folgt in Kürze
 
 
+----------------------------------------------------------------------------------------------------------------
+
+
 ##### Cloudflared - nicht mehr supportet
 - `Update März 2026` zu [Cloudflared](https://docs.pi-hole.net/guides/dns/cloudflared/) - [developers.cloudflare.com/changelog](https://developers.cloudflare.com/changelog/post/2025-11-11-cloudflared-proxy-dns/):
     - Leider unterstützt Cloudflared nicht mehr die "proxy-dns"-Funktion ab Version 2026.2.0.
