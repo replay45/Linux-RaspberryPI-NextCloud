@@ -384,7 +384,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 - Folgend finden sich Anleitungen zu `Unbound (rekursiv)` und zu `DNS-Verschlüsselung mit einem Forwarder`.
 
 
-### Anleitung zu DNS-Verschlüsselung: [DNS-Forwarder]()
+### Anleitung zu DNS-Verschlüsselung: [DNS-Forwarder](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/dns-server/DNS-Forwarder.md)
 ### Anleitung zu Unbound: [Unbound-Rekursiv]() - folgt in Kürze
 
 
