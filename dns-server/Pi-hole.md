@@ -228,7 +228,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 	- Mehr dazu unter Punkt 6.
 
 
-### Empfohlen: [Cloudflare](https://www.cloudflare.com/)
+### [Cloudflare](https://www.cloudflare.com/)
 - `Vorteile`
     - empfehlenswerter Anbieter, weite Verbreitung
     - Geschwindigkeit (schnelle Server)
@@ -307,20 +307,20 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 6. DNS Verschlüsselung/Signaturverfahren - DoT / DoH / DNSSEC
+# 6. DNS Verschlüsselung/Signaturverfahren - DoT / DoH / DNSCrypt / DNSSEC
 
 `Anleitung mit Version 6.0 von Pi hole getestet`
 
 ## Wieso sollte man DNS Verschlüsselung/Signaturverfahren verwenden ?
-- Schutz der `Privatsphäre` vor Dritten (nur DoT/DoH)
-- Schutz vor `Tracking` durch Internetanbieter (nur DoT/DoH)
-- Schutz vor [Man-in-the-Middle-Angriffen](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff), bei denen die DNS-Anfragen `manipuliert` werden (DoT/DoH/DNSSEC).
-- Schutz vor `Umleitung` auf bösartigen Webseiten. (DoT/DoH/DNSSEC)
+- Schutz der `Privatsphäre` vor Dritten (nur DoT/DoH/DNSCrypt)
+- Schutz vor `Tracking` durch Internetanbieter (nur DoT/DoH/DNSCrypt)
+- Schutz vor [Man-in-the-Middle-Angriffen](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff), bei denen die DNS-Anfragen `manipuliert` werden (DoT/DoH/DNSCrypt/DNSSEC).
+- Schutz vor `Umleitung` auf bösartigen Webseiten. (DoT/DoH/DNSCrypt/DNSSEC)
 - Hinweis:
-	- Dabei sollte man beachten, dass DNSSEC auch von der Domain unterstützt werden muss und DoT/DoH muss der externe DNS-Resolver/Server unterstützen.
+	- Dabei sollte man beachten, dass DNSSEC auch von der Domain unterstützt werden muss und DoT/DoH/DNSCrypt muss der verwendete Forwarder und der externe DNS-Resolver/Upstream-Server unterstützen.
 
 
-## Welche Verschlüsselung oder Signaturverfahren sollte man nutzen: DNSSEC / DoT / DoH ?
+## Welche Verschlüsselung oder Signaturverfahren sollte man nutzen: DNSSEC / DoT / DoH / DNSCrypt ?
 
 1. DNSSEC (Domain Name System Security Extensions) - Signaturverfahren
 
@@ -342,6 +342,8 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
     - Schützt die Privatsphäre (Schutz vor Tracking)
     - Schützt vor Manipulationen (Schutz vor [Man-in-the-Middle-Angriffen](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff))
     - DoH verwendet HTTPS und tarnt den DNS-Traffic als normalen Web-Traffic
+    - Abfrage an Upstream-Server & Antwort des Upstream-Servers sind verschlüsselt
+    - verwendet Port 443
 
     `Nachteile:`
     - Anfragen werden NICHT digital signiert
@@ -354,18 +356,37 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
     - Sichere Verschlüsselung
     - Schützt die Privatsphäre (Schutz vor Tracking)
     - Schützt vor Manipulationen (Schutz vor [Man-in-the-Middle-Angriffen](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff))
+    - Abfrage an Upstream-Server & Antwort des Upstream-Servers sind verschlüsselt
 
     `Nachteile:`
     - Anfragen werden NICHT digital signiert
     - Namensauflösung auf dem DNS-Server ist unverschlüsselt (lediglich der Traffic zwischen Client und DNS-Server wird verschlüsselt)
     - DoT-Verschlüsselung ist als DNS-Traffic erkennbar (aber verschlüsselt).
+    - verwendet Port 853 (ist häufig blockiert)
 
 
+4. DNSCrypt
 
-4. `Fazit`
+    `Vorteile:`
+    - Sichere Verschlüsselung
+    - Schützt die Privatsphäre (Schutz vor Tracking)
+    - Schützt vor Manipulationen (Schutz vor [Man-in-the-Middle-Angriffen](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff))
+    - Basiert auf UDP, hat daher auch eine geringe Latenz
+    - ist [Open Source](https://de.wikipedia.org/wiki/Open_Source)
+    - verwendet Port 53
+
+    `Nachteile:`
+    - Anfragen werden NICHT digital signiert
+    - Namensauflösung auf dem DNS-Server ist unverschlüsselt (lediglich der Traffic zwischen Client und DNS-Server wird verschlüsselt)
+    - DNSCrypt-Verschlüsselung ist als DNS-Traffic erkennbar (aber verschlüsselt).
+    - DNSCrypt ist kein offizieller Internetstandard (KEIN RFC beim IETF) im Gegenstatz zu DoT/DoH
+
+
+- `Fazit`
     - DNSSEC schützt vor Manipulation durch Signatur, bietet aber keine Verschlüsselung und keinen Schutz vor Tracking.
     - DoH-Verschlüsselung bietet mehr Datenschutz und Sicherheit (nur grundlegende Verschlüsselung auf dem Kommunikationsweg), Traffic als normaler Web-Traffic getarnt.
     - DoT-Verschlüsselung bietet mehr Datenschutz und Sicherheit (nur grundlegende Verschlüsselung auf dem Kommunikationsweg), als verschlüsselter-DNS-Traffic erkennbar.
+    - DNSCrypt bietet mehr Datenschutz und Sicherheit (nur grundlegende Verschlüsselung auf dem Kommunikationsweg), ist Open Source, jedoch kein offizieller Internetstandard (KEIN RFC beim IETF).
 
 
 ## Aktivieren von DNSSEC im [Pi hole](https://pi-hole.net/)
@@ -375,12 +396,12 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 - Domains, die kein DNSSEC unterstützen, werden mit `INSECURE` gekennzeichnet.
 
 
-## Nutzung von DoT / DoH (DNS-Verschlüsselung) mit dem [Pi hole](https://pi-hole.net/)
+## Nutzung von DoT / DoH / DNSCrypt (DNS-Verschlüsselung) mit dem [Pi hole](https://pi-hole.net/)
 
 `Anleitung mit Version 6.0 von Pi hole getestet`
 
 - Standardmäßig unterstützt Pi hole KEINE Verschlüsselungsoptionen.
-- Um `DoH/DoT` nutzen zu können, muss man Pi hole mit einem `Stub-Resolver bzw. Forwarder`, wie [Unbound](https://docs.pi-hole.net/guides/dns/unbound/) oder [dnscrypt-proxy](https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/) verwenden.
+- Um `DoH/DoT/DNSCrypt` nutzen zu können, muss man Pi hole mit einem `Stub-Resolver bzw. Forwarder`, wie [Unbound](https://docs.pi-hole.net/guides/dns/unbound/) oder [dnscrypt-proxy](https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/) verwenden.
 - Folgend finden sich Anleitungen zu `Unbound (rekursiv)` und zu `DNS-Verschlüsselung mit einem Forwarder`.
 
 
@@ -406,8 +427,8 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 
 ### DNS-Server bei mobilen Geräten außerhalb des Heimnetzwerkes
 - Es ist außerdem auch möglich, den `DNS Server bei mobilen Geräten` wie Laptops und Handys etc. zu ändern, um den gewünschten Anbieter nutzen zu können.
-- Das ist in der Hinsicht interessant, wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche Domains man aufruft` (z.B. Tracking verhindern).
-- Wie oben beschrieben ist [Cloudflare](https://www.cloudflare.com/) ein Anbieter, der den Fokus auf `Datenschutz & Sicherheit` legt.
+- Das ist in der Hinsicht interessant, wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche DNS-Anfragen man stellt` (z.B. Tracking/Logging verhindern).
+- Wie oben beschrieben sind [Cloudflare](https://www.cloudflare.com/) und [Quad9](https://www.quad9.net/de/) Anbieter, die den Fokus auf `Datenschutz & Sicherheit` legen.
 - Mehr dazu in den einzelnen `Beiträgen zur Sicherheit auf dem entsprechenden Betriebsystem`. - [Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung), [MacOS](https://github.com/replay45/Windows-Apple-und-Android/tree/main/Apple), [Android](https://github.com/replay45/Windows-Apple-und-Android/tree/main/Android)
 
 
