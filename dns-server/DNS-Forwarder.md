@@ -38,14 +38,14 @@
 - `rekursiver Resolver`
 	- Ein rekursiver Resolver löst DNS-Anfragen selbstständig auf. Das heißt, er löst die DNS-Anfragen direkt bei den Root- und TLD-Nameservern auf, ohne einen anderen externen Resolver einzubeziehen.
 	- Die Root- und TLD-Nameserver werden auch von externen DNS-Anbietern genutzt, um DNS-Anfragen aufzulösen, z.B. wenn man einen externen DNS-Anbieter wie Cloudflare oder Google nutzt, stellt man an diesen seine Anfragen und der externe DNS-Anbieter löst dann für einen die Anfrage bei den Root- und TLD-Nameservern auf.
-	- Mit einem rekursivem-Resolver kann man direkt bei den Root- und TLD-Nameservern die Anfragen auflösen, wodurch der DNS-Anbieter wegfällt, was den Datenschutz erhöht.
+	- Mit einem rekursiven-Resolver kann man direkt bei den Root- und TLD-Nameservern die Anfragen auflösen, wodurch der DNS-Anbieter wegfällt, was den Datenschutz erhöht.
 	- Ein Beispiel für einen rekursiven-Resolver wäre Unbound.
 
 
 - `Forwarder`
-	- Ein Forwarder ist ein [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System), der Anfragen entgegennimmt, aber nicht selber auflöst, im gegensatz zu den rekursiven, sondern diese Anfrage an einen externen DNS-Anbieter weiterleitet.
+	- Ein Forwarder ist ein [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System), der Anfragen entgegennimmt, aber nicht selber auflöst, im Gegensatz zu den rekursiven, sondern diese Anfrage an einen externen DNS-Anbieter weiterleitet.
 	- Ein Forwarder ist also quasi der Vermittler zwischen dem Client und dem eigentlichen rekursiven Resolver.
-	- Forwarder werden dann verwendet, wenn man Verschlüsselungsoptionen nutzen möchte, die Nativ (z.B. in Pi hole) nicht verfügbar sind.
+	- Forwarder werden dann verwendet, wenn man Verschlüsselungsoptionen nutzen möchte, die nativ (z.B. in Pi hole) nicht verfügbar sind.
 	- Damit wäre ein üblicher Anwendungsfall eines Forwarders, das Entgegennehmen von den DNS-Anfragen vom Pi hole, diese (wenn konfiguriert) verschlüsselt an einen externen DNS-Anbieter weiterzuleiten, damit der externe Anbieter die Namensauflösung vornehmen kann.
 	- Ein Beispiel für einen Forwarder wäre [dnscrypt-proxy](https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/).
 	- Client → Pi-hole → beliebiger-Forwarder → Upstream-DNS-Server → beliebiger-Forwarder → Pi-hole → Client
@@ -61,7 +61,7 @@
 # 2. Cloudflared - (nicht mehr supportet)
 - `Update März 2026` zu [Cloudflared](https://docs.pi-hole.net/guides/dns/cloudflared/) - [developers.cloudflare.com/changelog](https://developers.cloudflare.com/changelog/post/2025-11-11-cloudflared-proxy-dns/):
     - Leider unterstützt Cloudflared nicht mehr die "proxy-dns"-Funktion ab Version 2026.2.0.
-    - Das Bedeutet, dass Cloudflare ab Version 2026.2.0 nicht mehr als DoH-Forwarder (mit DNSoverHTTPS), wie es in dieser und der verlinkten Anleitung beschrieben wird, verwendet werden kann.
+    - Das bedeutet, dass Cloudflare ab Version 2026.2.0 nicht mehr als DoH-Forwarder (mit DNSoverHTTPS), wie es in dieser und der verlinkten Anleitung beschrieben wird, verwendet werden kann.
     - Entwender es wird ein Downgrade auf die Version 2025.x durchgeführt, um die proxy-dns-Funktion weiterhin zu verwenden, oder es müssen alternative DoH-Proxys, wie [dnscrypt-proxy](https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/) oder [stubby (nur DoT)](https://github.com/getdnsapi/stubby) verwendet werden.
     - Alternativ bietet sich der Umstieg zu [AdGuard Home](https://adguard.com/de/adguard-home/overview.html) an, welcher DoH und DoT direkt unterstützt.
 
