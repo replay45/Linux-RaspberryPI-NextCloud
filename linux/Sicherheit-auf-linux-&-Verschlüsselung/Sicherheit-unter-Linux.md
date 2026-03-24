@@ -1,6 +1,6 @@
 # Sicherheit auf Linux
 
-`Anleitung erstellt am 11.6.2025, zuletzt bearbeitet am 21.12.2025`
+`Anleitung erstellt am 11.6.2025, zuletzt bearbeitet am 24.3.2026`
 
 `Anleitung für Debian-basierte Systeme geeignet`
 
@@ -206,7 +206,7 @@ $ sudo ufw logging off
 
 # 5. DNS Server - [Cloudflare DNS](https://www.cloudflare.com/)
 
-- `mehr zu DNS-Servern` in diesem Repository unter [Raspberry-Pi/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi)
+- `mehr zu DNS-Servern` in diesem Repository unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server)
 - Hinweis:
     - Das Ändern des DNS-Servers zu einem sicheren Anbieter, verhindert ohne Implementierung einer Verschlüsselung oder Signierung keine [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) oder Tracking !
 
@@ -219,18 +219,16 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
 ## Wieso den DNS Server ändern ?
 - Standardmäßig nutzt man die DNS-Server des Internetanbieters, diese sind jedoch häufig eher langsamer und wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche Domains man aufruft`, ist es sehr ratsam, die DNS-Server von [Cloudflare](https://www.cloudflare.com/) zu nutzen.
 - Den DNS-Server kann man auf allen gänigen Desktop-Betriebsystemen sowie auf dem Smartphone, als auch in vielen gänigen Routern ändern.
-- Wie man seinen eigenen kleinen DNS-Server mit [Pi hole](https://pi-hole.net/) erstellen kann, wird unter [Raspberry-Pi/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi) gezeigt.
-- [Cloudflare](https://www.cloudflare.com/) legt dabei den `Fokus` auf `Datenschutz & Sicherheit`, verspricht `kein Logging` von Daten die zur Identifizierung genutzt werden können und bietet dennoch sehr `schnelle DNS-Server`.
+- Wie man seinen eigenen kleinen DNS-Server mit [Pi hole](https://pi-hole.net/) erstellen kann, wird unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server) gezeigt.
+- [Cloudflare](https://www.cloudflare.com/) und [Quad9](https://www.quad9.net/) legen dabei den `Fokus` auf `Datenschutz & Sicherheit` und versprechen `kein Logging` von Daten die zur Identifizierung genutzt werden können und bieten dennoch sehr `schnelle DNS-Server`.
 
 
-### Hier die Vorteile der [Cloudflare](https://www.cloudflare.com/) DNS-Server
+### Hier die Vorteile der [Cloudflare](https://www.cloudflare.com/) und [Quad9](https://www.quad9.net/) DNS-Server
 - `Vorteile`
-    - empfehlenswerter Anbieter, weite Verbreitung
     - Geschwindigkeit (schnelle Server)
-    - Server auf der ganzen Welt
     - Fokus auf Datenschutz & Sicherheit
     - kein Logging von IP-Adressen
-    - ideal für private Nutzer & Haushalte
+    - ideal für private Nutzer & Haushalte, sowie Unternehmen
 
 
 ## DNS Server ändern
@@ -249,15 +247,15 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
     - Einige Router, wie z.B. die [FritzBox](https://avm.de/) unterstützen auch `DNS-Verschlüsselung (DoT)`, um die Anfragen sowie die Antworten zu verschlüsseln, damit [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) und Tracking durch Dritte verhindert werden können.
 
 
-## mobile Geräte (Laptops) - optimalen DNS-Server nutzen & ggf. DNS-Verschlüsselung
+## mobile Geräte (z.B. Laptops) - optimalen DNS-Server nutzen & ggf. DNS-Verschlüsselung
 - Bei mobilen Geräten, wie Laptops, die auch außerhalb des Heimnetzes genutzt werden, sollte ein geeigneter Anbieter verwendet werden.
 - Standardmäßig gibt es mit den Bordmitteln unter Linux mit [GNOME](https://www.gnome.org/) keine Möglichkeit, den DNS-Server für alle Verbindungen global einzustellen oder eine DNS-Verschlüsselung zu aktivieren.
-- Die wohl einfachste Möglichkeit könnte eine VPN-Verbindung in das Heimnetzwerk sein, um die gewünschten DNS-Server mit ggf. DoT-Verschlüsselung z.B. über den Router wie die [FritzBox](https://avm.de/) zu nutzen oder den eigenen DNS-Server (z.B. Pi hole) zu nutzen.
+- Die wohl einfachste Möglichkeit könnte eine VPN-Verbindung in das Heimnetzwerk sein, um die gewünschten DNS-Server mit ggf. DoT-Verschlüsselung z.B. über den Router wie die [FritzBox](https://avm.de/) zu nutzen oder den eigenen DNS-Server (z.B. [Pi hole](https://pi-hole.net/) oder [AdGuard Home](https://adguard.com/de/adguard-home/overview.html)) zu nutzen.
 - Eine VPN-Verbindung bietet u.a. auch den Vorteil, dass der eigene Netzwerkverkehr bei unsicheren oder fremden WLANs verschlüsselt wird und man auf andere Geräte aus dem Heimnetz zugreifen kann.
-- Eine andere Möglichkeit wäre z.B. [Pi hole](https://pi-hole.net/) über Dyn-DNS aus dem Internet erreichbar zu machen/ extern zu hosten, um Pi hole als DNS-Server einzustellen (nur für sehr erfahrene Nutzer geeignet).
+- Eine andere Möglichkeit wäre z.B. [Pi hole](https://pi-hole.net/)/[AdGuard Home](https://adguard.com/de/adguard-home/overview.html) über [DynDNS](https://de.wikipedia.org/wiki/Dynamisches_DNS) aus dem Internet erreichbar zu machen oder extern bei einem Hostinganbieter zu hosten, um den gewünschten DNS-Server zu nutzen.
+- Alternativ kann man auch einen Forwarder direkt auf dem eigenen Gerät installieren und DNS-Verschlüsselung über den entsprechenden Forwarder realisieren. Dafür kann man z.B. [DNSCrypt-Proxy](https://dnscrypt.info/) verwenden.
 
-
-Das Aufsetzen von [Pi hole](https://pi-hole.net/) wird unter [Raspberry-Pi/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi) gezeigt.
+> Das Aufsetzen von [Pi hole](https://pi-hole.net/) wird unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server) gezeigt.
 
 
 ----------------------------------------------------------------------------------------------------------------
