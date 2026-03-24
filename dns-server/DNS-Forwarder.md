@@ -1,4 +1,4 @@
-# DNS-Forwarder (DoT/DoH Verschlüsselung)
+# DNS-Forwarder (DoT/DoH/DNSCrypt Verschlüsselung)
 
 - Anleitung zu DNS-Forwarder mit Verschlüsselungsoptionen in Kombination mit [Pi hole](https://pi-hole.net/).
 - Diese Anleitung ist die Fortführung der [Pi hole-Anleitung](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/dns-server/Pi-hole.md).
@@ -11,7 +11,7 @@
 1. Einleitung
 	- Ziel dieser Anleitung
 	- Was ist ein rekursiver-Resolver oder Forwarder ?
-	- Eigenschaften und Anwendungsfälle von DoT/DoH/DNSSEC
+	- Eigenschaften und Anwendungsfälle von DoT/DoH/DNSCrypt/DNSSEC
 2. Cloudflared - (nicht mehr supportet)
     - `Update März 2026` zu [Cloudflared](https://docs.pi-hole.net/guides/dns/cloudflared/)
 3. Pi hole mit [dnscrypt-proxy](https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/) als Forwarder
@@ -20,7 +20,7 @@
     - Optional: Systemseitige Optimierung - Limit für offene Dateideskriptoren
 4. Cloudflared deinstallieren
     - Wenn Cloudflared manuell installiert wurde
-    - Wenn Cloudflared über den "service install" isntalliert wurde
+    - Wenn Cloudflared über den "service install" installiert wurde
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@
 ## Ziel dieser Anleitung
 - Diese Anleitung ist die Weiterführung der [Pi hole-Anleitung](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/dns-server/Pi-hole.md).
 - Diese Anleitung basiert darauf, dass [Pi hole](https://pi-hole.net/) bereits installiert wurde und Pi hole mit einem `Forwarder erweitert werden soll`.
-- Die Zielgruppe dieser Anleitung sind Administratoren, private Anwender, aber auch für kleine Unternehmen.
+- Die Zielgruppe dieser Anleitung sind Administratoren, private Anwender, aber auch kleine Unternehmen.
 
 
 ## Was ist ein rekursiver-Resolver oder Forwarder ?
@@ -40,7 +40,7 @@
 	- Die Root- und TLD-Nameserver werden auch von externen DNS-Anbietern genutzt, um DNS-Anfragen aufzulösen, z.B. wenn man einen externen DNS-Anbieter wie Cloudflare oder Google nutzt, stellt man an diesen seine Anfragen und der externe DNS-Anbieter löst dann für einen die Anfrage bei den Root- und TLD-Nameservern auf.
 	- Mit einem rekursivem-Resolver kann man direkt bei den Root- und TLD-Nameservern die Anfragen auflösen, wodurch der DNS-Anbieter wegfällt, was den Datenschutz erhöht.
 	- Ein Beispiel für einen rekursiven-Resolver wäre Unbound.
-	- [Anleitung zu Unbound als Forwarder oder Rekursiver Resolver](xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+
 
 - `Forwarder`
 	- Ein Forwarder ist ein [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System), der Anfragen entgegennimmt, aber nicht selber auflöst, im gegensatz zu den rekursiven, sondern diese Anfrage an einen externen DNS-Anbieter weiterleitet.
@@ -51,8 +51,8 @@
 	- Client → Pi-hole → beliebiger-Forwarder → Upstream-DNS-Server → beliebiger-Forwarder → Pi-hole → Client
 
 
-## Eigenschaften und Anwendungsfälle von DoT/DoH/DNSSEC
-- Eigenschaften und Anwendungsfälle der DNS-Verschlüsselungs- und Signaturverfahren (DoT/DoH/DNSSEC) können ebenfalls in der [Pi hole-Anleitung](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/dns-server/Pi-hole.md) nachgeschaut werden.
+## Eigenschaften und Anwendungsfälle von DoT/DoH/DNSCrypt/DNSSEC
+- Eigenschaften und Anwendungsfälle der DNS-Verschlüsselungs- und Signaturverfahren (DoT/DoH/DNSCrypt/DNSSEC) können ebenfalls in der [Pi hole-Anleitung](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/dns-server/Pi-hole.md) nachgeschaut werden.
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -72,10 +72,10 @@
 # 3. Pi hole mit [dnscrypt-proxy](https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/) als Forwarder
 
 ## Was ist [dnscrypt-proxy](https://dnscrypt.info/) ?
-- Dnscrypt-proxy ist ein flexibler [Open Source](https://de.wikipedia.org/wiki/Open_Source) DNS-Proxy, der moderne verschlüselungsmethoden unterstützt, darunter DNSCrypt v2 und DNSoverHTTPS (DoH).
+- Dnscrypt-proxy ist ein flexibler [Open Source](https://de.wikipedia.org/wiki/Open_Source) DNS-Proxy, der moderne Verschlüsselungsmethoden unterstützt, darunter DNSCrypt v2 und DNSoverHTTPS (DoH).
 - Mit dnscrypt-proxy lässt sich der DNS-Traffic zum Upstream-Server eines DNS-Anbieters verschlüsseln.
 - Die Verschlüsselung des DNS-Traffics kann vor [Man-in-the-Middle-Angriffen](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) sowie vor Manipulationen, Tracking/Logging durch den Internetserviceprovider (ISP) oder durch Dritte schützen.
-- Außerdem unterstützt dnscrypt-proxy `Load-Balanceing`, das heißt, wenn man mehrere DNS-Upstream-Server, z.B. auch von unterschiedlichen Anbietern in der Konfig angiebt, dann bevorzugt dnscrypt-proxy den Server mit der geringsten Latenz.
+- Außerdem unterstützt dnscrypt-proxy `Load-Balanceing`, das heißt, wenn man mehrere DNS-Upstream-Server, z.B. auch von unterschiedlichen Anbietern in der Konfig angibt, dann bevorzugt dnscrypt-proxy den Server mit der geringsten Latenz.
 
 
 ## Einrichtung von dnscrypt-proxy als Forwarder
