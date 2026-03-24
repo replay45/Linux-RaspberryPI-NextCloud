@@ -11,10 +11,12 @@
     - Was tun, wenn man trotzdem einen Virenscanner auf Linux nutzen möchte ?
 3. [Firewall](https://de.wikipedia.org/wiki/Firewall)
 4. [Secure Boot](https://en.wikipedia.org/wiki/UEFI#Secure_Boot)
-5. DNS Server ändern - [Cloudflare DNS](https://www.cloudflare.com/)
-    - Was ist ein DNS-Server ?
-    - Wieso den DNS-Server ändern ? 
+5. DNS Server
+    - Was ist ein [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System) ?
+    - Wieso den DNS Server ändern ?
+    - Welchen Upstream-Server/Anbieter wählen ?
     - DNS Server ändern
+    - mobile Geräte (z.B. Laptops) - optimalen DNS-Server nutzen & ggf. DNS-Verschlüsselung
 6. Rootkit-Prüfung
 
 
@@ -204,7 +206,7 @@ $ sudo ufw logging off
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 5. DNS Server - [Cloudflare DNS](https://www.cloudflare.com/)
+# 5. DNS Server
 
 - `mehr zu DNS-Servern` in diesem Repository unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server)
 - Hinweis:
@@ -217,14 +219,14 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
 
 
 ## Wieso den DNS Server ändern ?
-- Standardmäßig nutzt man die DNS-Server des Internetanbieters, diese sind jedoch häufig eher langsamer und wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche Domains man aufruft`, ist es sehr ratsam, die DNS-Server von [Cloudflare](https://www.cloudflare.com/) zu nutzen.
+- Standardmäßig nutzt man die DNS-Server des Internetanbieters, diese sind jedoch häufig eher langsamer und wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche DNS-Anfragen man stellt`, ist es sehr ratsam, die DNS-Server eines vertrauenswürdigen und datenschutzfreundlichen Anbieters zu verwenden.
 - Den DNS-Server kann man auf allen gänigen Desktop-Betriebsystemen sowie auf dem Smartphone, als auch in vielen gänigen Routern ändern.
 - Wie man seinen eigenen kleinen DNS-Server mit [Pi hole](https://pi-hole.net/) erstellen kann, wird unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server) gezeigt.
+
+
+## Welchen Upstream-Server/Anbieter wählen ?
 - [Cloudflare](https://www.cloudflare.com/) und [Quad9](https://www.quad9.net/) legen dabei den `Fokus` auf `Datenschutz & Sicherheit` und versprechen `kein Logging` von Daten die zur Identifizierung genutzt werden können und bieten dennoch sehr `schnelle DNS-Server`.
-
-
-### Hier die Vorteile der [Cloudflare](https://www.cloudflare.com/) und [Quad9](https://www.quad9.net/) DNS-Server
-- `Vorteile`
+- Hier einige Vorteile der [Cloudflare](https://www.cloudflare.com/) und [Quad9](https://www.quad9.net/) DNS-Server
     - Geschwindigkeit (schnelle Server)
     - Fokus auf Datenschutz & Sicherheit
     - kein Logging von IP-Adressen
