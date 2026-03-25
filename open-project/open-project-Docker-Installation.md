@@ -440,9 +440,7 @@ $ sudo ufw enable
 - Nach der ersten Anmeldung muss man das Passwort ändern.
 
 ### Backups
-- Das Einrichten und Wiederherstellen von Backups wird in der Anleitung [Backups-von-Open-Project-erstellen](xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx) erläutert.
-
-> folgt in Kürze
+- Das Einrichten und Wiederherstellen von Backups wird in der Anleitung [Backups-von-Open-Project-erstellen](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/open-project/Backups-von-open-project-erstellen.md) erläutert.
 
 
 -------------------------------------------------------------------------------------------------------------
