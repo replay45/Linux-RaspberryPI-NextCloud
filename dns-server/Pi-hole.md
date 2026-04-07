@@ -1,7 +1,7 @@
 # [Pi hole](https://pi-hole.net/)
 
 
-`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 3.3.2026`
+`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 7.4.2026`
 
 `Anleitung für Raspberry Pi OS und Ubuntu-Server geeignet`
 
@@ -17,6 +17,7 @@
 8. DNS-Filterlisten (Blocklisten) & Domains blacklisten/whitelisten
 9. Empfehlungen für Blocklisten
 10. DNS-Filterlisten (Blocklisten) selbst erstellen
+11. [Pi hole](https://pi-hole.net/) Interface-Einstellungen
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -379,13 +380,13 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
     - Anfragen werden NICHT digital signiert
     - Namensauflösung auf dem DNS-Server ist unverschlüsselt (lediglich der Traffic zwischen Client und DNS-Server wird verschlüsselt)
     - DNSCrypt-Verschlüsselung ist als DNS-Traffic erkennbar (aber verschlüsselt).
-    - DNSCrypt ist kein offizieller Internetstandard (KEIN RFC beim IETF) im Gegenstatz zu DoT/DoH
+    - DNSCrypt ist kein offizieller Internetstandard (KEIN RFC beim IETF) im Gegensatz zu DoT/DoH.
 
 
 - `Fazit`
     - DNSSEC schützt vor Manipulation durch Signatur, bietet aber keine Verschlüsselung und keinen Schutz vor Tracking.
     - DoH-Verschlüsselung bietet mehr Datenschutz und Sicherheit (nur grundlegende Verschlüsselung auf dem Kommunikationsweg), Traffic als normaler Web-Traffic getarnt.
-    - DoT-Verschlüsselung bietet mehr Datenschutz und Sicherheit (nur grundlegende Verschlüsselung auf dem Kommunikationsweg), als verschlüsselter-DNS-Traffic erkennbar.
+    - DoT-Verschlüsselung bietet mehr Datenschutz und Sicherheit (nur grundlegende Verschlüsselung auf dem Kommunikationsweg), als verschlüsselter DNS-Traffic erkennbar.
     - DNSCrypt bietet mehr Datenschutz und Sicherheit (nur grundlegende Verschlüsselung auf dem Kommunikationsweg), ist Open Source, jedoch kein offizieller Internetstandard (KEIN RFC beim IETF).
 
 
@@ -547,6 +548,62 @@ beispiel.example.org
 	- URL (RAW) zur Blockliste kopieren
 	- bei Pi hole als Blockliste hinzufügen
 	- den Reiter `Tools` öffnen und `Update Gravity` ausführen
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 11. [Pi hole](https://pi-hole.net/) Interface-Einstellungen
+
+`Stand 7.4.2026, getestet mit Pi hole Version 6.1.2`
+
+### Wofür werden diese Einstellungen benötigt ?
+- Wenn man Pi hole in einer größeren oder komplexeren Netzwerkumgebung verwenden möchte, muss man ggf. die Interface Einstellungen anpassen, damit auch Subnetze oder VPNs mit [NAT](https://de.wikipedia.org/wiki/Netzwerkadress%C3%BCbersetzung) Pi hole als DNS-Server verwenden können.
+- `WARNUNG`: Änderungen an den Interface Einstellungen können zu Sicherheitsrisiken führen !
+    - Deshalb muss sichergestellt werden, dass Pi hole nur in den gewünschten Netzen erreichbar ist.
+
+### Sicherheitsrisiken minimieren / Interface durch Firewallregeln absichern
+- Wenn die Option "Permit all origins" verwendet wird, sollten unbedingt die Firewallregeln auf dem Pi hole Server, z.B. mit ufw angepasst werden.
+- Firewall anpassen (auf Pi hole Server):
+    - z.B. folgende Firewallregeln verwenden, um nur bestimmte Netze zuzulassen.
+    - Es müssen ggf. die Netzwerkbereiche und Subnetzmasken angepasst werden.
+```
+$ sudo ufw allow from 192.168.1.0/24 to any port 53
+$ sudo ufw allow from 10.10.10.0/16 to any port 53
+$ sudo ufw deny 53
+```
+
+- Regeln überprüfen:
+```
+$ sudo ufw status numbered
+```
+
+
+### Welche Interface-Einstellung gibt es ?
+- Allow only local requests (Standardoption)
+    - Diese Option sollte standardmäßig gesetzt sein.
+    - Wenn die anderen Optionen nicht explizit benötigt werden, sollte diese Option angewählt sein.
+    - Pi hole akzeptiert dann nur Anfragen aus dem lokalen Netzwerk, andere Subnetze oder Netzwerke die mit [NAT](https://de.wikipedia.org/wiki/Netzwerkadress%C3%BCbersetzung) verbunden sind, werden ignoriert.
+
+- Permit all origins (für erweiterte Nutzung)
+    - Pi hole akzeptiert bei dieser Option alle Anfragen aus allen Netzwerken.
+    - Warnung: Diese Option sollte nur angewendet werden, wenn der Pi hole durch eine Firewall abgesichert ist !
+
+- Respond only on interface (für spezifische Netzwerkschnittstellen)
+    - Pi hole akzeptiert nur Anfragen, die auf der ausgewählten Netzwerkschnittstelle eintreffen (z. B. eth0 oder ens160).
+    - Sinnvoll, wenn Pi hole auf einem Server mit mehreren Netzwerkschnittstellen läuft und nur Anfragen einer bestimmten Schnittstelle bearbeiten soll.
+
+- Bind only to interface (für dedizierte Netzwerke)
+    - Pi-hole bindet sich nur an die ausgewählte Netzwerkschnittstelle und ignoriert Anfragen von anderen Schnittstellen.
+    - Verwendung: Nützlich, um Pi-hole auf eine bestimmte Netzwerkumgebung zu beschränken
+    - Warnung: Diese Option kann die Erreichbarkeit von Pi-hole einschränken, wenn die falsche Schnittstelle ausgewählt wird.
+
+
+### Einstellung setzen
+- Pi hole WebUI öffnen: https://IP-ADRESSE/admin
+- Unter dem Reiter `Settings` > `DNS`
+- `Expert` aktivieren
+- Interface settings festlegen
 
 
 ----------------------------------------------------------------------------------------------------------------
