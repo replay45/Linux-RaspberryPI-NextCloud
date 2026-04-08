@@ -1,7 +1,7 @@
 # [Pi hole](https://pi-hole.net/)
 
 
-`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 7.4.2026`
+`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 8.4.2026`
 
 `Anleitung für Raspberry Pi OS und Ubuntu-Server geeignet`
 
@@ -555,27 +555,55 @@ beispiel.example.org
 
 # 11. [Pi hole](https://pi-hole.net/) Interface-Einstellungen
 
-`Stand 7.4.2026, getestet mit Pi hole Version 6.1.2`
+`Stand 8.4.2026, getestet mit Pi hole Version 6.4`
 
 ### Wofür werden diese Einstellungen benötigt ?
-- Wenn man Pi hole in einer größeren oder komplexeren Netzwerkumgebung verwenden möchte, muss man ggf. die Interface Einstellungen anpassen, damit auch Subnetze oder VPNs mit [NAT](https://de.wikipedia.org/wiki/Netzwerkadress%C3%BCbersetzung) Pi hole als DNS-Server verwenden können.
-- `WARNUNG`: Änderungen an den Interface Einstellungen können zu Sicherheitsrisiken führen !
+- Wenn man Pi hole in einer größeren oder komplexeren Netzwerkumgebung verwenden möchte, muss man ggf. die Interface-Einstellungen anpassen, damit auch Subnetze oder VPNs mit [NAT](https://de.wikipedia.org/wiki/Netzwerkadress%C3%BCbersetzung) Pi hole als DNS-Server verwenden können.
+- `WARNUNG`: Änderungen an den Interface-Einstellungen können zu Sicherheitsrisiken führen !
     - Deshalb muss sichergestellt werden, dass Pi hole nur in den gewünschten Netzen erreichbar ist.
 
 ### Sicherheitsrisiken minimieren / Interface durch Firewallregeln absichern
-- Wenn die Option "Permit all origins" verwendet wird, sollten unbedingt die Firewallregeln auf dem Pi hole Server, z.B. mit ufw angepasst werden.
-- Firewall anpassen (auf Pi hole Server):
+- Wenn die Option "Permit all origins" verwendet wird, müssen unbedingt die Firewallregeln auf dem Pi hole Server, z.B. mit ufw angepasst werden, um ungewollten Zugriff zu verhindern.
+- Die Firewall verarbeitet die Regeln von oben nach unten, das bedeutet, die oberen Regeln haben Vorrang. Daher müssen die Ausnahmeregeln vor den Verbotsregeln stehen.
+    - Ausnahmeregeln (allow) müssen vor den Blockierregeln (deny) stehen.
+    - Falls nötig, Regeln mit `$ sudo ufw delete NUMMER` löschen und neu setzen.
+
+#### 1. alte Regel löschen
+- Wenn ufw bereits aktiv ist und der Port 53 für alle IPs offen ist, musss die alte Regel zunächst entfernt werden.
+```
+$ sudo ufw status numbered
+$ sudo ufw delete [NUMMER_DER_ALLOW-53-REGEL]
+$ sudo ufw status verbose
+```
+
+#### 2. Ausnahmen für gewünschte Regeln hinzufügen
+- Reihenfolge beachten ! Zuerst die Ausnahmen (allow) und dann die Blockierregel (deny) !
     - z.B. folgende Firewallregeln verwenden, um nur bestimmte Netze zuzulassen.
     - Es müssen ggf. die Netzwerkbereiche und Subnetzmasken angepasst werden.
+    - Häufig verwendet werden z.B.: `192.168.1.0/24`, `192.168.12.0/24`, `192.168.178.0/24` `10.10.10.0/24` oder `10.10.10.0/16`
 ```
+$ sudo ufw allow from IP-ADRESS-BEREICH/SUBNETMASKE to any port 53
+z.B.
 $ sudo ufw allow from 192.168.1.0/24 to any port 53
+oder
 $ sudo ufw allow from 10.10.10.0/16 to any port 53
+```
+
+#### 3. Port 53 Blockieren
+- Die deny-Regel blockiert alle DNS-Anfragen, die nicht von den oberen erlaubten Ausnahmen stammen.
+```
 $ sudo ufw deny 53
 ```
 
-- Regeln überprüfen:
+- Regeln überprüfen
 ```
 $ sudo ufw status numbered
+$ sudo ufw status verbose
+```
+
+- Optional logging aktivieren
+```
+$ sudo ufw logging on
 ```
 
 
@@ -583,7 +611,7 @@ $ sudo ufw status numbered
 - Allow only local requests (Standardoption)
     - Diese Option sollte standardmäßig gesetzt sein.
     - Wenn die anderen Optionen nicht explizit benötigt werden, sollte diese Option angewählt sein.
-    - Pi hole akzeptiert dann nur Anfragen aus dem lokalen Netzwerk, andere Subnetze oder Netzwerke die mit [NAT](https://de.wikipedia.org/wiki/Netzwerkadress%C3%BCbersetzung) verbunden sind, werden ignoriert.
+    - Pi hole akzeptiert dann nur Anfragen aus dem lokalen Netzwerk, andere Subnetze oder Netzwerke, die mit [NAT](https://de.wikipedia.org/wiki/Netzwerkadress%C3%BCbersetzung) verbunden sind, werden ignoriert.
 
 - Permit all origins (für erweiterte Nutzung)
     - Pi hole akzeptiert bei dieser Option alle Anfragen aus allen Netzwerken.
