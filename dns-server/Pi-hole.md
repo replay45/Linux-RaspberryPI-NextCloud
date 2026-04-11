@@ -1,7 +1,7 @@
 # [Pi hole](https://pi-hole.net/)
 
 
-`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 8.4.2026`
+`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 9.4.2026`
 
 `Anleitung für Raspberry Pi OS und Ubuntu-Server geeignet`
 
@@ -77,22 +77,39 @@ $ sudo bash basic-install.sh
 
 
 ## C. [Firewall](https://de.wikipedia.org/wiki/Firewall) Konfiguration mit [ufw](https://wiki.ubuntuusers.de/ufw/)
+- Firewall installieren und Status prüfen
 ```
 $ sudo apt install ufw
 $ sudo ufw status
-$ sudo ufw allow 80,443,53,853/udp
-$ sudo ufw allow 80,443,53,853/tcp
+```
+
+- Wenn auf den Server über SSH zugegriffen werden soll
+```
+$ sudo ufw allow ssh
+```
+
+- Ports für WebUI öffnen
+```
+$ sudo ufw allow 80,443/udp
+$ sudo ufw allow 80,443/tcp
+```
+
+- Port 53 (Standard DNS-Port für unveschlüsselte DNS-Pakete)
+```
+$ sudo ufw allow 53/udp
+$ sudo ufw allow 53/tcp
+```
+
+- Wenn Pi hole auch für DNSoverTLS (DoT) genutzt werden soll
+```
+$ sudo ufw allow 853/udp
+$ sudo ufw allow 853/tcp
 ```
 
 - Wenn Pi hole auch als [DHCP-Server](https://de.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) genutzt wird:
 ```
 $ sudo ufw allow 67/udp
 $ sudo ufw allow 67/tcp
-```
-
-- Wenn auf den Pi über SSH zugegriffen werden soll:
-```
-$ sudo ufw allow ssh
 ```
 
 - Firewall aktivieren:
@@ -137,7 +154,7 @@ $ sudo pihole setpassword
 
 ## G. [Pi hole](https://pi-hole.net/) Updates
 ```
-$ pihole -up
+$ sudo pihole -up
 ```
 
 ## H. Blockierung kurzzeitig unterbrechen
@@ -563,13 +580,16 @@ beispiel.example.org
     - Deshalb muss sichergestellt werden, dass Pi hole nur in den gewünschten Netzen erreichbar ist.
 
 ### Sicherheitsrisiken minimieren / Interface durch Firewallregeln absichern
-- Wenn die Option "Permit all origins" verwendet wird, müssen unbedingt die Firewallregeln auf dem Pi hole Server, z.B. mit ufw angepasst werden, um ungewollten Zugriff zu verhindern.
-- Die Firewall verarbeitet die Regeln von oben nach unten, das bedeutet, die oberen Regeln haben Vorrang. Daher müssen die Ausnahmeregeln vor den Verbotsregeln stehen.
+- Wenn die Option "Permit all origins" verwendet wird, müssen unbedingt die `Firewallregeln auf dem Pi hole Server`, z.B. mit ufw angepasst werden, `um ungewollten Zugriff zu verhindern`.
+- Die Firewall verarbeitet die Regeln `von oben nach unten`, das bedeutet, die oberen Regeln haben Vorrang. Daher müssen die `Ausnahmeregeln vor den Verbotsregeln` stehen.
     - Ausnahmeregeln (allow) müssen vor den Blockierregeln (deny) stehen.
     - Falls nötig, Regeln mit `$ sudo ufw delete NUMMER` löschen und neu setzen.
 
+- [Weitere Informationen zur Firewall unter Linux und dem ufw-Firewallmanager](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung/Sicherheit-unter-Linux.md)
+
+
 #### 1. alte Regel löschen
-- Wenn ufw bereits aktiv ist und der Port 53 für alle IPs offen ist, musss die alte Regel zunächst entfernt werden.
+- Wenn ufw bereits aktiv ist und der Port 53 für alle IPs offen ist, muss die alte Regel (die Port 53 enthält) zunächst entfernt werden.
 ```
 $ sudo ufw status numbered
 $ sudo ufw delete [NUMMER_DER_ALLOW-53-REGEL]
@@ -584,15 +604,18 @@ $ sudo ufw status verbose
 ```
 $ sudo ufw allow from IP-ADRESS-BEREICH/SUBNETMASKE to any port 53
 z.B.
-$ sudo ufw allow from 192.168.1.0/24 to any port 53
+$ sudo ufw allow from 192.168.1.0/24 to any port 53 proto tcp
+$ sudo ufw allow from 192.168.1.0/24 to any port 53 proto udp
 oder
-$ sudo ufw allow from 10.10.10.0/16 to any port 53
+$ sudo ufw allow from 10.10.10.0/16 to any port 53 proto tcp
+$ sudo ufw allow from 10.10.10.0/16 to any port 53 proto udp
 ```
 
 #### 3. Port 53 Blockieren
 - Die deny-Regel blockiert alle DNS-Anfragen, die nicht von den oberen erlaubten Ausnahmen stammen.
 ```
-$ sudo ufw deny 53
+$ sudo ufw deny 53/tcp
+$ sudo ufw deny 53/udp
 ```
 
 - Regeln überprüfen
