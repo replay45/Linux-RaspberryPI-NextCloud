@@ -4,7 +4,7 @@
 - Diese Anleitung ist die Fortführung der [Pi hole-Anleitung](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/dns-server/Pi-hole.md).
 
 
-`Anleitung verfasst am 2.3.2026`
+`Anleitung verfasst am 2.3.2026, zuletzt bearbeitet am 11.4.2026`
 
 
 ## Inhaltsverzeichnis
@@ -15,10 +15,12 @@
 2. Cloudflared - (nicht mehr supportet)
     - `Update März 2026` zu [Cloudflared](https://docs.pi-hole.net/guides/dns/cloudflared/)
 3. Pi hole mit [dnscrypt-proxy](https://docs.pi-hole.net/guides/dns/dnscrypt-proxy/) als Forwarder
-    - Vorteile von dnscrypt-proxy
+    - Was ist [dnscrypt-proxy](https://dnscrypt.info/) ?
     - Einrichtung von dnscrypt-proxy als Forwarder
-    - Optional: Systemseitige Optimierung - Limit für offene Dateideskriptoren
-4. Cloudflared deinstallieren
+    - dnscrypt-proxy deinstallieren
+    - Optional Testen, ob Verschlüsselung angewendet wird
+4. Optional: Systemseitige Optimierung - Limit für offene Dateideskriptoren
+5. Cloudflared deinstallieren
     - Wenn Cloudflared manuell installiert wurde
     - Wenn Cloudflared über den "service install" installiert wurde
 
@@ -40,7 +42,7 @@
 	- Die Root- und TLD-Nameserver werden auch von externen DNS-Anbietern genutzt, um DNS-Anfragen aufzulösen, z.B. wenn man einen externen DNS-Anbieter wie Cloudflare oder Google nutzt, stellt man an diesen seine Anfragen und der externe DNS-Anbieter löst dann für einen die Anfrage bei den Root- und TLD-Nameservern auf.
 	- Mit einem rekursiven-Resolver kann man direkt bei den Root- und TLD-Nameservern die Anfragen auflösen, wodurch der DNS-Anbieter wegfällt, was den Datenschutz erhöht.
 	- Ein Beispiel für einen rekursiven-Resolver wäre Unbound.
-
+	- [Anleitung zu Unbound als Forwarder oder Rekursiver Resolver](xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 
 - `Forwarder`
 	- Ein Forwarder ist ein [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System), der Anfragen entgegennimmt, aber nicht selber auflöst, im Gegensatz zu den rekursiven, sondern diese Anfrage an einen externen DNS-Anbieter weiterleitet.
@@ -98,6 +100,8 @@ $ sudo systemctl edit dnscrypt-proxy.socket
 ```
 
 - Konfiguration bearbeiten, sodass sie folgendes enthält:
+    - Dabei ist die Position des Abschnittes entscheident.
+    - Der Abschnitt muss über der Zeile "### Lines below this comment will be discarded" stehen:
 ```
 ### Editing /etc/systemd/system/dnscrypt-proxy.socket.d/override.conf
 ### Anything between here and the comment below will become the contents of the drop-in file
@@ -108,7 +112,7 @@ ListenDatagram=
 ListenStream=127.0.0.1:5053
 ListenDatagram=127.0.0.1:5053
 
-### Edits below this comment will be discarded
+### Lines below this comment will be discarded
 ```
 
 - `/etc/dnscrypt-proxy/dnscrypt-proxy.toml` bearbeiten
@@ -119,7 +123,7 @@ $ sudo nano /etc/dnscrypt-proxy/dnscrypt-proxy.toml
 - Konfiguration bearbeiten, sodass sie folgendes enthält:
     - Die Zeile `listen_addresses = []` muss leer bleiben !
     - In der Zeile `server_names = ['cloudflare-security']`
-    - Um andere oder zusätzliche (Fallback) Upstream-Server zu nutzen die sogenannten "server-namen" aus der offiziellen Liste kopieren: [nscrypt.info/public-servers/](https://dnscrypt.info/public-servers/)
+    - Um andere oder zusätzliche (Fallback) Upstream-Server zu nutzen die sogenannten "server-namen" aus der offiziellen Liste kopieren: [dnscrypt.info/public-servers/](https://dnscrypt.info/public-servers/)
         - `'cloudflare'`: Cloudflare DNS (anycast) - aka 1.1.1.1 / 1.0.0.1 (over DoH)
         - `'cloudflare-security'`: Cloudflare DNS with malware blocking - aka 1.1.1.2 / 1.0.0.2 (over DoH)
         - `'adguard-dns'`: Remove ads and malware (over DNSCrypt)
@@ -150,72 +154,19 @@ $ sudo systemctl status dnscrypt-proxy.service
 $ sudo systemctl status pihole-FTL.service
 ```
 
+### Forwarder in Pi hole als Upstream einstellen
 - Nun im `Pi hole Dashbaord` unter `Settings > DNS > Upstram DNS-Servers` `127.0.0.1#5053` eintragen, um dnscrypt-proxy zu verwenden.
 - Speichern nicht vergessen.
 
 
-## Updates von dnscrypt-proxy
+### Updates von dnscrypt-proxy
 Wenn dnscrypt-prxy wie in dieser Anleitung beschrieben über den Paketmanager apt installiert wurde, dann wird dieser mit den System-Updates aktualisiert.
 
-- System-Updats mit Paketmanager apt
+- System-Updates mit Paketmanager apt
 ```
 $ sudo apt update
 $ sudo apt upgrade
 $ sudo apt autoremove --purge && sudo apt autoclean
-```
-
-
-
-## Optional: Systemseitige Optimierung - Limit für offene Dateideskriptoren
-- Limit für offene Dateideskriptoren prüfen:
-	- Wenn die `Ausgabe: 4096` ist, dann ist `alles in ordnung`.
-	- Sollte die `Ausgabe: 1024` sein, ist das `für hohes Aufkommen zu gering`.
-	- Für sehr viele Anfragen ist `8192` optimal.
-	- Das bringt jedoch nur in Lastszenarien etwas, bei wenigen Clients ist die Anpassung nicht notwendig.
-```
-$ ulimit -n
-```
-
-- Limit erhöhen:
-```
-$ sudo nano /etc/security/limits.conf
-```
-
-- Am Ende ergänzen:
-```
-*         soft     nofile      8192
-*         hard     nofile      8192
-```
-
-- Danach auch Systemd anpassen, um die Änderung dauerhaft zu setzen:
-```
-$ sudo mkdir -p /etc/systemd/system/unbound.service.d/
-```
-```
-$ sudo nano /etc/systemd/system/unbound.service.d/limits.conf
-```
-
-- erwarteter Inhalt:
-```
-[Service]
-LimitNOFILE=8192
-```
-
-- Neu laden:
-```
-$ sudo systemctl daemon-reexec
-$ sudo systemctl daemon-reload
-$ sudo systemctl restart cloudflared
-```
-
-- Damit alles vollständig und sauber geladen wird, noch ein Neustart:
-```
-$ sudo reboot
-```
-
-- Überprüfen:
-```
-$ ulimit -n
 ```
 
 
@@ -233,7 +184,7 @@ $ sudo apt remove --purge dnscrypt-proxy
 ----------------------------------------------------------------------------------------------------------------
 
 
-## Optional Testen, ob Verschlüsselung angewand wird
+## Optional Testen, ob Verschlüsselung angewendet wird
 
 - Logs überprüfen
     - Wenn in den Zeilen etwas vergelichbares steht, wie `[UPSTREAM-SERVER-XYZ] OK (DNSCrypt)` oder  `[UPSTREAM-SERVER-XYZ] OK (DoH)`
@@ -250,7 +201,51 @@ $ sudo ss -tulnp | grep dnscrypt-proxy
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 4. Cloudflared deinstallieren
+# 4. Optional: Systemseitige Optimierung - Limit für offene Dateideskriptoren
+- Limit für offene Dateideskriptoren bearbeiten:
+    - Um die Verarbeitung in Lastszenarien zu beschleunigen, kann man das Limit für offene Dateideskriptoren für Pi hole-FTL anpassen.
+    - Jedoch bringt die Erhöhung des Limits nicht automatisch mehr performance, jedoch Lastszenarien oder Umgebungen mit sehr vielen Clients kann dies nützlich sein.
+    - Bei der Nutzung von Pi hole in einem kleinen Heimnetzwerk sollte das nicht nötig sein.
+
+- Override-Datei für Pi hole-FTL:
+```
+$ sudo mkdir -p /etc/systemd/system/pihole-FTL.service.d/
+$ sudo nano /etc/systemd/system/pihole-FTL.service.d/override.conf
+```
+
+- Folgendes einfügen:
+```
+[Service]
+LimitNOFILE=8192
+```
+
+- Neustart des Pi hole FTL-Dienstes:
+```
+$ sudo systemctl daemon-reexec
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart pihole-FTL
+```
+
+- Damit alles vollständig und sauber geladen wird, noch ein Neustart:
+```
+$ sudo reboot
+```
+
+- Limit überprüfen:
+```
+$ sudo systemctl show pihole-FTL | grep LimitNOFILE
+```
+
+- Logs optional prüfen:
+```
+$ sudo tail -f /var/log/pihole/FTL.log
+```
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 5. Cloudflared deinstallieren
 
 ### Wenn Cloudflared manuell installiert wurde
 - systemctl-Dienst entfernen & cloudflared-User entfernen
