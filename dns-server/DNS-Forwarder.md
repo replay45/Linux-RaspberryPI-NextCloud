@@ -139,7 +139,7 @@ listen_addresses = []
 
 # Populate `server_names` with desired DoH/DNSCrypt upstream DNS servers listed in https://dnscrypt.info/public-servers/.
 # Example for Cloudflare malware-blocking DNS:
-server_names = ['cloudflare-security', 'quad9-dnscrypt-ip4-filter-pri']
+server_names = ['cloudflare-security', 'quad9-doh-ip4-port443-filter-pri', 'quad9-dnscrypt-ip4-filter-pri']
 ```
 
 - Dienste neu starten
