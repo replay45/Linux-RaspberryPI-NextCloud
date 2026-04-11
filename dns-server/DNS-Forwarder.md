@@ -20,6 +20,8 @@
     - dnscrypt-proxy deinstallieren
     - Optional Testen, ob Verschlüsselung angewendet wird
 4. Optional: Systemseitige Optimierung - Limit für offene Dateideskriptoren
+    - Limit für offene Dateideskriptoren für Pi hole anpassen
+    - Limit für offene Dateideskriptoren für dnscrypt-proxy anpassen
 5. Cloudflared deinstallieren
     - Wenn Cloudflared manuell installiert wurde
     - Wenn Cloudflared über den "service install" installiert wurde
@@ -203,10 +205,12 @@ $ sudo ss -tulnp | grep dnscrypt-proxy
 
 # 4. Optional: Systemseitige Optimierung - Limit für offene Dateideskriptoren
 - Limit für offene Dateideskriptoren bearbeiten:
-    - Um die Verarbeitung in Lastszenarien zu beschleunigen, kann man das Limit für offene Dateideskriptoren für Pi hole-FTL anpassen.
-    - Jedoch bringt die Erhöhung des Limits nicht automatisch mehr performance, jedoch Lastszenarien oder Umgebungen mit sehr vielen Clients kann dies nützlich sein.
+    - Um die Verarbeitung in Lastszenarien zu beschleunigen, kann man das Limit für offene Dateideskriptoren für einzelne Dienste angepasst werden.
+    - Das Erhöhen des Limits ermöglicht mehrere gleichzeitige Verbindungen, was die Performance unter Last verbassern kann.
     - Bei der Nutzung von Pi hole in einem kleinen Heimnetzwerk sollte das nicht nötig sein.
 
+
+### Limit für offene Dateideskriptoren für Pi hole anpassen
 - Override-Datei für Pi hole-FTL:
 ```
 $ sudo mkdir -p /etc/systemd/system/pihole-FTL.service.d/
@@ -219,7 +223,7 @@ $ sudo nano /etc/systemd/system/pihole-FTL.service.d/override.conf
 LimitNOFILE=8192
 ```
 
-- Neustart des Pi hole FTL-Dienstes:
+- Neustart der Dienstes:
 ```
 $ sudo systemctl daemon-reexec
 $ sudo systemctl daemon-reload
@@ -239,6 +243,36 @@ $ sudo systemctl show pihole-FTL | grep LimitNOFILE
 - Logs optional prüfen:
 ```
 $ sudo tail -f /var/log/pihole/FTL.log
+```
+
+### Limit für offene Dateideskriptoren für dnscrypt-proxy anpassen
+- Override-Datei für dnscrypt-proxy:
+```
+$ sudo mkdir -p /etc/systemd/system/dnscrypt-proxy.service.d/
+$ sudo nano /etc/systemd/system/dnscrypt-proxy.service.d/override.conf
+```
+
+- Folgendes einfügen:
+```
+[Service]
+LimitNOFILE=8192
+```
+
+- Neustart der Dienstes:
+```
+$ sudo systemctl daemon-reexec
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart dnscrypt-proxy.service
+```
+
+- Damit alles vollständig und sauber geladen wird, noch ein Neustart:
+```
+$ sudo reboot
+```
+
+- Limit überprüfen:
+```
+$ sudo systemctl show dnscrypt-proxy.service | grep LimitNOFILE
 ```
 
 
@@ -265,9 +299,8 @@ $ sudo rm /etc/cron.weekly/cloudflared-updater
 $ sudo apt purge cloudflared
 ```
 
-Falls ein Cronjob verwendet wurde, z.B.:
-    - Diesen ggf. entfernen !
-    - Falls ein anderer Pfad verwendet wurde, diesen anpassen.
+- Falls ein Cronjob verwendet wurde, diesen entfernen !
+    - Falls ein anderer Pfad verwendet wurde, diesen entsprechend anpassen.
 ```
 $ sudo nano /etc/cron.d/cloudflared-update
 ```
