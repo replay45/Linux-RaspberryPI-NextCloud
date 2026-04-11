@@ -156,13 +156,17 @@ $ sudo systemctl status dnscrypt-proxy.service
 $ sudo systemctl status pihole-FTL.service
 ```
 
+
 ### Forwarder in Pi hole als Upstream einstellen
-- Nun im `Pi hole Dashbaord` unter `Settings > DNS > Upstram DNS-Servers` `127.0.0.1#5053` eintragen, um dnscrypt-proxy zu verwenden.
+- Nun im `Pi hole Dashbaord` unter `Settings > DNS > Upstram DNS-Servers` folgendes eintragen, um dnscrypt-proxy zu verwenden:
+```
+127.0.0.1#5053
+```
 - Speichern nicht vergessen.
 
 
 ### Updates von dnscrypt-proxy
-Wenn dnscrypt-prxy wie in dieser Anleitung beschrieben über den Paketmanager apt installiert wurde, dann wird dieser mit den System-Updates aktualisiert.
+Wenn dnscrypt-proxy wie in dieser Anleitung beschrieben über den Paketmanager apt installiert wurde, dann wird dieser mit den System-Updates aktualisiert.
 
 - System-Updates mit Paketmanager apt
 ```
