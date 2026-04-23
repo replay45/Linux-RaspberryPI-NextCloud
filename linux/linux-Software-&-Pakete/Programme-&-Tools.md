@@ -1,22 +1,21 @@
 # Programme und Tools
 
-`Anleitung zuletzt bearbeitet am 4.2.2026`
-
-
 ## Inhaltsverzeichnis
 1. Browser & Mail
 2. Systemüberwachung & Systeminformationen
 3. Medienwiedergabe
 4. Poduktivität
-5. [Metadata Cleaner](https://flathub.org/apps/fr.romainvigier.MetadataCleaner)
+5. Metadata Cleaner / mat2
 6. [Warpinator](https://warpinator.com/)
 7. VPN - Wireguard
 
 
 ----------------------------------------------------------------------------------------------------------------
 
+`Anleitung zuletzt bearbeitet am 4.2.2026`
 
 # 1. Browser & Mail
+- [sicher-&-datenschutzorientiert-surfen](https://github.com/replay45/ethical-hacking-und-cybersecurity/blob/main/cyber-security/sicher-%26-datenschutzorientiert-surfen.md)
 
 ### [Firefox](https://www.mozilla.org/de/firefox/new/)
 ```
@@ -37,6 +36,15 @@ $ sudo apt update
 $ sudo apt install brave-browser
 ```
 
+### [Mullvad](https://mullvad.net/de/download/browser/linux)
+```
+$ sudo apt install curl
+$ sudo curl -fsSLo /usr/share/keyrings/mullvad-keyring.asc https://repository.mullvad.net/deb/mullvad-keyring.asc
+$ echo "deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=$( dpkg --print-architecture )] https://repository.mullvad.net/deb/stable stable main" | sudo tee /etc/apt/sources.list.d/mullvad.list
+$ sudo apt update
+$ sudo apt install mullvad-browser
+```
+
 ### [Thunderbird](https://www.thunderbird.net/de/)
 ```
 $ sudo apt install thunderbird
@@ -49,6 +57,8 @@ $ sudo apt install thunderbird
 
 
 # 2. Systemüberwachung & Systeminformationen
+
+`Anleitung zuletzt bearbeitet am 4.2.2026`
 
 ### htop - Systemmonitor
 - `htop` ist ein Systemmonitor, ähnlich wie ein Taskmanager, aber im Terminal und zeigt die CPU und RAM Auslastung, die Prozessliste, den System-Load und die Prozess ID.
@@ -113,6 +123,8 @@ $ sudo apt install cpu-x
 
 # 3. Medienwiedergabe
 
+`Anleitung zuletzt bearbeitet am 4.2.2026`
+
 ### [vlc Media Player](https://www.videolan.org/vlc/index.de.html)
 ```
 $ sudo apt install vlc
@@ -123,6 +135,8 @@ $ sudo apt install vlc
 
 
 # 4. Poduktivität
+
+`Anleitung zuletzt bearbeitet am 4.2.2026`
 
 ### [Visual Studio Code](https://code.visualstudio.com/)
 - Debian Paket herunterladen
@@ -150,7 +164,6 @@ $ sudo apt install keepassxc
 
 
 ### [Libre Office](https://de.libreoffice.org/)
-
 - Möglichkeit 1
     - Download Deb-Datei
     - entpacken und Terminal in Ordner öffnen 
@@ -190,16 +203,14 @@ $ sudo dpkg -i *.deb
 
 # Linux Tools
 
+`Anleitung zuletzt bearbeitet am 4.2.2026`
 
-# 5. [Metadata Cleaner](https://flathub.org/apps/fr.romainvigier.MetadataCleaner)
-
-`10.4.2025: Der Metadata Cleaner wird nicht mehr vom Entwickler supportet und erhält keine Updates mehr.`
-[gitlab.com - Metadata Cleaner](https://gitlab.com/rmnvgr/metadata-cleaner/)
-
+# 5. Metadata Cleaner/ mat2
 - Metadaten in einer Datei enthalten viele Informationen.
 - Kameras zeichnen Daten darüber auf, wann und wo ein Bild aufgenommen und welche Kamera verwendet wurde. 
 - Office-Anwendungen fügen automatisch Autoren- oder Firmeninformationen zu Dokumenten hinzu.
 - Nicht immer möchte man, dass diese Informationen für Dritte zugänglich sind.
+
 
 ### Mehr zu Metadaten
 - [Weitere Informationen zu Metadaten und einem Tool, um Metadaten zu entfernen, hier](https://github.com/replay45/ethical-hacking-und-cybersecurity/tree/main/cyber-security)
@@ -209,6 +220,8 @@ $ sudo dpkg -i *.deb
 
 
 # 6. [Warpinator](https://warpinator.com/)
+
+`Anleitung zuletzt bearbeitet am 4.2.2026`
 
 Warpinator ist ein Tool, womit Dateien und Ordner einfach zwischen Linux Computern oder alternativ auch an Android oder Windows Geräte im selben lokalen Netzwerk übertragen werden können.
 
@@ -220,73 +233,90 @@ Aber auch im [F-Droid-Store](https://f-droid.org/de/packages/slowscript.warpinat
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 7. VPN
+# 7. [VPN](https://de.wikipedia.org/wiki/Virtual_Private_Network)
+
+`Anleitung zuletzt bearbeitet am 23.4.2026`
+
+## Was ist [WireGuard](https://www.wireguard.com/) ?
+- Wireguard ist ein modernes und effizientes [VPN](https://de.wikipedia.org/wiki/Virtual_Private_Network)-Protokoll, welches schnelle und sichere VPN-Verbindungen ermöglicht.
+- Zudem ist das Protokoll sowohl für einfache Konfiguration als auch für `hohe Sicherheit bekannt`.
+- Das Protokoll wird nicht nur von VPN-Anbietern benutzt, es findet auch Verwendung bei modernen Routern, wie z.B. bei den [FritzBoxen](https://avm.de/).
+- Somit kann man eine sichere Verbindung von seinem Handy/Tablet oder Laptop von überall aus, in das Heimnetz herstellen, was sich besonders bei der Nutzung von öffentlichen oder fremden WLANs anbietet, denn bei der VPN-Verbindung wird der eigene Netzwerkverkehr bis in das Heimnetz verschlüsselt. 
+- Außerdem kann man über die VPN-Vebindung in das Heimnetz auch auf Geräte, wie Homeserver aus dem Heimnetzwerk zugreifen oder einen eigenen [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System), wie [Pi hole](https://pi-hole.net/) nutzen.
+
+Mehr zu Pi hole und DNS-Servern unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/dns-server/Pi-hole.md) 
 
 
-## Was ist [Wireguard](https://www.wireguard.com/) ?
-Wireguard ist ein modernes und effizientes VPN-Protokoll, welches schnelle und sichere VPN-Verbindungen ermöglicht.
-Zudem ist das Protokoll sowohl für einfache Konfiguration als auch für hohe Sicherheit bekannt.
-
-Das Protokoll wird nicht nur von VPN-Anbietern benutzt, es findet auch Verwendung bei modernen [FritzBoxen](https://avm.de/).
-Somit kann man eine sichere Verbindung von seinem Handy oder Laptop von überall aus, auf das Heimnetz herstellen, was sich besonders bei der Nutzung von öffentlichen oder fremden WLANs anbietet, denn bei der VPN-Verbindung wird der eigene Netzwerkverkehr bis in das Heimnetz verschlüsselt. Außerdem kann man über die VPN-Vebindung in das Heimnetz auch auf Geräte aus dem Heimnetzwerk zugreifen oder einen eigenen DNS-Server, wie [Pi hole](https://pi-hole.net/) nutzen.
+## [WireGuard](https://www.wireguard.com/) auf Windows/Android/iOS/MacOS
+- Auf den gängigen Betriebssystemen gibt es eine offizielle App mit grafischer Oberfläche, in der man die Konfigurationsdatei benutzerfreundlich importieren kann.
+- Für Linux gibt es leider noch keine "App" mit GUI.
 
 
-- Mehr zu Pi hole und DNS-Servern unter [RaspberryPi/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/raspberry-pi) 
+## Full- / Split-Tunneling
+In der Regel Unterschiedet man bei VPN-Verbindungen zwischen Fulltunneling und Splittunneling.
+
+- Fulltunneling
+    - Bei Fulltunneling werden so gut wie alle Pakete über die VPN-Verbindung gesendet, mit Ausnahme von ARP-Paketen, die aus technischen Gründen nicht über die VPN-Verbindung geleitet werden.
+    - Um sich vor Tracking durch ISPs zuschützen oder seinen gesammten Traffic zum VPN-Server zu routen ist Fulltunneling geeignet.
+    - Nachteil von Fulltunneling ist, dass die Last auf den VPN-Server erhöht wird, da dieser deutlich mehr Traffic verarbeiten muss.
+    
+- Splittunneling
+    - Hingegen werden bei Splittunneling nur bestimmte Pakete/Pakettypen über die VPN-Verbindung geleitet.
+    - Splittunneling hat den Vorteil der geringen Last, denn es werden nur bestimmte Pakete über die VPN-Verbindung geroutet.
 
 
-## [Wireguard](https://www.wireguard.com/) auf Windows/Android/iOS/MacOS
-- Auf den gängigen Betriebsystemen gibt es eine offizielle App mit grafischer Oberfläche, in der man die Konfigurationsdatei benutzerfreundlich importieren kann.
-- Für Linux gibt es leider noch keine App mit grafischem Interface.
 
+## [WireGuard](https://www.wireguard.com/) einrichten - [Debian](https://www.debian.org/index.de.html) basierte Distributionen
 
-
-## [Wireguard einrichten - Debian basierte Distributionen](https://www.wireguard.com/)
-
-`Die Anleitung wurde auf Kali Linux mit der GNOME Benutzeroberfläche getestet, sollte aber auf anderen Debian basierenden Distributionen, wie Ubuntu, problemlos funktionieren.`
+`Die Anleitung wurde auf Kali Linux & Debian mit der GNOME Benutzeroberfläche getestet, sollte aber auf anderen Debian basierenden Distributionen, wie Ubuntu etc., problemlos funktionieren.`
 
 `Für diese Anleitungen wird eine Wireguard-Konfigurationsdatei vom VPN-Server vorausgesetzt.`
 
-- Dabei ist egal, ob diese von einem VPN-Anbieter oder von der FritzBox aus dem Heimnetzwerk kommt.
 
-- Hinweis zu Kali:
-    - In Kali Linux ist es möglich, die VPN-Verbindung im Quick-Panel oder in den Einstellungen unter "Netzwerk" zu aktivieren.
-    - Alternativ kann aber auch die Verbindung über `nmtui` (Punkt 7.1) im Terminal gestartet werden.
-
-- Hinweis zu Ubuntu:
+- Hinweis zu [Ubuntu](https://ubuntu.com/download):
     - Zum Zeitpunkt der Erstellung dieser Anleitung ist es erst in Ubuntu 23.10 möglich, die Wireguard VPN-Verbindung grafisch zu starten.
-    - Wer eine ältere Version nutzt, muss die Verbindung im Terminal über `nmtui` (Punkt 7.1) starten.
 
 
 ### Wichtig - Name der Konfigurationsdatei
-- Um Probleme bei der Einrichtung zu vermeiden, empiehlt es sich die Konfigurationsdatei `wg_config.conf` zu benennen.
+- Um Probleme bei der Einrichtung zu vermeiden, empiehlt es sich einen kurzen Namen für die Konfigurationsdatei zu wählen, wie z.B. `wg_config.conf`.
 - Wer mehrere Verbindungen nutzt, kann die Konfigurationen mit Zahlen ergänzen, wie z.B. `wg_config01.conf`.
 
 
 -----------------------------------------------------------------------------------------------------------------
 
 
-# 7.1 Befehlszeilen-Methode
+# 7.1 Befehlszeilen-Methode - CLI
 - Installation:
 ```
+$ sudo apt update
 $ sudo apt install wireguard resolvconf
+$ sudo apt install wireguard-tools
 ```
 
-- in das Verzeichnis wechseln, wo die config-Datei gespeichert ist:
+- Konfiguration in /etc/wireguard verschieben
 ```
-$ sudo su
-$ cd /etc/Wireguard
-$ sudo chown root:root /etc/wireguard/wg-client.conf
-$ sudo chmod 644 /etc/wireguard/wg-client.conf
+$ sudo mv /PLATZHALTER/VERZEICHNIS/wg-client01.conf /etc/wireguard/
+$ ls -l /etc/wireguard/
+```
+
+- Berechtigungen für das Verzeichnis und die Konfig-Datei setzen
+    - Bei `$ sudo chown root:USERNAME /etc/wireguard/wg-client01.conf` den Platzhalter `USERNAME` durch den eigenen Benutzernamen ersetzen.
+```
+$ ls -l /etc/wireguard/
+$ sudo chown root:root /etc/wireguard/
+$ whoami
+$ sudo chown root:USERNAME /etc/wireguard/wg-client01.conf
+$ sudo chmod 640 /etc/wireguard/wg-client01.conf
 $ sudo chmod 755 /etc/wireguard
 ```
 
 - Verbindung über Befehl starten/beenden:
 ```
-$ sudo wg-quick up /etc/wireguard/wg-client.conf
+$ sudo wg-quick up /etc/wireguard/wg-client01.conf
 $ sudo wg show
 ```
 ```
-$ wg-quick down /etc/wireguard/wg-client.conf
+$ wg-quick down /etc/wireguard/wg-client01.conf
 $ ifconfig
 $ ip a
 ```
@@ -296,80 +326,94 @@ $ ip a
 ```        
 $ nmtui-connect
 ```
-```
-$ nmcli connection import type wireguard file /etc/wireguard/wg-client.conf
-$ nm-connection-editor
-```
 
 
-# 7.2 grafische Methode mit dem nm-editor
+# 7.2 [WireGuard](https://www.wireguard.com/) VPN-Konfiguration unter Debain/Debian basierten Systemen mit [NetworkManager/nmcli](https://wiki.ubuntuusers.de/NetworkManager/nmcli/) - CLI
+- Für diese Methode sollte unter KEINEN Umständen das WireGuard Paket installiert sein, da dies zu Konflikten führt.
+- WireGuard-Tools (wireguard-tools) kann installiert bleiben.
+- Daher unbedingt folgenden Befehlausführen, um WireGuard zu entfernen.
 ```
-$ sudo apt install wireguard resolvconf
-$ nm-connection-editor
-```
-
-- `+`
-- unter `virtual` `Wireguard` auswählen
-- nach dem ausfüllen der Kästchen, auf `Save` gehen
-- Nun in den Einstellungen noch die Eigenschaften der Verbindung öffnen und bei `Peers` die Fehlenden Einträge ergänzen.
-- Nach dem Speichern, kann im Quick-Panel (Schnelleinstellungen) oder alternativ in den Einstellungen unter "Netzwerk", die VPN-Verbindung gestartet und beendet werden.
-
-
-# 7.3 Wireguard-config via nmcli importieren
-```
-$ nmcli
-$ nmcli connection import type wireguard file wg_config.conf
-```
-```
-$ sudo wg show
-$ ifconfig
-$ ip a
+$ sudo apt remove --purge wireguard
 ```
 
-- um den Autostart von Wireguard (über nmcli) zu deaktivieren:
+- Eine Verbindung hinzufügen
+    - Konfig im WireGuard Server erstellen.
+    - Konfig auf Linux-System verschieben und mit Befehl hinzufügen:
+    - Bei `"NAME_DER_VERBINDUNG"` den Namen der Verbindung mit den Anführungszeichen angeben, z.B. `wg_config01`
+```
+$ nmcli connection modify "NAME_DER_VERBINDUNG" connection.autoconnect no
+```
 
-Wireguard Verbindungsname ausfindig machen
+- Verbindung anzeigen
 ```
 $ nmcli connection show
 ```
 
-Autostart ausschalten:
+- Optional den automatischen Start der Verbindung deaktivieren
 ```
-$ nmcli connection modify "dein-verbindungsname" connection.autoconnect no
-```
-
-Überprüfen:
-```
-$ nmcli connection show "dein-verbindungsname" | grep autoconnect
+$ nmcli connection modify "NAME_DER_VERBINDUNG" connection.autoconnect no
 ```
 
-
-
-
-# 7.4 Wireguard Konfiguaration manuell in den Einstellungen hinzufügen (grafische Methode)
-Diese Methode ist unter Ubuntu erst ab der Version 24 möglich !
-Diese Anleitung wurde unter Kali Linux getestet.
-
-
-- Unter Kali Linux gibt es eine weitere Möglichkeit, um Wireguard komfortabel nutzen zu können.
-- Natürlich funktioniert auch die Befehlszeilen-Methode unter Kali Linux.
-
-
-- Die config-Datei bereithalten und öffnen.
-- Einstellungen öffnen,
-- zu dem Punkt `Netzerk` eine VPN Verbindung hinzufügen.
-- Unter `Add VPN` `Wireguard` auswählen.
-- Dann einen `Connection` und `Interface` Namen wählen, und den privaten Schlüssel einfügen.
-- Danach bei `Peers` die Adresse des Routers einfügen.
-- Nun auf speichern klicken und in dem Quick-Panel (Schnelleinstellungen) oder in den Einstellungen unter VPN die Verbindung herstellen.
-
-- Zum Überprüfen der Verbindung:
+- Überprüfen:
 ```
-$ ifconfig
-```
-oder
-```
-$ ip a
+$ nmcli connection show "NAME_DER_VERBINDUNG" | grep autoconnect
 ```
 
-----------------------------------------------------------------------------------------------------------------
+- Verbindungen deaktivieren
+```
+$ nmcli connection down NAME_DER_VERBINDUNG
+```
+
+- Verbindung aufbauen
+```
+$ nmcli connection up NAME_DER_VERBINDUNG
+```
+
+- Wenn eine Distribution mit GUI verwendet wird können nun auch die Funktionen der GUI verwendet werden, um die Verbindung komfortabel zu starten/beenden.
+- Alternativ können natürlich weiterhin die Befehle verwendet werden.
+
+
+# 7.3 [WireGuard](https://www.wireguard.com/) VPN-Konfiguration mit GNOME (GNOME Einstellungen oder [NetworkManager/nm-connection-editor](https://wiki.ubuntuusers.de/NetworkManager/)) - GUI
+Diese Methode ist unter [Ubuntu](https://ubuntu.com/download) erst ab der Version 24 möglich !
+Diese Anleitung wurde unter [Kali Linux](https://www.kali.org/) & [Debian](https://www.debian.org/index.de.html) getestet.
+
+- [NetworkManager/nm-connection-editor](https://wiki.ubuntuusers.de/NetworkManager/) öffnen
+```
+$ nm-connection-editor
+```
+- Im nm-connection-editor nun auf das `+`-Symbol klicken.
+- Unter `Virtual`, `WireGuard` auswählen.
+- `Create`
+- WireGuard Konfigurationen einfügen, aus der erstellten Konfiguartion vom VPN-Server.
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+# 7.4 VPN-Verbindung überprüfen/ Pakete überprüfen
+- [Wireshark](https://www.wireshark.org/)
+    - Um zu überprüfen, welche Pakete/Pakettypen über die VPN-Verbindung geleitet werden, kann das Tool [Wireshark](https://www.wireshark.org/) verwendet werden.
+
+- IP Route
+    - mit IP Route kann überprüft werden wie die Pakete geroutet werden, also über welche Verbindung/Netzwerkadapter die Pakete gesendet werden.
+```
+$ ip route
+$ ip -4 route get 1.1.1.1
+```
+
+- DNS-Auflösung überprüfen
+```
+$ dig test.de
+$ dig google.de
+$ dig @9.9.9.9 test.de
+```
+
+- Verbindung überprüfen
+```
+$ ping 1.1.1.1
+$ ping 9.9.9.9
+```
+
+
+-----------------------------------------------------------------------------------------------------------------
