@@ -1,7 +1,7 @@
 # [Pi hole](https://pi-hole.net/)
 
 
-`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 9.4.2026`
+`Anleitung verfasst am 15.5.2024, zuletzt bearbeitet 19.5.2026`
 
 `Anleitung für Raspberry Pi OS und Ubuntu-Server geeignet`
 
@@ -17,7 +17,8 @@
 8. DNS-Filterlisten (Blocklisten) & Domains blacklisten/whitelisten
 9. Empfehlungen für Blocklisten
 10. DNS-Filterlisten (Blocklisten) selbst erstellen
-11. [Pi hole](https://pi-hole.net/) Interface-Einstellungen
+11. Datenbank-Einstellungen (pihole-FTL)
+12. [Pi hole](https://pi-hole.net/) Interface-Einstellungen (Optional, nur wenn benötigt)
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -507,6 +508,15 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 	- [Pi-hole Parser - Italy](https://raw.githubusercontent.com/deathbybandaid/piholeparser/master/Subscribable-Lists/CountryCodesLists/Italy.txt)
 	- [ABP Japanese Filters - ads](https://raw.githubusercontent.com/deathbybandaid/piholeparser/master/Subscribable-Lists/ParsedBlacklists/ABP-Japanese-Filters.txt)
 
+- Empfehlung für erfahrene Nutzer (erweiterte Blocklisten)
+    - Die Blocklisten von [github.com/hagezi](https://github.com/hagezi) sind umfangreicher als die üblichen Blocklisten und daher eher für erfahrene Nutzer geeignet. Da sich einige Blocklisten im Inhalt überschneiden, sollte man bei Verwendung mehrere Blocklisten prüfen, welche Kombination man verwendet !
+    - Die Blocklisten die sich unter `adblock` befinden, können auch mit Pi hole verwendet werden.
+    - [github.com/hagezi - Blocklisten](https://github.com/hagezi/dns-blocklists)
+    - Konkrete Empfehlung: [Pro](https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt)
+    - Konkrete Empfehlung: [fake](https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt)
+    - Konkrete Empfehlung: [tif](https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt)
+    - Konkrete Empfehlung: [NSFW](https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/nsfw.txt)
+
 - Weitere Empfehlungen
 	- Auf der Github Seite von Steven Black unter [github.com/StevenBlack/hosts](https://github.com/StevenBlack/hosts/blob/master/readme.md) finden sich viele weitere Empfehlungen.
 	- Eigene Blocklisten: [github.com/replay45/DNS-Filterlisten](https://github.com/replay45/DNS-Filterlisten)
@@ -570,7 +580,43 @@ beispiel.example.org
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 11. [Pi hole](https://pi-hole.net/) Interface-Einstellungen
+# 11. Datenbank-Einstellungen (pihole-FTL)
+
+
+## Datenbank-Einstellungen (Privcy-related database settings)
+- Pi hole speichert DNS-Abfragen und Netzwerkinformationen in einer SQLite-Datenbank unter `/etc/pihole/pihole-FTL.db`.
+- Die folgenden Einstellungen steuern, wie lange Daten gespeichert werden und wie sie beim Start geladen werden sollen.
+- Je nach Leistung des Servers kann die Performance einbrechen, wenn die Datenbank zu groß wird.
+
+### Should FTL load queries from the database on (re)start?
+- Diese Option steuert, ob beim Neustart alle gespeicherten DNS-Abfragen aus der Datenbank geladen werden.
+- Diese Funktion ist erforderlich, damit Statistiken auch sofort nach einem Neustart des Dienstes gealden werden können.
+- Wenn diese Option deaktiviert ist, gehen nach einem Neustart des Pi hole Dienstes alle Statistiken und Aufzeichnungen zu DNS-Abfragen im Query-Log verloren.
+
+### Maximum number of days to keep queries in the database
+- Maximale Speicherdauer für DNS-Abfragen in der Datenbank, also welche DNS-Abfragen Clients gestellt haben.
+- Empfohlener Wert: ca. 3-14 Tage, bei größeren Netzwerken mit vielen DNS-Abfragen, sollte der Wert entsprechend verringert werden.
+
+### How long should IP addresses be kept in the network_addresses table [days]?
+- Speicherdauer für IP-Adressen und Hostnamen von Clients.
+- Hat einen geringen Performace-Einfluss, jedoch kann man je nach Größe des Netzwerkes einen Wert zwischen ca. 7-30 Tagen wählen.
+
+
+### Einstellungen setzen
+- Einstellungen im Pi hole Dashboard anpassen: 
+    - `SYSTEM > Settings > Privacy`
+    - `Expert-Modus aktivieren`
+    - `Privcy-related database settings` 
+    - `Should FTL load queries from the database on (re)start?` an oder abwählen
+    - Wert setzen bei: `Maximum number of days to keep queries in the database`
+    - Wert setzen bei: `How long should IP addresses be kept in the network_addresses table [days]?`
+    - speichern
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+# 12. [Pi hole](https://pi-hole.net/) Interface-Einstellungen (Optional, nur wenn benötigt)
 
 `Stand 8.4.2026, getestet mit Pi hole Version 6.4`
 
