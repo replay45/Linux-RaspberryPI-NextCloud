@@ -1,6 +1,6 @@
 # Linux-Server
 
-`Anleitung erstellt am 17.8.2025`
+`Anleitung erstellt am 17.8.2025, zuletzt bearbeitet am 16.6.2026`
 
 
 ## Inhaltsverzeichnis
@@ -10,7 +10,7 @@
 4. [Firewall](https://de.wikipedia.org/wiki/Firewall)
 5. [SSH](https://de.wikipedia.org/wiki/Secure_Shell)
 6. Verschlüsselung & Sicherheit unter Linux
-7. Server-Hardware und Ausfallsicherheit
+7. physischer Schutz der Server-Hardware und Ausfallsicherheit
 8. eigene Cloudlösung/ Netzlaufwerk
 	- [Nextcloud](https://nextcloud.com/de/)
 	- [SFTP](https://de.wikipedia.org/wiki/SSH_File_Transfer_Protocol)
@@ -41,7 +41,7 @@
 	- Implementierung vieler Sicherheitsmaßnahmen inkl. Verschlüsselung möglich
 	- z.B. durch VPN ins Heimnetz auch von extern sicherer Zugang möglich
 	- auch ggf. für mehrere Personen im Haushalt geeignet
-	- mit vielen Diensten erweiterbar, z.B. Filesharing ([SMB](https://de.wikipedia.org/wiki/Server_Message_Block), [SFTP](https://de.wikipedia.org/wiki/SSH_File_Transfer_Protocol), [WebDav](https://de.wikipedia.org/wiki/WebDAV)), eigene Cloud wie [Nextcloud](https://nextcloud.com/de/), oder [Media-Server](https://de.wikipedia.org/wiki/Streaming-Server), wie Plex, Jellyfin etc.
+	- mit vielen Diensten erweiterbar, z.B. Filesharing ([SMB](https://de.wikipedia.org/wiki/Server_Message_Block), [SFTP](https://de.wikipedia.org/wiki/SSH_File_Transfer_Protocol), [WebDav](https://de.wikipedia.org/wiki/WebDAV)), eigene Cloud wie [Nextcloud](https://nextcloud.com/de/), oder [Media-Server](https://de.wikipedia.org/wiki/Streaming-Server), wie [Plex](https://www.plex.tv/), [Jellyfin](https://jellyfin.org/) etc.
 
 
 -----------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ $ sudo apt autoremove --purge && sudo apt autoclean
 
 
 # 3. [Firewall](https://de.wikipedia.org/wiki/Firewall)
-- Mehr zur Firewall
+- Mehr zur Firewall unter Linux:
 	- Mehr zur [Firewall](https://de.wikipedia.org/wiki/Firewall) unter [Sicherheit-auf-Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung)
 	- [Firewall Manager - ufw](https://wiki.ubuntuusers.de/ufw/):
 
@@ -137,30 +137,32 @@ $ ssh USER@IP-ADRESSE
 
 
 # 5. Verschlüsselung & Sicherheit unter Linux
-- Mehr zu `Sicherheit unter Linux` in dem Ordner Linux unter [Sicherheit-auf-Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung) zu finden.
-- Mehr zu `Verschlüsselung unter Linux` in dem Ordner Linux unter [Verschlüsselung auf Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung).
+- Mehr zu `Sicherheit unter Linux` unter [Sicherheit-auf-Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung).
+- Mehr zu `Verschlüsselung unter Linux` unter [Verschlüsselung auf Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung).
+- Mehr zu `Absicherung eines Linux-Servers` unter [Linux-Server-absichern]().
 
 
 -----------------------------------------------------------------------------------------------
 
 
-# 6. Server-Hardware und Ausfallsicherheit
+# 6. physischer Schutz der Server-Hardware und Ausfallsicherheit
 - Um den Server und die Hardware zu schützen und auch die Verfügbarkeit der Daten sicherzustellen, sind hier noch ein paar Maßnahmen beschrieben.
 
-- `physischer Schutz`:
-	- Der Server sollte an einem geeigneten Platz stehen, der kühl und trocken ist und an dem die Luftzufuhr gewährleistet werden kann.
-	- Außerdem sollte der Server in einer erhöhten Position befestigt werden, sodass der Kontakt mit Wasser vermieden wird, was besonders in Kellern ein wichtiger Punkt ist.
-	- Optional können physische Sicherungen vorgenommen werden, um den Server vor unbefugten Zugriffen/Manipulationen zu schützen. Dafür eignen sich z.B. Serverschränke.
+### physischer Schutz
+- Der Server sollte an einem geeigneten Platz stehen, der kühl und trocken ist und an dem die Luftzufuhr gewährleistet werden kann.
+- Außerdem sollte der Server in einer erhöhten Position befestigt werden, sodass der Kontakt mit Wasser vermieden wird, was besonders in Kellern ein wichtiger Punkt ist.
+- Optional können physische Sicherungen vorgenommen werden, um den Server vor unbefugten Zugriffen/Manipulationen zu schützen. Dafür eignen sich z.B. Server- oder Netzwerkschränke.
+- Zusätzlich kann man Hardware mit Sicherheitssiegel versehen, um diese vor Manipulationen zu schützen, sodass die Hardware nicht geöffnet werden kann, ohne das Siegel zu beschädigen.
 
-- `Schutz vor Überspannung/Stromausfall`:
-	- Zunächst kann eine Mehrfachsteckdose mit Überspannungs- und ggf. auch Blitzschutz verwendet werden, um die Hardware vor Spannungsspitzen zu schützen.
-	- Einen zusätzlichen Schutz kann auch eine [USV](https://de.wikipedia.org/wiki/Unterbrechungsfreie_Stromversorgung) bieten, sowohl bei Spannungsschwankungen, als auch vor Spannungspitzen.
-	- Eine [USV](https://de.wikipedia.org/wiki/Unterbrechungsfreie_Stromversorgung) kann zudem auch bei kompatibler Hardware sicherstellen, dass der Server sich bei einem Stromausfall korrekt herunterfahren kann.
+### Schutz vor Überspannung/Stromausfall
+- Zunächst kann eine Mehrfachsteckdose mit `Überspannungs- und Blitzschutz (Feinschutz)` verwendet werden, um besonders schützenswerte Hardware vor Überspannungen zu schützen. Ein Feinschutz in einer Mehrfachsteckdose ersetzt jedoch keinen fachgerecht installierten Blitzschutz im Sicherungskasten - [Mehr zu Mehrfachsteckdosen & Überspannungsschutz](https://github.com/replay45/Projekt-Sammlung-und-Fun-Projekte/blob/main/Sammlung/Strom.md).
+- Einen zusätzlichen Schutz kann auch eine [USV](https://de.wikipedia.org/wiki/Unterbrechungsfreie_Stromversorgung) bieten, sowohl bei `Spannungsschwankungen`, als auch vor `Spannungspitzen`.
+- Eine [USV](https://de.wikipedia.org/wiki/Unterbrechungsfreie_Stromversorgung) kann zudem auch bei kompatibler Hardware sicherstellen, dass der Server sich bei einem Stromausfall `korrekt herunterfahren` kann.
 
-- [RAID](https://de.wikipedia.org/wiki/RAID) - Verfügbarkeit der Daten ([business continuity](https://de.wikipedia.org/wiki/Betriebliches_Kontinuit%C3%A4tsmanagement))
-	- RAID-Konfigurationen helfen bei physischen Defekten an Festplatten.
-	- Durch die korrekte Wahl der RAID-Konfiguration kann sichergestellt werden, dass die Daten auch erhalten bleiben, wenn eine Festplatte ausfällt.
-    - Mehr zu RAID-Konfiguration auf Ubuntu-Server in der Anleitung [RAID einrichten - Ubuntu-Server](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/linux/Linux-Server/RAID.md).
+### [RAID](https://de.wikipedia.org/wiki/RAID) - Verfügbarkeit der Daten ([business continuity](https://de.wikipedia.org/wiki/Betriebliches_Kontinuit%C3%A4tsmanagement))
+- RAID-Konfigurationen helfen bei physischen Defekten an Festplatten.
+- Durch die korrekte Wahl der RAID-Konfiguration kann sichergestellt werden, dass die Daten auch erhalten bleiben, wenn eine Festplatte ausfällt.
+- Mehr zu RAID-Konfiguration auf Ubuntu-Server in der Anleitung [RAID einrichten - Ubuntu-Server](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/linux/Linux-Server/RAID.md).
 
 
 -----------------------------------------------------------------------------------------------
@@ -188,7 +190,7 @@ $ ssh USER@IP-ADRESSE
 - `Nachteile`
 	- Performance stark vom Server abhängig
 	- Kann für sehr große Dateien langsamer sein als SMB oder SFTP
-	- administrieren kann aufwendiger sein als eine einfache SMB-Netzfreigabe
+	- Einrichtung kann aufwendiger sein als eine einfache SMB-Netzfreigabe
 
 
 ### [WebDav](https://de.wikipedia.org/wiki/WebDAV) (als Netzlaufwerk)
