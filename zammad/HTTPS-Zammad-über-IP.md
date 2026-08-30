@@ -1,6 +1,6 @@
 # [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure) für [Zammad](https://zammad.com/de) - über [IP-Adresse](https://de.wikipedia.org/wiki/IP-Adresse) (ohne öffentliche Domain)
 
-`Anleitung erstellt am 1.7.2025, zuletzt bearbeitet am 17.8.2026`
+`Anleitung erstellt am 1.7.2025, zuletzt bearbeitet am 30.8.2026`
 
 
 # 1. selbstsigniertes Zertifikat
@@ -76,8 +76,10 @@ $ openssl x509 -req -in Zammad.csr -CA ZammadCA.crt -CAkey ZammadCA.key -CAcreat
 
 # 3. [Firewall](https://ubuntu.com/server/docs/firewalls) vom [Ubuntu-Server](https://ubuntu.com/download/server) mit [Firewall-Manager ufw](https://wiki.ubuntuusers.de/ufw/)
 - HTTPS-Anfragen erlauben und Status der Firewall abrufen
+    - HTTPS Anfragen erlauben um Weiterleitung auf HTTPS (HSTS) zu ermöglichen
 ```
 $ sudo ufw allow https
+$ sudo ufw allow http
 $ sudo ufw enable
 $ sudo ufw status
 ```
@@ -107,13 +109,13 @@ $ sudo nano /etc/nginx/sites-available/zammad
 ```
 server {
     listen 80;
-    server_name IP-ADRESSE;
+    server_name IP-ADRESSE zammad.lokal.com;
     return 301 https://$host$request_uri;
 }
 
 server {
   listen 443 ssl;
-  server_name IP-ADRESSE;
+  server_name IP-ADRESSE zammad.lokal.com;
 
   ssl_certificate     /home/USERNAME/zammad-zertifikate/Zammad.crt;
   ssl_certificate_key /home/USERNAME/zammad-zertifikate/Zammad.key;
@@ -126,6 +128,8 @@ server {
     proxy_set_header X-Real-IP  $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header X-Forwarded-Port 443;
+    proxy_set_header X-Forwarded-Ssl on;
 
     proxy_pass http://127.0.0.1:8080;
   }
@@ -156,7 +160,55 @@ $ sudo systemctl restart nginx
 -------------------------------------------------------------------------------------------------------------
 
 
-# 6. Prüfen, ob Zertifikat gültig und aktiv ist
+# 6. CSRF Token Problem
+- Was ist das Problem ?
+    - Das Problem kann auftreten, wenn ein Reverseproxy für HTTPS verwendet wird.
+    - Wenn das Problem auftritt kann sich kein Benutzer/Admin-Konto mehr bei Zammad einloggen.
+
+- Auf Ubuntu-Server per SSH einloggen
+    - In das Zammad-Docker Verzeichnis wechseln
+    - eine neue Datei erstellen
+```
+$ cd zammad-docker-compose
+$ ls -a
+$ sudo nano .env
+```
+
+- nun folgendes einfügen und anpassen:
+    - LOKALER-DNS-EINTRAG durch den tatsächlichen verwendeten DNS Eintrag erstetzen
+```
+ZAMMAD_FQDN=LOKALER-DNS-EINTRAG
+ZAMMAD_HTTP_TYPE=http
+NGINX_SERVER_SCHEME=https
+```
+
+- Überprüfen:
+    - Befehl ausführen und nach `ZAMMAD_FQDN=`, `ZAMMAD_HTTP_TYPE=http` etc. suchen
+```
+$ docker compose config
+```
+
+- Überprüfen:
+```
+$ docker compose config | grep -E 'ZAMMAD_FQDN|ZAMMAD_HTTP_TYPE|NGINX_SERVER_SCHEME'
+```
+- Die Ausgabe sollte wie folgt aussehen:
+```
+NGINX_SERVER_SCHEME: https
+ZAMMAD_FQDN: LOKALER-DNS-EINTRAG
+ZAMMAD_HTTP_TYPE: http
+```
+
+- Wenn die Werte korrekt gesetzt sind, dann folgenden Befehl nutzen, um Container neu zu starten:
+```
+$ docker compose up -d
+```
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+# 7. Prüfen, ob Zertifikat gültig und aktiv ist
 - im Browser:
 	- Auch wenn der Browser das Zertifikat nicht als vertrauenswürdig einstuft, besteht trotzdem eine HTTPS-Verbindung.
 	- Im Browser die Seiteninformationen aufrufen (Vorhängeschloss-Symbol)
@@ -172,7 +224,7 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 -------------------------------------------------------------------------------------------------------------
 
 
-# 7. CA-Zertifikat in Clients importieren
+# 8. CA-Zertifikat in Clients importieren
 
 
 ## Zertifikat von Server mit [SCP](https://de.wikipedia.org/wiki/Secure_Copy) herunterladen
@@ -191,11 +243,11 @@ $ sudo scp user@IP-ADRESSE:/home/username/.../cert.crt /dein/lokales/verzeichnis
 $ ssh user@IP-Adresse
 ```
 ```
-$ cd /home/username/OpenProject-Zertifikate
+$ cd /home/username/Zammad-Zertifikate
 $ ls
 ```
 ```
-$ sudo chmod 644 home/username/OpenProject-Zertifikate/OpenProjectCA.crt
+$ sudo chmod 644 home/username/Zammad-Zertifikate/ZammadCA.crt
 ```
 - Nun nochmal mit SCP versuchen, die Datei zu kopieren.
 
@@ -219,18 +271,6 @@ $ sudo chmod 644 home/username/OpenProject-Zertifikate/OpenProjectCA.crt
 ## In einer [Active Directory](https://de.wikipedia.org/wiki/Active_Directory) Umgebung, mit GPO-Richtlinie Zertifikate an Clients automatisch verteilen
 - Wenn eine Active Directory (Domäne) genutzt wird, kann eine Gruppenrichtlinie (GPO) erstellt werden, um das CA-Zertifikat automatisch an alle Clients zu verteilen.
 - Dabei muss ggf. das Zertifikat in den Zertifikatsspeicher des Betriebssystems für die Chrome-basierten Browser und ggf. separat in den Firefox-Zertifikatsspeicher verteilt werden, wobei es auch möglich ist, Firefox über die GPO so zu konfigurieren, dass dieser den Zertifikatsspeicher des Betriebssystems verwendet.
-
-
--------------------------------------------------------------------------------------------------------------
-
-
-### Zugriff auf Zammad - HTTP / HTTPS
-- Wenn alles korrekt konfiguriert wurde, sollte das Zammad folgendermaßen erreichbar sein:
-	- Zu administrativen Zwecken über HTTP: http://IP-Adresse:8080
-	- Über die IP-Adresse: HTTP-Anfragen sollten automatisch auf HTTPS umgeleitet werden.
-	- GGf. über den internen DNS-Eintrag mit Umleitung auf HTTPS
-
-- Das heißt, sofern nicht direkt der Port 8080 aufgerufen wird, sollten alle HTTP-Anfragen (über Port 80) auf HTTPS, also Port 443, umgeleitet werden (egal, ob über die IP-Adresse oder den DNS-Eintrag).
 
 
 -------------------------------------------------------------------------------------------------------------
