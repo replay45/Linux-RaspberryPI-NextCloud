@@ -1,6 +1,6 @@
 # [HTTPS](https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol_Secure) für [Zammad](https://zammad.com/de) - über [IP-Adresse](https://de.wikipedia.org/wiki/IP-Adresse) (ohne öffentliche Domain)
 
-`Anleitung erstellt am 1.7.2025, zuletzt bearbeitet am 30.8.2026`
+`Anleitung erstellt am 1.7.2025, zuletzt bearbeitet am 9.9.2026`
 
 
 # 1. selbstsigniertes Zertifikat
@@ -105,7 +105,7 @@ $ sudo nano /etc/nginx/sites-available/zammad
 - folgendes einfügen:
     - Platzhalter anpassen:
     - `IP-ADRESSE`: IP-Adresse des Servers und ggf. auch Zammad.example anpassen
-    - `/home/USERNAME/zammad-zertifikate/` Pfad ggf. anpassen
+    - `/PATH/TO/zammad-zertifikate/` Pfad ggf. anpassen
 ```
 server {
     listen 80;
@@ -117,8 +117,8 @@ server {
   listen 443 ssl;
   server_name IP-ADRESSE zammad.lokal.com;
 
-  ssl_certificate     /home/USERNAME/zammad-zertifikate/Zammad.crt;
-  ssl_certificate_key /home/USERNAME/zammad-zertifikate/Zammad.key;
+  ssl_certificate     /PATH/TO/zammad-zertifikate/Zammad.crt;
+  ssl_certificate_key /PATH/TO/zammad-zertifikate/Zammad.key;
 
   proxy_redirect    off;
 
@@ -227,27 +227,25 @@ $ openssl s_client -connect IP-Adresse:443 -showcerts
 # 8. CA-Zertifikat in Clients importieren
 
 
-## Zertifikat von Server mit [SCP](https://de.wikipedia.org/wiki/Secure_Copy) herunterladen
-
 ### Windows:
 - Für Windows gibt es das Tool [WinSCP](https://winscp.net/eng/index.php).
 
 ### Linux:
-- Zertifikat über SCP kopieren (Befehl auf lokalem Rechner ausführen):
+- Zertifikat über [SCP](https://de.wikipedia.org/wiki/Secure_Copy) kopieren (Befehl auf lokalem Rechner ausführen):
 ```
-$ sudo scp user@IP-ADRESSE:/home/username/.../cert.crt /dein/lokales/verzeichnis/zielordner
+$ sudo scp USER@IP-ADRESSE:/PATH/TO/ZammadCA.crt /lokales/verzeichnis/zielordner
 ```
 
 - Wenn ein Berechtigungsfehler erscheint (Befehle auf dem Server ausführen):
 ```
-$ ssh user@IP-Adresse
+$ ssh USER@IP-Adresse
 ```
 ```
-$ cd /home/username/Zammad-Zertifikate
+$ cd /PATH/TO/Zammad-Zertifikate
 $ ls
 ```
 ```
-$ sudo chmod 644 home/username/Zammad-Zertifikate/ZammadCA.crt
+$ sudo chmod 644 /PATH/TO/Zammad-Zertifikate/ZammadCA.crt
 ```
 - Nun nochmal mit SCP versuchen, die Datei zu kopieren.
 
