@@ -1,6 +1,6 @@
 # Zammad konfigurieren & einrichten
 
-`Anleitung erstellt am 25.3.2025, zuletzt bearbeitet am 30.8.2026`
+`Anleitung erstellt am 25.3.2025, zuletzt bearbeitet am 9.9.2026`
 
 - Link zur [Zammad Admin Dokumentation](https://admin-docs.zammad.org/de/latest/#)
 
@@ -202,6 +202,7 @@ $ openssl s_client -connect SRV-DC:636 -showcerts
     - `Übermitteln`
 
 ### E-Mail - SMTP-Konfiguration
+- SMTP-Konfiguration
     - Dafür unter `Kanäle > E-Mail`, `E-Mail-Benachrichtigung` auf `Bearbeiten` und `SMTP - eigene ausgehende SMTP-Einstellungen konfigurieren...` anwählen.
     - SMTP: vom E-Mail Anbieter vorgegebene E-Mail-Adresse
     - Unter Benutzername und Passwort die entsprechenden Zugangsdaten der Support-E-Mail-Adresse eingeben
