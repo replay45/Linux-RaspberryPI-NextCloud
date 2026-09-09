@@ -1,6 +1,6 @@
 # [Zammad](https://zammad.com/de) über [Docker](https://www.docker.com/) auf einem [Ubuntu-Server](https://ubuntu.com/download/server) installieren
 
-`Anleitung zuletzt bearbeitet am 24.8.2026`
+`Anleitung zuletzt bearbeitet am 9.9.2026`
 
 - Link zur [Zammad System Dokumentation](https://docs.zammad.org/en/latest/index.html)
 
