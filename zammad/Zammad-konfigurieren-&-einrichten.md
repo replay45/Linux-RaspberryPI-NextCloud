@@ -1,13 +1,13 @@
 # Zammad konfigurieren & einrichten
 
-`Anleitung erstellt am 25.3.2025, zuletzt bearbeitet am 9.9.2026`
+`Anleitung erstellt am 25.3.2025, zuletzt bearbeitet am 10.9.2026`
 
 - Link zur [Zammad Admin Dokumentation](https://admin-docs.zammad.org/de/latest/#)
 
 ## Inhaltsverzeichnis
 1. Ersteinrichtung von Zammad (Admin Account anlegen)
 2. Ersteinrichtung & Einstellungen
-3. LDAP-Integration (Benutzerkonten über Active Directory)
+3. [LDAP](https://de.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol)-Integration (Benutzerkonten über [Microsoft Active Directory (AD)](https://de.wikipedia.org/wiki/Active_Directory))
 4. E-Mail-Integrationen
 
 
@@ -15,7 +15,7 @@
 
 
 # 1. Ersteinrichtung von Zammad (Admin Account anlegen)
-- `http://server-ip:8080` (falls reverse-Proxy schon eingerichtet wurde: https://server-ip)
+- `http://server-ip:8080` (falls reverse-Proxy schon eingerichtet wurde: `https://server-ip`)
 - Einrichtungsassistenten folgen
     - Admin-Konto erstellen
     - Nach der Erstellung des Admin-Kontos im Browser wird man zum Dashboard weitergeleitet.
@@ -50,6 +50,11 @@
 - z.B. geöffnete Tickets, geschlossene Tickets, Tickets sortiert nach Gruppen etc.
 
 
+### Kanäle > Web
+- Wenn nur bestimmte Ticket-Gruppen (aus Verwaltung > Gruppen) von Ticket-Kunden auswählbar sein sollen, kann dies hier festgelegt werden.
+- Dafür einfach unter `Gruppenauswhl für Ticket-erstellung` die Gruppen hinzufügen, die Ticket-Kunden auswählen können.
+
+
 ### Einstellungen > Branding
 - Bei "Produktname" kann ein beliebiger Name angegeben werden, dieser erscheint dann z.B. im Bowser Tab, als Benennenung des Tabs.
 - Außerdem können Name der Organisation und Logo angepasst werden.
@@ -59,7 +64,7 @@
 - [Speicherung von Anhängen](https://admin-docs.zammad.org/de/latest/settings/system/storage.html)
     - Unter diesem Punkt kann man einstellen, wie Anhänge gespeichert werden sollen.
     - Standardmäßig werden Anhänge in der SQL-Datenbank gespeichert, allerdings kann das dazu führen, dass die Datenbank schnell anwächst, was zu deutlichen Performance Problemen führen kann.
-    - Empfohlen ist die Speichermethode `Dateisystem`. Dabei werden die Anhänge unter `/opt/zammad/storage/` gespeichert.
+    - Empfohlen ist die Speichermethode `Dateisystem`. Dabei werden die Anhänge unter `/opt/zammad/storage/` im `Docker-Container` gespeichert.
     - Bei der Erstellung von Backups muss dann entsprechend beachtet werden die Datenbank und die Anhänge zu backupen.
     - Es ist nachträglich möglich den Speicherort für existierende Anhänge zu ändern, die entsprechenden Befehle dazu finden sich in der offiziellen Dokumentation.
 
@@ -75,10 +80,10 @@
 - Basis
     - Hier kann eingestellt werden, ob Nutzer auf der Anmeldeseite sich neu registrierenkönnen. Je NAch Anwendungsfall von Zammad deaktivieren !
     - Ebenso kann eingestellt werden, ob Benutzer die Passwort vergessen-Option verwenden können, wenn später Integrationen, wie z.B. LDAP genutzt werden soll, könnte man die Option deaktivieren.
-    - Außerdem kann noch das Sitzungstimeout eingesetllt werden.
+    - Außerdem kann noch das Sitzungstimeout eingesetellt werden.
 
 - Passwort
-    - Hier können Policys für die Anforderungen an Passwörter angepasst werden
+    - Hier können Richtlinien für die Anforderungen an Passwörter angepasst werden.
 
 
 ### Einstellungen > Ticket
@@ -87,7 +92,7 @@
 
 
 ### System > Wartungsmodus / Wartungsnachricht
-- Im Admin Dashboard in den Einstellungen unter `System > Wartung` kann der Wartungsmodus -Modus aktivert und eine Wartungsnachricht `@Login` eingestellt, die separat eingestellt werden kann eingerichtet werden.
+- Im Admin Dashboard in den Einstellungen unter `System > Wartung` kann der Wartungsmodusmodus aktivert und eine Wartungsnachricht `@Login` eingestellt, die separat eingestellt werden kann eingerichtet werden.
 - Die Wartungsnachricht `@Login` kann auch unabhänig vom Wartungsmodus genutzt werden.
 
 
@@ -98,7 +103,7 @@
 -------------------------------------------------------------------------------------------------------------
 
 
-# 3. LDAP-Integration (Benutzerkonten über Active Directory)
+# 3. [LDAP](https://de.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol)-Integration (Benutzerkonten über [Microsoft Active Directory (AD)](https://de.wikipedia.org/wiki/Active_Directory))
 
 ### Was ist [LDAP / LDAPS](https://de.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol) ?
 - LDAP ist ein offenes Protokoll, das für die Authentifizierung in Verzeichnisdiensten verwendet wird. LDAP wird häufig in Active Directory-Umgebungen verwendet, um Benutzer zu authentifizieren.
@@ -106,7 +111,7 @@
 - Außerhalb von Testumgebungen sollte man daher immer LDAPS nutzen.
 
 
-### Prüfen ob auf Active Directory-Server (AD) LDAP oder LDAPS aktiv ist
+### Prüfen ob auf [Microsoft Active Directory (AD)](https://de.wikipedia.org/wiki/Active_Directory) LDAP oder LDAPS aktiv ist
 - Standard-Ports: 
 	- LDAP verwendet normalerweise Port 389 
 	- LDAPS verwendet Port 636
@@ -155,13 +160,19 @@ $ openssl s_client -connect SRV-DC:636 -showcerts
 
 - Base DN
     - Hier legt man die Attribute der Domäne fest
-    - Wenn die Domäne domäne.local heißt, dann müssen die Attribute entsprechend angepasst werden `DC=domäne,DC=local`
+    - Wenn die Domäne "Firma.local" heißt, dann müssen die Attribute entsprechend angepasst werden `DC=domäne,DC=local`
     - man kann auch zusätzlich OUs (Organisationseinheiten) hinzufügen: `OU=Users,DC=domäne,DC=local` dabei muss der Name der OU entsprechend der OU angepasst werden, in der die zu importierenden User sind.
     - Es ist auch möglich mehrere OUs anzugeben.
 
 
 ### LDAP Zuordnung - Benutzer
-- Hier kann festgelegt werden welche Attribute vom LDAP Server auf die entsprechenden Zammad-Attribute gemappt werden, z.B. givenname (LDAP) für Vorname (Zammad) oder samaccountname (LDAP) für Login (Zammad) etc.
+- Hier kann festgelegt werden welche Attribute vom LDAP Server auf die entsprechenden Zammad-Attribute gemappt werden z.B.:
+    - `givenname` (LDAP) für `firstname` (Zammad)
+    - `sn` (LDAP) für `lastname` (Zammad)
+    - `mail` (LDAP) für `email` (Zammad)
+    - `samaccountname` (LDAP) für `login` (Zammad)
+    - `telephonenumber` (LDAP) für `phone` (Zammad)
+    - `description` (LDAP) für `note` (Zammad)
 
 
 ### Sicherheitsgruppen (LDAP) / Rollen (Zammad)
@@ -201,7 +212,7 @@ $ openssl s_client -connect SRV-DC:636 -showcerts
     - `#{config.product_name} <noreply@#{config.fqdn}>` muss durch die support-E-Mail Adresse ersetzt werden, z.B. support@firma.de ...
     - `Übermitteln`
 
-### E-Mail - SMTP-Konfiguration
+### E-Mail - [SMTP](https://de.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)-Konfiguration
 - SMTP-Konfiguration
     - Dafür unter `Kanäle > E-Mail`, `E-Mail-Benachrichtigung` auf `Bearbeiten` und `SMTP - eigene ausgehende SMTP-Einstellungen konfigurieren...` anwählen.
     - SMTP: vom E-Mail Anbieter vorgegebene E-Mail-Adresse
