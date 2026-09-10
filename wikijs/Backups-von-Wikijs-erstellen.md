@@ -6,7 +6,7 @@
 ## Inhaltsverzeichnis
 1. Einsatzzweck "Snapshots"
 2. Backups der Inhalte auf einen [SFTP](https://de.wikipedia.org/wiki/SSH_File_Transfer_Protocol)-Server
-3. Datenbank-Backups: (Konfigurationen, Einstellungen & Inhalte) - [Docker](https://de.wikipedia.org/wiki/Docker_(Software)
+3. Datenbank-Backups: (Konfigurationen, Einstellungen & Inhalte) - [Docker](https://de.wikipedia.org/wiki/Docker_(Software))
 4. Erstellte Datenbank-Backups auf einen anderen Server übertragen ([SCP](https://de.wikipedia.org/wiki/Secure_Copy) & [rsync](https://de.wikipedia.org/wiki/Rsync))
 5. PostgreSQL-Datenbank-Backups wiederherstellen
 6. Datenbank-Backups automatisch löschen nach entsprechender Zeit
@@ -63,7 +63,7 @@ $ sudo docker compose logs -f
 -------------------------------------------------------------------------------------------------------------
 
 
-# 3. Datenbank-Backups: (Konfigurationen, Einstellungen & Inhalte) - [Docker](https://de.wikipedia.org/wiki/Docker_(Software)
+# 3. Datenbank-Backups: (Konfigurationen, Einstellungen & Inhalte) - [Docker](https://de.wikipedia.org/wiki/Docker_(Software))
 - Beim Backup der Datenbank sollten alle Konfigurationen, Einstellungen und Inhalte gebackupt werden.
 - Dieses kann ebenfalls automatisiert werden.
 
