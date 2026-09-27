@@ -2,10 +2,12 @@
 
 `Anleitung für Ubuntu-Server & Debian geeignet`
 
+[Mehr zu Sicherheit auf Linux-Clients](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung/Sicherheit-unter-Linux.md)
+
 ## Inhaltsverzeichnis
 1. physische Absicherung
 2. Ubuntu/Debian-Server-automatisierte-Wartung (Updates/Neustarts)
-3. Firewall
+3. [Firewall](https://de.wikipedia.org/wiki/Firewall)
 
 
 ---------------------------------------------------------------------------
@@ -45,13 +47,13 @@
 $ crontab -e
 ```
 
-- Cronjob um Server alle 3 Monate um 5 Uhr Nachts neuzustarten.
+- Cronjob um Server alle 3 Monate um 5 Uhr Nachts neu zu starten.
     - `0 5 * 1-12/3 *` = Minute 0, Stunde 5, *1-12/3 = alle 3 Monate (beginnend mit Jannuar, also Neustart im Monat 1,4,7,10)
 ```
 0 5 * 1-12/3 * /bin/systemctl reboot
 ```
 
-- Cronjob um Server alle 6 Monate um 5 Uhr Nachts neuzustarten.
+- Cronjob, um Server alle 6 Monate um 5 Uhr Nachts neu zu starten.
 ```
 0 5 *1-12/6 * * /bin/systemctl reboot
 ```
@@ -85,8 +87,8 @@ $ sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
     - Die Konfiguration enthält den foglenden Abschnitt bereits, dieser muss NICHT hinzugefügt werden!
     - Durch die `//` werden die Zeilen auskommentiert.
     - Durch das Entfernen der beiden `//` wird die Zeile aktiv.
-    - Updates für Pakete (Programme): `"${distro_id}:${distro_codename}-updates";`
-    - Sicherheitsupdates: `"${distro_id}:${distro_codename}-security";`
+    - Updates für Pakete (Programme): `"${distro_id}ESMApps:${distro_codename}-apps-security";`
+    - Sicherheitsupdates: `"${distro_id}ESM:${distro_codename}-infra-security";`
 ```
 Unattended-Upgrade::Allowed-Origins {
         "${distro_id}:${distro_codename}";
@@ -199,14 +201,14 @@ $ sudo unattended-upgrades --dry-run --debug
 ---------------------------------------------------------------------------
 
 
-# 3. Firewall
+# 3. [Firewall](https://de.wikipedia.org/wiki/Firewall)
 
-- Firewall Punkt auch in der Anleitung unter Sicherheit unter Linux überarbeiten
 
 ### Was ist eine Firewall ?
-
-
-### Wie funktioniert die Firewall unter Linux ?
+- Eine Firewall ist ein System zur Absicherung eines Netzwerkes oder eines einzelnen Computers vor unerwünschten Netzwerkzugriffen.
+- Die Kernfunktion einer Firewall ist dabei ausschließlich Regeln für die Netzwerkkommunikation durchzusetzen.
+- Typischerweise funktioniert eine Firewall auf einem Betriebssystem so, dass jeglicher eingehender Netzwerkkverkehr verworfen wird, ausgehender Netzwerkverkehr wird jedoch erlaubt und lediglich die Antworten auf diesen ausgehenden Verkehr werden dann eingehend erlaubt.
+- Eine Firewall auf dem Betriebssystem ist daher essenziell, ersetzt jedoch keinesfalls eine Netzwerk-/Hardware-Firewall für das gesammte Netzwerk.
 
 
 ### [Firewall Manager - ufw](https://wiki.ubuntuusers.de/ufw/) (Debian-basierte Distributionen)
@@ -280,6 +282,7 @@ $ sudo ufw logging on
 $ sudo ufw logging STUFE 
 $ sudo ufw logging off 
 ```
+
 
 ---------------------------------------------------------------------------
 
