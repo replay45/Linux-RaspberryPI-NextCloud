@@ -1,6 +1,6 @@
 # Sicherheit auf Linux
 
-`Anleitung erstellt am 11.6.2025, zuletzt bearbeitet am 24.3.2026`
+`Anleitung erstellt am 11.6.2025, zuletzt bearbeitet am 27.9.2026`
 
 `Anleitung für Debian-basierte Systeme geeignet`
 
@@ -21,6 +21,7 @@
 
 
 - Mehr zu `Verschlüsselung unter Linux` in diesem Ordner unter [Verschlüsselung auf Linux](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung)
+- Mehr zu `Absicherung eines Linux-Servers` unter [Linux-Server-absichern](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/linux/Linux-Server/Linux-Server-absichern.md).
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -105,14 +106,14 @@ $ sudo freshclam
 
 # 3. [Firewall](https://de.wikipedia.org/wiki/Firewall)
 
-- Was ist eine [Firewall](https://de.wikipedia.org/wiki/Firewall) ?
-    - Eine Firewall kontrolliert den Datenfluss zwischen einem internen und einem externen Netzwerk und blockiert unerwünschten Datenverkehr.
-    - Die Funktion einer Firewall simpel erklärt: Wenn eine Anfrage aus dem internen Bereich gesendet und von extern beantwortet wurde, (z.B. einen Aufruf einer Webseite) dann können die entsprechenden Datenpakete die Firewall passieren. Wenn jedoch Datenpakete von extern gesendet werden, ohne, dass danach gefragt wurde, sollte die Firewall diese blockieren.
-    - Zusammenfassend schützt eine Firewall vor unerwünschtem Datenverkehr in einem Netzwerk, um die Systeme zu schützen.
 
+### Was ist eine Firewall ?
+- Eine Firewall ist System zur Absicherung eines Netzwerkes oder eines einzelnen Computers vor unerwünschten Netzwerkzugriffen.
+- Die Kernfunktion einer Firewall ist dabei ausschließlich Regeln für die Netzwerkkommunikation durchzusetzen.
+- Typischerweise funktioniert eine Firewall auf einem Betriebssystem so, dass jeglicher eingehender Netzwerkkverkehr verworfen wird, ausgehender Netzwerkverkehr wird jedoch erlaubt und lediglich die Antworten auf diesen ausgehenden Verkehr werden dann eingehend erlaubt.
+- Eine Firewall auf dem Betriebssystem ist daher essenziell, ersetzt jedoch keinesfalls eine Netzwerk-/Hardware-Firewall für das gesammte Netzwerk.
 
-[Firewall Manager - ufw](https://wiki.ubuntuusers.de/ufw/) (Debian-basierte Distributionen):
-
+### [Firewall Manager - ufw](https://wiki.ubuntuusers.de/ufw/) (Debian-basierte Distributionen):
 - Installation & Status
 ```
 $ sudo apt install ufw
@@ -147,7 +148,7 @@ $ sudo ufw allow 53/udp
 - Portfreigabe für eine bestimmte IP-Adresse
 ```
 $ sudo ufw allow from IP-ADRESSE
-$ sudo ufw allow from 203.0.113.4
+$ sudo ufw allow from 192.168.2.10
 
 $ sudo ufw allow from IP-ADRESSE to any port PORT
 $ sudo ufw allow from 192.168.2.10 to any port 22
@@ -196,8 +197,6 @@ $ sudo ufw logging off
 - Technisch funktioniert das über eine digitale Signatur, wodurch nicht signierte oder veränderte Software blockiert wird.
 
 
-
-
 ### Einrichtung von [Secure Boot](https://en.wikipedia.org/wiki/UEFI#Secure_Boot) - (Debian-basierte Distributionen)
 
 *folgt in Kürze*
@@ -210,7 +209,9 @@ $ sudo ufw logging off
 
 - `mehr zu DNS-Servern` in diesem Repository unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server)
 - Hinweis:
-    - Das Ändern des DNS-Servers zu einem sicheren Anbieter, verhindert ohne Implementierung einer Verschlüsselung oder Signierung keine [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) oder Tracking !
+    - Das Ändern des DNS-Servers zu einem sicheren Anbieter, verhindert `ohne Implementierung einer Verschlüsselung` oder Signierung `keine` [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) oder `Tracking` durch den [ISP](https://de.wikipedia.org/wiki/Internetdienstanbieter) oder Dritte !
+    - Das verschlüsseln des DNS-Traffics ist jedoch kein Wundermittel und schützt auch nur den DNS-Traffic selber und hat nichts mit einem [VPN](https://de.wikipedia.org/wiki/Virtual_Private_Network) zu tun.
+    
 
 ## Was ist ein [DNS-Server](https://de.wikipedia.org/wiki/Domain_Name_System) ?
 Ein DNS-Server `übersetzt Domainnamen` wie "google.de" in [IP-Adressen](https://de.wikipedia.org/wiki/IP-Adresse), denn Domains sind für uns Menschen, im Gegensatz zu IP-Adressen, einfacher zu merken.
@@ -220,8 +221,8 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
 
 ## Wieso den DNS Server ändern ?
 - Standardmäßig nutzt man die DNS-Server des Internetanbieters, diese sind jedoch häufig eher langsamer und wenn man `verhindern` möchte, dass der `Internetprovider bzw. Mobilfunkanbieter einsehen kann, welche DNS-Anfragen man stellt`, ist es sehr ratsam, die DNS-Server eines vertrauenswürdigen und datenschutzfreundlichen Anbieters zu verwenden.
-- Den DNS-Server kann man auf allen gänigen Desktop-Betriebsystemen sowie auf dem Smartphone, als auch in vielen gänigen Routern ändern.
-- Wie man seinen eigenen kleinen DNS-Server mit [Pi hole](https://pi-hole.net/) erstellen kann, wird unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server) gezeigt.
+- Den DNS-Server kann man auf allen gänigen Desktop-Betriebsystemen sowie auf dem Smartphone, als auch in vielen gänigen [Routern](https://de.wikipedia.org/wiki/Router)/[DHCP-Servern](https://de.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) ändern.
+- Wie man seinen eigenen kleinen DNS-Server mit [Pi hole](https://pi-hole.net/) hosten kann, wird unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server) gezeigt.
 
 
 ## Welchen Upstream-Server/Anbieter wählen ?
@@ -230,7 +231,7 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
     - Geschwindigkeit (schnelle Server)
     - Fokus auf Datenschutz & Sicherheit
     - kein Logging von IP-Adressen
-    - ideal für private Nutzer & Haushalte, sowie Unternehmen
+    - ideal für private Nutzer, Haushalte, sowie Unternehmen
 
 
 ## DNS Server ändern
@@ -239,11 +240,11 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
     - Einstellungen öffnen
     - WLAN / LAN Verbindung auswählen.
     - Eigenschaften der Verbindung auswählen.
-    - Zu dem Reiter `IPv4` wechseln, `"Automatic" deaktivieren` und IP-Adresse des DNS-Servers einfügen. ([Cloudflare DNS](https://www.cloudflare.com/): `1.1.1.1, 1.0.0.1`).
+    - Zu dem Reiter `IPv4` wechseln, `"Automatic" deaktivieren` und IP-Adresse des DNS-Servers einfügen.
     - Nun zu dem Reiter `IPv6` wechseln und ebenfalls `"Automatic" deaktivieren` und optional IPv6 des DNS-Servers einfügen.
 
-- Router:
-    - Wenn man nicht für jedes Gerät den DNS-Server einzeln einstellen möchte, kann man dies auch im Router tun.
+- Router/DHCP-Server:
+    - Wenn man nicht für jedes Gerät den DNS-Server einzeln einstellen möchte, kann man dies auch im DHCP-Server oder den DNS-Upstream des Routers ändern.
     - Je nach Hersteller und Modell können die Optionen abweichen (Vodafone Easy-Boxen unterstützen das Ändern des DNS-Servers in der Regel nicht).
     - Um den DNS-Server zu ändern, die Option finden, wo der primäre und der sekundäre-DNS-Server festgelegt werden können. Dabei können sowohl der primäre- als auch der sekundäre-DNS-Server unterschiedliche Server vom gleichen Anbieter sein, oder der sekundäre Server kann wahlweise auch von dem primären Anbieter abweichen, um eine hohe Ausfallsicherheit zu gewährleisten.
     - Einige Router, wie z.B. die [FritzBox](https://avm.de/) unterstützen auch `DNS-Verschlüsselung (DoT)`, um die Anfragen sowie die Antworten zu verschlüsseln, damit [Man-in-the-Middle-Angriffe](https://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff) und Tracking durch Dritte verhindert werden können.
@@ -254,7 +255,6 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
 - Standardmäßig gibt es mit den Bordmitteln unter Linux mit [GNOME](https://www.gnome.org/) keine Möglichkeit, den DNS-Server für alle Verbindungen global einzustellen oder eine DNS-Verschlüsselung zu aktivieren.
 - Die wohl einfachste Möglichkeit könnte eine VPN-Verbindung in das Heimnetzwerk sein, um die gewünschten DNS-Server mit ggf. DoT-Verschlüsselung z.B. über den Router wie die [FritzBox](https://avm.de/) zu nutzen oder den eigenen DNS-Server (z.B. [Pi hole](https://pi-hole.net/) oder [AdGuard Home](https://adguard.com/de/adguard-home/overview.html)) zu nutzen.
 - Eine VPN-Verbindung bietet u.a. auch den Vorteil, dass der eigene Netzwerkverkehr bei unsicheren oder fremden WLANs verschlüsselt wird und man auf andere Geräte aus dem Heimnetz zugreifen kann.
-- Eine andere Möglichkeit wäre z.B. [Pi hole](https://pi-hole.net/)/[AdGuard Home](https://adguard.com/de/adguard-home/overview.html) über [DynDNS](https://de.wikipedia.org/wiki/Dynamisches_DNS) aus dem Internet erreichbar zu machen oder extern bei einem Hostinganbieter zu hosten, um den gewünschten DNS-Server zu nutzen.
 - Alternativ kann man auch einen Forwarder direkt auf dem eigenen Gerät installieren und DNS-Verschlüsselung über den entsprechenden Forwarder realisieren. Dafür kann man z.B. [DNSCrypt-Proxy](https://dnscrypt.info/) verwenden.
 
 > Das Aufsetzen von [Pi hole](https://pi-hole.net/) wird unter [DNS-Server/Pi-hole](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/dns-server) gezeigt.
@@ -263,10 +263,10 @@ Außerdem gibt es nicht genügend verfügbare IPv4-Adressen, daher können diese
 ----------------------------------------------------------------------------------------------------------------
 
 
-# 6. Rootkit-Prüfung
+# 6. [Rootkit](https://de.wikipedia.org/wiki/Rootkit)-Prüfung
 
 
-### Was ist ein Rootkit
+### Was ist ein Rootkit ?
 - Ein Rootkit ist Schadsoftware (Maleware), die versucht sich mit Administratorrechten tief im System zu verstecken, um z.B. Backdoors zu installieren.
 - Die Gefahr dabei ist, dass Rootkits auch Kernel-Code ändern könnten und sich vor der Erkennung schützen.
 - Dabei werden Rootkits in der Regel entweder durch Maleware-Infektion oder durch Angreifer nach erfolgreicher Kompromitierung installiert.
