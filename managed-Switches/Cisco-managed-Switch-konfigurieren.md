@@ -1,15 +1,15 @@
 # [Cisco](https://www.cisco.com/) managed Switch konfigurieren
 
-`Anleitung verfasst am 28.3.2026`
+`Anleitung verfasst am 28.3.2026, zuletzt bearbeitet am 28.9.2026`
 
-`Anleitung getestet mit einem Cisco Catalyst Switch und Cisco IOS-Software`
+`Anleitung getestet mit einem Cisco Catalyst Switch aus der 2960X/XR-Reihe und Cisco IOS-Software`
 
 
 ### Hinweis zum seriellen Konsolen-Anschluss
-- Managed Switches verwenden in der Regel serielle Anschlüsse, die als "Console" betitelt werden.
-- Diese Anschlüsse sind entweder als [RJ45](https://de.wikipedia.org/wiki/RJ-Steckverbindung) oder manchmal auch als USB-Port verfügbar.
+- Managed Switches/Router verwenden in der Regel serielle Anschlüsse, die als "Console" betitelt werden.
+- Diese Anschlüsse sind entweder als [RJ45](https://de.wikipedia.org/wiki/RJ-Steckverbindung), manchmal auch als [mini-USB-Port](https://de.wikipedia.org/wiki/Universal_Serial_Bus), oder bei älteren Modellen als [RS-232/DB9](https://de.wikipedia.org/wiki/RS-232) verfügbar.
 - Da beim klassischen Konsolen Kabel die Pins vertauscht werden, ist es wichtig, dass niemals der LAN-Anschluss am PC/Laptop für den Konsolen-Anschluss verwendet wird, ansonsten können die Geräte beschädigt werden.
-- Der RJ45-Anschluss muss in den Consolen-Port des Switches und der USB-Anschluss in den Client.
+- Der RJ45-Anschluss muss in den Consolen-Port des Switches und der `USB-Anschluss in den Client`.
 
 
 -----------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ $ sudo minicom -D /dev/ttyUSB0
 - Es sollte nun die Konsole des managed Switch geöffnet sein.
 - Falls nicht, muss vielleicht die `Baudrate` angegeben werden.
     - Die Baudrate steht in der Regel im Handbuch des Switches (häufig 9600, 38400 oder 115200).
-    - Die Baudrate kann man wie folgt angeben: `$ minicom -D /dev/ttyUSB0 -b BAUDRATE`, z.B: `$ minicom -D /dev/ttyUSB0 -b 9600`
+    - Die Baudrate kann man wie folgt angeben: `$ minicom -D /dev/ttyUSB0 -b BAUDRATE`, z.B: `$ sudo minicom -D /dev/ttyUSB0 -b 9600`
 
 - Minicom verlassen
     - Um Minicom zu verlassen, `STRG+A`, dann `X` und `Enter` drücken.
@@ -113,10 +113,14 @@ oder
 > ?
 ```
 
-- Switch ausschalten/herunterfahren
-    - mit "yes" bestätigen
+- Switch neustarten
 ```
 > reload
+```
+
+- alle Switches im Stack neustarten
+```
+> reload /all
 ```
 
 - Zeigt IOS-Version, Modell, Uptime und mehr:
@@ -147,7 +151,7 @@ oder
 > show cdp neighbors
 ```
 
-- In den Konfigurationsmodus:
+- In den Konfigurationsmodus wechseln:
 ```
 # configure terminal
 oder
@@ -414,8 +418,8 @@ und/oder
 ```
 
 ### IOS-Software herunterladen
-- Die gewünschte Firmaware-Version herunterladen, am besten die `"stable-version"` auswählen.
-- Dabei auf das genaue Modell des Switches achten.
+- Die gewünschte Firmaware-Version herunterladen, am besten die `"stable-version"` auswählen [cisco.com](https://www.cisco.com/c/en/us/support/switches/category.html).
+- Dabei auf das genaue Modell des Switches achten, evtl. muss ein Benutzerkonto angelegt werden.
 - Die genaue Modellbezeichnung findet man auf dem Switch selbst als auch in der WebUI. Alternativ kann man sich das Modell auch in der Console mit `> show version` anzeigen lassen.
 - Sofern die WebUI verwendet wird, sollte man auch die Version `...with webui...` herunterladen.
 
@@ -594,5 +598,197 @@ und/oder
 ```
 
 - Nun sollte der Switch auf Werkseinstellungen zurückgesetzt sein.
+
+
+----------------------------------------------------------------------------------------------------
+
+
+# 10. Portmodes & Portfast
+
+
+### Welche Portmodes gibt es ?
+- `dynamic - auto`
+    - Zunächst stehen wahrscheinlich nach standardkonfiguration alle Ports am Switch auf "dynamic - auto".
+    - Das ist jedoch ein potenzielles Sicherheitsrisiko, denn der Switch verhandelt per DTP (Dynamic Trunking Protocol) den Modus. Angreifer könnten dabei versuchen den Port zum Trunk-Port zu machen, wodurch dieser sich unerlaubten Zugriff auf alle VLANs machen könnte.
+    - Daher sollte `KEIN` Port im default-Zustand auf "dynamic" bleiben ! Ports sollten standardmäßig als "Access-Ports" konfiguriert werden.
+
+- `Access Ports`
+    - Access Ports senden/empfangen nur untagged-Traffic (+optional das Voice-VLAN) - mehr zu Voice-VLANs bei Punkt "12. Voice-VLAN".
+    - Ports sollten standardmäßig als Access Ports konfiguriert sein.
+
+- `Trunk`
+    - Der Trunk-Modus wird benötigt, um mehrere VLANs über einen einzelnen Port zu transportieren.
+    - Trunkports werden in der Regel für WLAN-AccessPoints oder als Uplink zu anderen Switches oder einer Firewall/Gateway verwendet.
+    - Dabei muss natürlich das Gegenüber auch entsprechend einen Trunk-Port bieten und den VLAN-Traffic taggen können.
+    - Das Native VLAN sollte aus Sicherheitsgründen auf ein nicht verwendetes VLAN gesetzt werden und auf dem Trunk NCIHT unter den erlaubten VLANs geführt werden !
+    - Da das Native VLAN keine aktiven Teilnehmer haben sollte, kann darüber kein unbefugter Traffic ins Netzwerk gelangen.
+    
+
+### Was ist Portfast ?
+- Portfast ist eine Funktion, um STP (Spanning-Tree-Protocol)-Funktionen auf Ports für Edge-Devices (also Endgeräte), wie PCs, Laptops, Server, Drucker etc. zu deaktivieren.
+- Denn wenn ein Gerät an den Switch per LAN angeschlossen wird, startet STP. Erst wenn STP durchgelaufen ist, wird der Port freigeschaltet.
+- Edge-Devices (also Endgeräte) unterstützen allerdings kein STP und daher dauert es ca. 30s bis der Port frei ist und der Client eine Verbindung aufbauen kann.
+
+
+### Auf welchen Ports sollte man Portfast aktivieren ?
+- Grundsätzlich sollte Portfast auf allen `Access Ports`, für `Clients, die KEIN STP unterstüzen, aktiviert` werden. Das wären z.B. PCs, Laptops, unmanaged Switches etc.
+- Lediglich auf den Uplinks zu anderen smart/managed-Switches oder Routern/Firewalls/Gateways sollte Portfast NICHT aktiviert werden.
+
+
+### Welche STP (Spanning-Tree-Protocol)-Funktionen sind empfohlen (Übersicht) ?
+- STP-Modus: `rapid-pvst`
+    - Überprüfen mit `# show spanning-tree summary | include mode`
+    - rapid-pvst ist der Standard für fast alle Netzwerke.
+
+- Für Edge-Ports (access Ports für Clients):
+    - Portfast: `enabled` - Schnelle Verfügbarkeit für Endgeräte, blockiert BPDUs (STP ist deaktiviert)
+
+- Für Uplinks/Trunk-Ports z.B. zu anderen smart/managed-Switches:
+    - Portfast: `disabled` - STP ist aktiv
+
+
+### Portfast Status-überprüfen (IOS-Software)
+- Prüfen, ob & für welche Ports, Portfast aktiv ist:
+    - Wenn keine Ausgabe erscheint ist Portfast nicht aktiv.
+```
+> en
+# show spanning-tree | include Portfast
+# show running-config
+```
+
+- Detaillierte Informationen zu Portfast pro Port:
+    - Den Platzhalter `PORT` mit dem entsprechenden Port ersetzen.
+```
+# show spanning-tree interface PORT detail
+z.B.
+# show spanning-tree interface GigabitEthernet1/0/1 detail
+```
+
+- Übersicht aller STP-Port-Eigenschaften
+```
+# show spanning-tree summary
+# show interfaces status
+```
+
+### Portfast auf allen "access Ports" aktivieren (IOS-Software) - CLI
+```
+> en
+# conf t
+```
+
+- Der folgende Befehl aktiviert Portfast auf allen "access Ports"
+    - Auf Trunk-Ports wird Portfast nicht aktiviert !
+    - Portfast muss außerdem manuell auf allen Uplinks zu anderen smart/managed-Switches deaktiviert werden.
+```
+# spanning-tree portfast default
+```
+
+- Um Portfast auf bestimmten Ports wieder zu deaktivieren
+```
+# interface GigabitEthernet1/0/1
+# spanning-tree portfast disable
+```
+
+- Speichern
+```
+# copy running-config startup-config
+```
+
+### Portfast in der WebUI
+Alternativ kann man Portfast auch in der WebUI aktivieren/deaktivieren.
+
+- In der WebUI unter `Konfiguration > Ports` kann man die einzelnen Ports anwählen.
+- Unter `Erweiterte Einstellungen` kann man nun STP für den ausgewählten Port konfigurieren.
+
+- Für Endgeräte (Edge-Devices):
+    - `STP-Porttyp`: `Edge`
+    - "Anwenden"
+
+- Für Uplinks zu anderen smart/managed-Switches:
+    - `STP-Porttyp`: `Deaktivieren`
+    - "Anwenden"
+
+- Änderungen speichern (Speichersymbol oben rechts in der WebUI um in startup-config zu speichern)
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+# 11. Trunk-Ports für mehrere VLANs
+- Wenn mehrere VLANs über einen pyhsichen Port laufen sollen, da z.B. ein WLAN-AccessPoint angeschlossen ist, der mehrere WLANs/SSIDs in unterschiedlichen VLANs bereitstellt, müssen diese über den gleichen Port laufen.
+- Dabei muss beachtet werden, dass entweder ein dedizierter Uplink-Port, z.B. zu einer Firewall/Gateway benötigt wird, der dann auf das entsprechende VLAN konfiguriert wird oder ein bereits vorhandener Uplink Port zur Firewall/Gateway ebenfalls als Trunk-Port konfiguriert wird.
+
+
+### Trunk-Port in der WebUI einstellen
+- WebUI öffnen
+- Den entsprechenden Port identifizieren und unter `Konfiguration > Ports` den entsprechenden Port auswählen.
+- Zunächst unter `Porteinstellungen` `Portfast deaktivieren` oder unter `Erweiterte Einstellungen` `STP-Porttyp` auf `Deaktivieren` setzten.
+- Danach unter `Porteinstellungen` den `Switch-Modus` auf `trunk` setzten.
+- Für die VLANs bei `zulässiges VLAN` `VLAN-IDs` anwählen, um unter `VLAN-IDs` die VLANs einzugeben (z.B. `10,20,30`)
+- Das `Native VLAN` ist das VLAN in das jeglicher ungetaggte Traffic landet, wenn also gewünscht ist, dass aus Sicherheitsgründen ungetaggter Traffic in einem nicht verwendeteten VLAN landet (damit er verworfen wird), kann man den Wert auf z.B. `999` setzen.
+- "Anwenden"
+- Änderungen speichern (Speichersymbol oben rechts in der WebUI um in startup-config zu speichern)
+
+
+### Hinweis zu Geräte die kein VLAN-Tagging unterstützen
+- Es gibt einige Geräte die kein VLAN-Tagging unterstützen, für die man typischerweise jedoch in ein VLAN einrichten möchte, wie z.B. Drucker.
+- Für diese Geräte muss man am Switch den Portmodus (switchport mode) auf `access` setzen, damit der Switch den Traffic an dem Port tagged, sodass dann z.B. der Uplink zum Gateway über einen Trunk-Port laufen kann.
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+# 12. [Link Aggregation](https://de.wikipedia.org/wiki/Link_Aggregation) - LACP
+- Was ist Link Aggregation/LACP
+    - LACP (Link Aggregation Control Protocol) ist eine logische Zusammenfassung mehrer physischer Ports zu einem einzigen logischen Port.
+    - Das Ziel dabei ist, die Bandbreite zu erhöhen und Redundanz zu schaffen.
+    - Die Bandbreitenerhöhung funktioniert nur bei mehreren Datenströmen, durch viele Geräte/Clients, da so die Last auf die logischen Ports aufgeteilt werden kann, bei einem einzelnen Client würde LACP keine Bandbreitenerhöhung erfolgen, da die Leitung z.B. pro Mac-Adresse (Layer2) verwendet wird.
+    - Beispiel: 2x 1Gbit/s-Ports wird mit LACP zu einem logischem Port mit bis zu 2Gbit/s.
+    - Aber LACP bietet auch den Vorteil der Redundanz, wodurch der Uplink aufrechterhalten werden kann, wenn eine Leitung z.B. durch einen Defekt ausfällt.
+    - Außerdem werden Wartungsarbeiten an den Leitungen etc. durch LACP vereinfacht, da immer ein Uplink verfügbar bleiben kann.
+    - Bei Cisco wird für LACP auch oftmals das Synonym `"Etherchannel"` verwendet.
+
+
+### LACP-Konfigurastionen in der WebUI überprüfen
+- WebUI öffnen
+- Unter `Monitoring > Ports` > `Port-Channel-Übersicht` sollten alle LACP-Portgruppierungen angezeigt werden.
+
+
+### LACP über die WebUI einstellen
+- WebUI öffnen
+- Bei Cisco Catalyst Modellen: `Konfiguration > Ports`
+- `STRG`-Taste gedrückt halten und die zwei Ports auswählen
+- Unter der Anzeige des/der ausgewählten Port(s) prüfen, ob die korrekten Ports angewählt wurden.
+- Nun unter `Porteinstellungen > Portgruppennummern` eine Nummer festlegen, z.B. `1` (diese muss auf beiden Switches identisch sein)
+- "Anwenden"
+- Der Portgruppentyp sollte `LACP` sein.
+- Nun sollten die Ports in WebUI immer zusammen angezeigt werden.
+- Unter `Monitoring > Ports` > `Port-Channel-Übersicht` sollten alle LACP-Portgruppierungen angezeigt werden.
+- Wenn über die LACP-Ports mehrere VLANs laufen sollen, muss der Port als `Trunk-Port` konfiguriert werden - mehr dazu unter Punkt "11. Trunk-Ports für mehrere VLANs".
+- Änderungen speichern (Speichersymbol oben rechts in der WebUI um in startup-config zu speichern)
+- Die Einstellungen müssen auf der entsprechenden Gegenseite, z.B. ein auf einem anderern Switch, ebenfalls vorgenommen werden, dabei den gleichen Wert für die LACP-Portgruppennummer verwenden.
+
+
+### physisch verbinden & Status prüfen
+- Nun die beiden konfigurierten Geräte mit den entsprechenden Ports physisch verbinden.
+- In der WebUI dafür unter `Services > CLI` folgende Befehle nutzen, um den Status einzusehen:
+- Portchannel überprüfen
+    - `D` = down
+    - `P` = bundeld
+```
+# show etherchannel X summary
+z.B. # show etherchannel 1 summary
+
+# show interfaces Port-channelX
+z.B. # show interfaces Port-channel1
+```
+
+- Nun können noch Stabilitätstest vorgenommen werden, z.B. ein Client an einen Access-Port anschließen und testen, ob es zu Ausfällen kommt, wenn eine Leitung der LACP-Portgruppierung getrennt wird. Dabei hilft unter anderem auch der "Ping"-Befehl auf einem beliebigen Betriebssytem.
+- Dabei können die Meldungen unter "Warnungen" in der WebUI auf ungewöhnliche Warnungen geprüft werden.
+
+
+### Wichtig:
+- Auf der Gegenseite, z.B. ein Server mit mehreren Netzwerkkarten oder ein smart/managed-Switch muss ebenfalls LACP konfiguriert sein/werden !
+
 
 -----------------------------------------------------------------------------------------------------
