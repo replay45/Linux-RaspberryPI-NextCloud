@@ -1,6 +1,6 @@
-# Verschlüsselung auf Linux
+# [Verschlüsselung](https://de.wikipedia.org/wiki/Verschl%C3%BCsselung) unter Linux
 
-`Anleitung erstellt am 19.11.2024, zuletzt bearbeitet am 27.1.2026`
+`Anleitung erstellt am 19.11.2024, zuletzt bearbeitet am 4.10.2026`
 
 
 ## Inhaltsverzeichnis
@@ -32,12 +32,15 @@ Das `erhöht erheblich die Sicherheit für die Daten, die durch die zweite Versc
 
 Es ist auch möglich, `externe Speichermedien` über CryFS zu verschlüsseln, allerdings eignet sich dafür das Tool [VeraCrypt](https://veracrypt.fr/) - (mehr dazu in diesem Ordner unter [Verschlüsselung mit VeraCrypt](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/Sicherheit-auf-linux-%26-Verschl%C3%BCsselung)), welches sich besonders für die Verschlüsselung von externen Speichermedien eignet und auch von allen gängigen Desktop-Betriebssystemen unterstützt wird.
 
+Für Verschlüsselung in `Cloud-Speicher` oder auf `Netzlaufwerken`, wie z.B. [SMB](https://de.wikipedia.org/wiki/Server_Message_Block) [SFTP](https://de.wikipedia.org/wiki/SSH_File_Transfer_Protocol) kann alternativ auch der [Cryptomator](https://cryptomator.org/) (auch [Open Source](https://de.wikipedia.org/wiki/Open_Source)) verwendet werden, dieser verschlüsselt ebenfalls Daten auf Dateiebene.
+
 
 ------------------------------------------------------------------------------------------------
 
 
 ### A. Installation von CryFS auf Linux
 ```
+$ sudo apt update
 $ sudo apt install cryfs
 ```
 
@@ -81,10 +84,8 @@ $ cryfs ~/HIER/PFAD/VERSCHLÜSSELTER/ORDNER ~/HIER/PFAD/ENTSCHLÜSSELTER/ORDNER
 
 ### C. optional ein Skript erstellen, um das Laufwerk einhängen zu können
 - Nun kann optional ein `Sh-Skript` erstellt werden, um nicht jedes Mal den Befehl ausführen zu müssen, sondern nur das Skript im Terminal zu starten, welches den Befehl automatisch ausführt.
-
 - Dieses Skript muss lediglich den Entschlüsselungsbefehl enthalten und als `Datei.sh` gespeichert werden.
-
-- Mehr zu sh-Skripten in der Datei [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux) im Linux Repository.
+- Mehr zu sh-Skripten in der Datei [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/linux-Terminal-%26-Skripte) im Linux Repository.
 
 
 ------------------------------------------------------------------------------------------------
@@ -93,10 +94,8 @@ $ cryfs ~/HIER/PFAD/VERSCHLÜSSELTER/ORDNER ~/HIER/PFAD/ENTSCHLÜSSELTER/ORDNER
 ### D. Skript über eine `.Desktop`-Datei verknüpfen und ausführbar machen
 - Das Skript kann man nun mit einer `.Desktop`-Datei` verknüpfen:
     - Dabei erscheint die `.Desktop`-Datei im App-Menü und führt beim Öffnen das erstellte sh-Skript aus und wenn alles korrekt eingerichtet ist, sollte sich ein Terminal mit der Passwortabfrage öffnen.
-
 - Dabei muss jedoch beachtet werden, dass in der `.Desktop`-Datei die Konfiguration richtig vorgenommen wurde und der Wert `Terminal=true` gesetzt wurde.
-
-- Wie man ein `sh-Skript mit einer ".Desktop"-Datei verknüpft`, wird ebenfalls in diesem Github-Repository unter [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux) gezeigt.
+- Wie man ein `sh-Skript mit einer ".Desktop"-Datei verknüpft`, wird ebenfalls in diesem Github-Repository unter [bash-sh-skripte](https://github.com/replay45/Linux-RaspberryPI-NextCloud/tree/main/linux/linux-Terminal-%26-Skripte) gezeigt.
 
 
 ------------------------------------------------------------------------------------------------
