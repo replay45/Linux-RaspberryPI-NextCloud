@@ -33,7 +33,7 @@
 
 
 ### Alternativen für Cloud & Netzlaufwerke - [Cryptomator](https://cryptomator.org/)
-- Wenn man Verschlüsselungsmethoden sucht, um Daten in einer Cloud oder auf einem Netzlaufwerk (z.B. SMB / SFTP etc.) zu verschlüsseln, sollte man sich den [Cryptomator](https://cryptomator.org/) anschauen, denn dieser verschlüsselt Daten auf Dateiebene.
+- Wenn man Verschlüsselungsmethoden sucht, um Daten in einer Cloud oder auf einem Netzlaufwerk (z.B. [SMB](https://de.wikipedia.org/wiki/Server_Message_Block) / [SFTP](https://de.wikipedia.org/wiki/SSH_File_Transfer_Protocol) etc.) zu verschlüsseln, sollte man sich den [Cryptomator](https://cryptomator.org/) anschauen, denn dieser verschlüsselt Daten auf Dateiebene.
 - Dieser ist ebenfalls [Open Source](https://de.wikipedia.org/wiki/Open_Source) und auf dem Desktop kostenlos.
 - Für Android/iOS gibt es mobile Apps, diese sind jedoch kostenpflichtig (Stand 2026).
 - Der Cryptomator bietet zudem Unterschtützung für gängige Cloudanbieter.
