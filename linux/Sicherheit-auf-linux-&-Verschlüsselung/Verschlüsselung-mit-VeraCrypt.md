@@ -1,6 +1,6 @@
 # Verschlüsselung mit [VeraCrypt](https://veracrypt.fr/)
 
-`Anleitung erstellt am 19.11.2024, zuletzt bearbeitet am 9.2.2026`
+`Anleitung erstellt am 19.11.2024, zuletzt bearbeitet am 4.10.2026`
 
 ## Inhaltsverzeichnis
 1. Was ist [VeraCrypt](https://veracrypt.io/)
@@ -16,14 +16,42 @@
 # 1. Was ist [VeraCrypt](https://veracrypt.io/) ?
 - VeraCrypt ist ein kostenloses [Open Source](https://de.wikipedia.org/wiki/Open_Source) `Verschlüsselungsprogramm` und wird zur Verschlüsselung von `Festplatten`, `Partitionen` und `Wechseldatenträgern`, wie `USB-Sticks` oder `externen Festplatten`, genutzt.
 - Das Programm ist u.a. für Linux, Windows und MacOS verfügbar.
+- Leider gibt es keine offizielle Unterstützung für Android/iOS (Stand 2026).
+
+
+### Vorteile & Einsatzzwecke von VeraCrypt
+- Vorteile
+    - [Open Source](https://de.wikipedia.org/wiki/Open_Source) & kostenlos
+    - Für Linux, Windows und MacOS verfügbar
+    - Unterstützung für versteckte und separat verschlüsselte Container oder Partitionen
+    - Kann auch für die Festplattenverschlüsselung bei Betriebssystemen eingestzt werden.
+
+- Einsatzzwecke
+    - Besonders geeignet zur Verschlüsselung von externen Speichermedien, wie externen Festplatten/ USB-Sticks etc.
+    - Festplattenverschlüsselung bei Windows-Systemen, da BitLocker mangelhaft ist.
+    - "Container"-Dateien (virtuelles Laufwerk) zur Aufbewahrung von sensiblen Daten.
+
+
+### Alternativen für Cloud & Netzlaufwerke - [Cryptomator](https://cryptomator.org/)
+- Wenn man Verschlüsselungsmethoden sucht, um Daten in einer Cloud oder auf einem Netzlaufwerk (z.B. SMB / SFTP etc.) zu verschlüsseln, sollte man sich den [Cryptomator](https://cryptomator.org/) anschauen, denn dieser verschlüsselt Daten auf Dateiebene.
+- Dieser ist ebenfalls [Open Source](https://de.wikipedia.org/wiki/Open_Source) und auf dem Desktop kostenlos.
+- Für Android/iOS gibt es mobile Apps, diese sind jedoch kostenpflichtig (Stand 2026).
+- Der Cryptomator bietet zudem Unterschtützung für gängige Cloudanbieter.
 
 
 ------------------------------------------------------------------------------------------------
 
 
-# 2. Installation auf Linux (Debian-basierte Distributionen)
-- [download tar.bz2 auf veracrypt.io](https://veracrypt.io/en/Downloads.html)
+# 2. Installation von VeraCrypt auf Linux (Debian-basierte Distributionen)
+- Es kann zwischen verschiedenen Installern auf der Seite [veracrypt.io/en/Downloads](https://veracrypt.io/en/Downloads.html) gewählt werden.
 
+### Debian Paket .deb
+- Es steht ein .deb-Paket für die Installation auf Debian Systemen zur Verfügung.
+- Dieses kann heruntergeladen werden und manuell über das Terminal oder alternativ über einen `Installer` wie [GDebi](https://packages.debian.org/de/stable/gdebi) installiert werden.
+
+
+### universeller Installer - tar.bz2
+- [download tar.bz2 auf veracrypt.io](https://veracrypt.io/en/Downloads.html)
 ```
 $ tar xvf veracrypt-version-setup.tar.bz2
 ```
@@ -39,7 +67,6 @@ $ ./veracrypt-version-setup-console-x64
 - Um die Version mit Benutzeroberfläche zu installieren, auf die Kennzeichnung `"gui"` achten !
 - Wenn man eine Benutzeroberfläche mit `gtk2` (meistens: [GNOME](https://www.gnome.org/), [XFCE](https://www.xfce.org/), [MATE](https://mate-desktop.org/) oder [Cinnamon](https://de.wikipedia.org/wiki/Cinnamon_(Desktop-Umgebung))) verwendet, kann man die Version mit `gtk2` installieren, jedoch ist das KEIN "Muss".
 - Nun dem Installationsassistenten folgen.
-- Alternativ kann das Debian-Paket auch mit einem `Installer` wie [GDebi](https://packages.debian.org/de/stable/gdebi) installiert werden.
 
 
 ### Deinstallationsbefehl:
@@ -79,12 +106,14 @@ Beim Erstellen der verschlüsselten Partition oder des externen Laufwerkes wird 
 # 4. Eine verschlüsselte Containerdatei auf einem beliebigen Laufwerk erstellen
 
 ### Was ist eine verschlüsselte Containerdatei ?
-Eine verschlüsselte Containerdatei ist ein verschlüsseltes virtuelles Laufwerk, was jedoch eine Datei und keine Partition ist, in dem Dateien gespeichert werden können.
+- Eine verschlüsselte Containerdatei ist ein verschlüsseltes virtuelles Laufwerk, was jedoch eine Datei und keine Partition ist, in dem Dateien gespeichert werden können.
+    - Vorteil: Die Containerdatei kann man beliebig auf einem oder mehreren Datenträgern verschieben.
+    - Nachteil: Das Bearbeiten der Containerdatei ist nicht vorgesehen, daher muss bei der Erstellung dieser die Größe der Containerdatei mit Bedacht gewählt werden.
 
-- Vorteil:
-    - Die Containerdatei kann man beliebig auf einem oder mehreren Datenträgern verschieben.
-- Nachteil:
-    - Das Bearbeiten der Containerdatei ist nicht vorgesehen, daher muss bei der Erstellung dieser die Größe der Containerdatei mit Bedacht gewählt werden.
+- Hinweis zu Netzlaufwerken
+    - Das Einhängen von Containerdateien von einem Netzlaufwerk ist nicht vorgesehen, bzw. kann bei Netzwerkabbrüchen auch zu Beschädigungen an der Containerdatei führen.
+    - Es wird daher empfohlen die Containerdatei auf das lokale System zu kopieren und lokal einzuhängen.
+    - Um Daten auf Netzlaufwerken oder in der Cloud zu verschlüsseln eignet sich der [Cryptomator](https://cryptomator.org/).
 
 
 ### Erstellen einer verschlüsselten Containerdatei
