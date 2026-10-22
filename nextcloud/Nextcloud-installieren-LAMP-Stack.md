@@ -1,6 +1,6 @@
 # [Nextcloud](https://nextcloud.com/de/) über LAMP-Stack installieren & konfigurieren
 
-`Anleitung erstellt am 21.6.2026`
+`Anleitung erstellt am 21.6.2026, zuletzt bearbeitet am 22.9.2026`
 
 `Nextcloud erfolgreich auf Ubuntu 24.04 installiert`
 
@@ -10,12 +10,12 @@
 2. interne Domain (DNS-Eintrag) / IP-Adresse
 3. [Ubuntu-Server](https://ubuntu.com/download/server) installieren
 4. Nextcloud installieren - LAMP-Stack
-    - Apache2 installieren
-    - PHP installieren
-    - MySQL (MariaDB) - Database
+    - [Apache2](https://httpd.apache.org/) installieren
+    - [PHP](https://www.php.net/) installieren
+    - [MySQL](https://www.mysql.com/) ([MariaDB](https://mariadb.org/)) - Database
     - Nextcloud installieren
 5. Datenverzeichnis erstellen & Berechtigungen setzen
-6. Apache2-Webserver konfigurieren
+6. [Apache2](https://httpd.apache.org/)-Webserver konfigurieren
 7. SSL-via IP mit Apache2 (inkl. selbstsigniertem IP-SSL-Zertifikat mit CA)
 8. Ersteinrichtung vornehmen
 9. CA-Zertifikat auf Clients installieren
@@ -118,18 +118,22 @@ $ sudo mc
 # 4. Nextcloud installieren - LAMP-Stack
 
 
-### Apache2 installieren
+### [Apache2](https://httpd.apache.org/) installieren
 - Apache2 installieren
 ```
 $ sudo apt install apache2
 ```
 
-### PHP installieren
+### [PHP](https://www.php.net/) installieren
 - Da PHP in `Ubuntu 24.04` direkt in den offiziellen Rpositiories enthalten ist, kann PHP direkt installiert werden, ohne ein Repository hinzufügen zu müssen.
     - Für `Ubuntu 22.04` müsste das Repository manuell hinzugefügt werden, bevor folgende Module hinzugefügt werden.
 ```
 $ sudo apt install php8.3 libapache2-mod-php8.3 php8.3-zip php8.3-xml php8.3-mbstring php8.3-gd php8.3-curl php8.3-imagick libmagickcore-6.q16-6-extra php8.3-intl php8.3-bcmath php8.3-gmp php8.3-cli php8.3-mysql php8.3-zip php8.3-gd  php8.3-mbstring php8.3-curl php8.3-xml php-pear unzip nano php8.3-apcu redis-server ufw php8.3-redis php8.3-smbclient php8.3-ldap php8.3-bz2 php8.3-sqlite3
 $ sudo apt update && sudo apt upgrade
+```
+- PHP-Version üverprüfen:
+```
+$ php -v
 ```
 
 - RAM kapazität prüfen
@@ -158,7 +162,14 @@ $ sudo nano /etc/php/8.3/apache2/php.ini
 - Mit `STRG+X` speichern und verlassen
 
 
-### MySQL (MariaDB) - Database
+- **Hinweis zu PHP-Versionen (Nachtrag vom 22.9.2026)**
+    - Ubuntu bringt in den Ubuntu-Releases immer nur eine Version mit bei `24.04 LTS: PHP 8.3`
+    - Die PHP-Version 8.3, erhält Sicherheitsupdates noch bis Ende 2026 und erhält mit Version `8.3.3` das Sicherheitsupdate der kritischen PHP2Shell-Sicherheitslücke.
+    - Ubuntu `26.04 LTS` bringt dann schon die PHP-version `8.5` mit.
+    - Wer also PHP nur aus den Quellen von Ubuntu beziehen möchte, sollte rechzeitig ein Release-Update auf 26.04 LTS durchführen.
+
+
+### [MySQL](https://www.mysql.com/) ([MariaDB](https://mariadb.org/)) - Database
 ```
 $ sudo apt install mariadb-server
 ```
@@ -243,7 +254,7 @@ $ sudo chmod -R 755 /var/www/nextcloud/
 -------------------------------------------------------------------------------------------------------------
 
 
-# 6. Apache2-Webserver konfigurieren
+# 6. [Apache2](https://httpd.apache.org/)-Webserver konfigurieren
 
 ### VirtualHost-Konfiguration
 - V-Host anlegen, um mehrere Webseiten auf einem Server zu ermöglichen
@@ -542,9 +553,9 @@ $ sudo rm -rf /home/USERNAME/NextcloudCA.crt
 
 - Wie man einen Linux-Server absichert, wird unter [Linux-Server-absichern](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/linux/Linux-Server/Linux-Server-absichern.md) erklärt.
 
-- Mehr zum Thema "Verschlüsselung" folgt in Kürze
+- Mehr zum Thema "Verschlüsselung" ist unter [Nextcloud-Verschlüsselung](xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 
-- Wie man die Nextcloud weiter konfigurieren und absichern kann, folgt in Kürze
+- Wie man die Nextcloud weiter konfigurieren und absichern kann, unter [Nextcloud-absichern-&-konfigurieren](xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 
 
 -------------------------------------------------------------------------------------------------------------
