@@ -1,6 +1,6 @@
 # [Nextcloud](https://nextcloud.com/de/) über LAMP-Stack installieren & konfigurieren
 
-`Anleitung erstellt am 21.6.2026, zuletzt bearbeitet am 22.9.2026`
+`Anleitung erstellt am 21.6.2026, zuletzt bearbeitet am 31.10.2026`
 
 `Nextcloud erfolgreich auf Ubuntu 24.04 installiert`
 
@@ -45,6 +45,7 @@
 # 2. interne Domain (DNS-Eintrag) / IP-Adresse
 - Diese Anleitung geht von der Verwendung der Nextcloud über die lokale IP-Adresse aus.
 - Die Einrichtung einer Domain wird nicht weiter beschrieben.
+
 
 ### interner DNS-Eintrag
 - Wenn man einen internen DNS-Eintrag verwendet, dann sollte man unbedingt folgendes beachten:
@@ -142,6 +143,7 @@ $ free -m
 ```
 
 - PHP-Installation konfigurieren
+    - Mit `STRG+X` speichern & verlassen
 ```
 $ sudo nano /etc/php/8.3/apache2/php.ini
 ```
@@ -285,7 +287,7 @@ $ sudo nano /etc/apache2/sites-available/nextcloud.conf
 
 </VirtualHost>
 ```
-
+- Mit `STRG+X` speichern & verlassen
 - Konfig mit der Befehlskette anwenden und Apache-Module konfigurieren
 ```
 $ sudo a2ensite nextcloud.conf
@@ -314,6 +316,9 @@ $ sudo apache2ctl configtest
     - Testen, ob Apache-Seite im Browser geöffnet werden kann.
     - Dafür ggf. noch Port 80 erlauben: `$ sudo ufw allow http`
     - Im Browser aufrufen: `http://IP-ADRESSE` (es müsste sich die Nextcloud-Ersteinrichtungsseite öffnen)
+
+
+-------------------------------------------------------------------------------------------------------------
 
 
 # 7. SSL-via IP mit Apache2 (inkl. selbstsigniertem IP-SSL-Zertifikat mit CA)
@@ -486,6 +491,7 @@ $ curl -vk https://IP-ADRESSE
 $ sudo nano /var/www/nextcloud/config/config.php
 ```
 - Unter `trusted_domains` IP-ADRESSE(N) überprüfen & ggf. DNS-Eintrag, der als Domain verwendet wird, ergänzen.
+- Mit `STRG+X` speichern & verlassen
 
 
 -------------------------------------------------------------------------------------------------------------
@@ -553,9 +559,9 @@ $ sudo rm -rf /home/USERNAME/NextcloudCA.crt
 
 - Wie man einen Linux-Server absichert, wird unter [Linux-Server-absichern](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/linux/Linux-Server/Linux-Server-absichern.md) erklärt.
 
-- Mehr zum Thema "Verschlüsselung" ist unter [Nextcloud-Verschlüsselung](xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+- Mehr zum Thema "Verschlüsselung" ist unter [Nextcloud-Verschlüsselung](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/nextcloud/Nextcloud-Verschl%C3%BCsselung.md).
 
-- Wie man die Nextcloud weiter konfigurieren und absichern kann, unter [Nextcloud-absichern-&-konfigurieren](xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+- Wie man die Nextcloud weiter konfigurieren und absichern kann, unter [Nextcloud-absichern-&-konfigurieren](https://github.com/replay45/Linux-RaspberryPI-NextCloud/blob/main/nextcloud/Nextcloud-absichern-&-konfigurieren.md).
 
 
 -------------------------------------------------------------------------------------------------------------
