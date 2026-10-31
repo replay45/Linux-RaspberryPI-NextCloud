@@ -1,6 +1,6 @@
 # [Nextcloud](https://nextcloud.com/de/) - Verschlüsselung
 
-`Anleitung erstellt am 30.4.2025, zuletzt bearbeitet am 28.9.2026`
+`Anleitung erstellt am 30.4.2025, zuletzt bearbeitet am 31.10.2026`
 
 
 ## Inhaltsverzeichnis
@@ -62,11 +62,12 @@ Im Terminal über SSH auf den Server der Nextcloud einloggen
 ```
 $ ssh user@IP-Adresse
 ```
-OCC-Befehl (allgemeiner Befehl):
+- OCC-Befehl (allgemeiner Befehl):
 ```
-$ occ encryption:encrypt-all
+$ cd /var/www/nextcloud
+$ sudo occ encryption:encrypt-all
 ```
-Wenn Nextcloud über den [Snap](https://snapcraft.io/)-Paketmanager installiert wurde:
+- Wenn Nextcloud über den [Snap](https://snapcraft.io/)-Paketmanager installiert wurde:
 ```
 $ sudo nextcloud.occ encryption:encrypt-all
 ```
