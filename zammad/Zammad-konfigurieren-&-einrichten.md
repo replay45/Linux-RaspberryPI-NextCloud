@@ -1,6 +1,6 @@
 # Zammad konfigurieren & einrichten
 
-`Anleitung erstellt am 25.3.2025, zuletzt bearbeitet am 10.9.2026`
+`Anleitung erstellt am 25.3.2025, zuletzt bearbeitet am 30.10.2026`
 
 - Link zur [Zammad Admin Dokumentation](https://admin-docs.zammad.org/de/latest/#)
 
@@ -29,6 +29,7 @@
 
 # 2. Ersteinrichtung & Einstellungen
 
+
 ### Verwalten > Benutzer
 - Unter diesem Reiter können lokale Benutzerkonten angelgt werden.
 - Wenn zukünftig oder bereits Integrationen für Benutzeranmeldungen, wie LDAP etc. genutzt werden/ werden sollen, dass keine konflikte mit doppelten Nutzernamen und E-Mail-Adressen entstehen.
@@ -48,6 +49,12 @@
 ### Verwalten > Übersichten
 - Hier können die Kategorien festgelegt werden, in denen die Ticketes für die Ticket-Moderatoren/ den Support-Mitarbeitern angezeigt werden.
 - z.B. geöffnete Tickets, geschlossene Tickets, Tickets sortiert nach Gruppen etc.
+
+
+### Verwalten > Trigger
+- Hier ist nun ein standard-Trigger, der eine automatische E-Mail versendet, sobald ein Nutzer ein Ticket öffnet.
+- Das ganze funktioniert natürlich nur, wenn auch eine der E-Mail-Integrationen eingerichtet ist.
+- Diese kann entsprechend angepasst werden.
 
 
 ### Kanäle > Web
@@ -118,19 +125,22 @@
 
 - Testen mit telnet
 	- Wenn die Verbindung erfolgreich ist, bedeutet dies, dass der AD-Server LDAPS unterstützt.
+	- `SERVER-IP` mit tatsächlischer IP ersetzten
 ```
-$ telnet <AD-Server-IP> 636
+$ telnet SERVER-IP 636
 ```
 
-- Verbindung über PowerShell prüfen:
+- Verbindung über [PowerShell](https://de.wikipedia.org/wiki/PowerShell) (Windows) prüfen:
 	- Wenn der Test erfolgreich ist, zeigt dies, dass LDAPS aktiviert und verfügbar ist.
+    - `SERVER-IP` mit tatsächlischer IP ersetzten
 ```
-$ Test-NetConnection -ComputerName <AD-Server-IP> -Port 636
+$ Test-NetConnection -ComputerName SERVER-IP -Port 636
 ```
 
-- Auf Linux prüfen
+- Unter Linux prüfen
+    - `SERVER-IP` mit tatsächlischer IP ersetzten
 ```
-$ openssl s_client -connect SRV-DC:636 -showcerts
+$ openssl s_client -connect SERVER-IP:636 -showcerts
 ```
 
 
