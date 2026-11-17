@@ -1,6 +1,6 @@
 # [Zammad](https://zammad.com/de) über [Docker](https://www.docker.com/) auf einem [Ubuntu-Server](https://ubuntu.com/download/server) installieren
 
-`Anleitung zuletzt bearbeitet am 9.9.2026`
+`Anleitung zuletzt bearbeitet am 17.11.2026`
 
 - Link zur [Zammad System Dokumentation](https://docs.zammad.org/en/latest/index.html)
 
@@ -28,7 +28,7 @@ $ sudo systemctl enable ssh
 $ sudo systemctl status ssh
 ```
 
-- in der [Firewall](https://de.wikipedia.org/wiki/Firewall) SSH erlauben - [Firewall-Manager ufw](https://wiki.ubuntuusers.de/ufw/)
+- in der lokalen [Firewall](https://de.wikipedia.org/wiki/Firewall) SSH erlauben - [Firewall-Manager ufw](https://wiki.ubuntuusers.de/ufw/)
 ```
 $ sudo ufw allow ssh
 $ sudo ufw status
@@ -61,7 +61,7 @@ runc
 ```
 
 - Deinstallationsbefehl:
-   - Der Paketmanager apt könnte fälschlicherweise melden, dass die Pakete nicht installiert sind.
+    - Der Paketmanager apt könnte fälschlicherweise melden, dass die Pakete nicht installiert sind.
 ```
 $ sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
 ```
@@ -135,6 +135,7 @@ $ sudo systemctl enable docker
 $ sudo systemctl status docker
 ```
 
+
 -------------------------------------------------------------------------------------------------------------
 
 
@@ -142,8 +143,33 @@ $ sudo systemctl status docker
 - Github-Repository klonen, um Konfig zu erhalten
 	- Beim Ausführen des Befehls wird der Ordner `zammad-docker-compose` erstellt.
 ```
+$ mkdir zammad-docker-compose
+$ cd zammad-docker-compose
 $ git clone https://github.com/zammad/zammad-docker-compose.git
 ```
+
+### Datenbank-Passwort vor dem ersten Start ändern (Stand 2026)
+- Wenn das Datenbank Passwort nachträglich geändert werden soll, muss dies in der `PostgreSQL-Datenbank` und in der `docker-compose.yml` bzw. der dazugehörigen `.env` angepasst werden.
+- Vor dem ersten Start der Docker-Container die Passwörter ändern:
+    - Die Passwörter sollten individuell und komplex sein.
+
+- Dafür eine neue Datei erstellen (im selben Verzeichnis wie compose.yml):
+    - Docker ließt die Passwörter direkt aus der .env, das Bearbeiten der docker-compose.yml ist nicht erforderlich.
+```
+$ ls -a
+$ sudo nano .env
+```
+
+- folgende Zeilen einfügen und Passwörter anpassen:
+```
+# Passwort des Zammad-Datenbankbenutzers
+POSTGRES_PASS=HIER_EIN_STARKES_PASSWORT
+
+# Passwort des PostgreSQL-Superusers
+POSTGRES_SUPERUSER_PASS=HIER_EIN_ANDERES_STARKES_PASSWORT
+```
+
+- Mit `STRG+X` speichern und schließen.
 
 
 -------------------------------------------------------------------------------------------------------------
@@ -188,8 +214,8 @@ $ ifconfig
 
 
 ### Docker Port mapping anpassen, da trotz Firewall Docker Port exponiert ist !
-- Standardmäßig ist der Docker-Port 8080 aufrufbar, auch wenn in der Firewall vom Ubuntu-Server keine Freigabe eingestellt wirde.
-- Das leigt daran, dass Docker selbst die Firewall-Regeln verwaltet.
+- Standardmäßig ist der Docker-Port 8080 aufrufbar, auch wenn in der Firewall vom Ubuntu-Server keine Freigabe eingestellt wurde.
+- Das liegt daran, dass Docker selbst die Firewall-Regeln verwaltet.
     - problematisch: `0.0.0.0:8080:8080` > kritische Konfiguration !
     - richtig: `127.0.0.1:8080:8080`
 
